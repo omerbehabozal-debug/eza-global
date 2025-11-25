@@ -50,7 +50,7 @@ export const ecosystemItems = {
       title: "Proxy",
       description: "API proxy katmanı olarak çalışan etik kontrol sistemi. Tüm istekleri yönlendirir.",
       href: "/products/proxy",
-      icon: "Network",
+      icon: "Globe",
     },
     {
       title: "Proxy-Lite",
@@ -108,7 +108,7 @@ export const ecosystemItems = {
       title: "Autonomous Safety",
       description: "Otonom sistemler için etik yönlendirme. Robotik ve AI karar destek sistemleri.",
       href: "/solutions/autonomous",
-      icon: "Bot",
+      icon: "Cpu",
     },
     {
       title: "Children Safety",
@@ -181,7 +181,7 @@ export const products = [
     title: "Proxy",
     description: "API proxy katmanı olarak çalışan etik kontrol sistemi. Tüm istekleri yönlendirir, zararlı içerikleri tespit eder ve daha iyi alternatifler önerir.",
     href: "/products/proxy",
-    icon: "Network",
+    icon: "Globe",
   },
   {
     title: "Proxy-Lite",

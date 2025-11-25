@@ -8,12 +8,17 @@ interface IconProps {
 }
 
 export default function Icon({ name, className = "", size = 24 }: IconProps) {
-  const IconComponent = Icons[name as keyof typeof Icons] as LucideIcon;
+  // Icon isimlerini normalize et (PascalCase)
+  const normalizedName = name as keyof typeof Icons;
+  const IconComponent = Icons[normalizedName] as LucideIcon | undefined;
   
   if (!IconComponent) {
+    // Development'ta console'a uyarı ver (production'da sessizce null döner)
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`Icon "${name}" not found in lucide-react`);
+    }
     return null;
   }
   
   return <IconComponent className={className} size={size} />;
 }
-
