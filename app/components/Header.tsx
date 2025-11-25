@@ -59,10 +59,13 @@ export default function Header() {
     <header className="bg-white/80 backdrop-blur-xl sticky top-0 z-50 border-b border-gray-200/50">
       <nav className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
+          <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-2 group">
               <span className="text-xl font-semibold text-eza-text">EZA.global</span>
             </Link>
+            <span className="hidden sm:inline-block px-2.5 py-0.5 bg-eza-blue/10 text-eza-blue text-xs font-medium rounded-full border border-eza-blue/20">
+              Etik Zeka Altyapısı
+            </span>
           </div>
 
           {/* Desktop Navigation */}

@@ -20,6 +20,11 @@ export default function Hero() {
       {/* Content layer */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-24 w-full">
         <div className="max-w-4xl mx-auto text-center">
+          <div className="hero-badge mb-4">
+            <span className="inline-block px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-medium rounded-full border border-eza-blue/20">
+              Etik Zeka Altyapısı
+            </span>
+          </div>
           <h1 className="hero-title text-5xl md:text-6xl lg:text-7xl font-semibold text-eza-text mb-6 leading-tight">
             Teknolojinin insanlığa karşı{" "}
             <span className="text-eza-blue">etik davranmasını</span>{" "}

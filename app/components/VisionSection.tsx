@@ -24,6 +24,9 @@ export default function VisionSection() {
     <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
       <FadeIn>
         <div className="text-center mb-16">
+          <div className="inline-block px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-medium rounded-full border border-eza-blue/20 mb-4">
+            Etik Zeka Altyapısı
+          </div>
           <h2 className="text-4xl md:text-5xl font-semibold text-eza-text mb-4">
             EZA Vizyonu
           </h2>
