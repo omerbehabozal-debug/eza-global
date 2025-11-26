@@ -7,6 +7,7 @@ import WhyEZA from "./components/WhyEZA";
 import Manifesto from "./components/Manifesto";
 import FAQ from "./components/FAQ";
 import EZACoreIntro from "./components/EZACoreIntro";
+import DemoShowcase from "./components/DemoShowcase";
 
 export default function Home() {
   return (
@@ -29,6 +30,11 @@ export default function Home() {
         <EZACoreIntro />
       </Section>
 
+      {/* Section 4.5: Premium Demo Videos - EZA-Core'un Nasıl Çalıştığını Göster */}
+      <Section className="bg-eza-gray">
+        <DemoShowcase />
+      </Section>
+
       {/* Section 5: Ecosystem - Nasıl Çalışıyor, Detaylar */}
       <Section id="ecosystem" className="bg-eza-gray">
         <div className="max-w-7xl mx-auto">
@@ -36,19 +42,19 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* Section 4: Sector Solutions - Compact Grid */}
-      <Section id="solutions" className="bg-eza-gray">
+      {/* Section 6: Sector Solutions - Compact Grid */}
+      <Section id="solutions" className="bg-white">
         <div className="max-w-7xl mx-auto">
           <SectorGrid />
         </div>
       </Section>
 
-      {/* Section 5: Kurucu Manifestosu */}
+      {/* Section 7: Kurucu Manifestosu */}
       <Section id="manifesto" className="bg-white">
         <Manifesto />
       </Section>
 
-      {/* Section 6: FAQ */}
+      {/* Section 8: FAQ */}
       <Section id="faq" className="bg-eza-gray">
         <FAQ />
       </Section>
