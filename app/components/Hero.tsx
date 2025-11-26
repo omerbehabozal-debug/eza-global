@@ -49,7 +49,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3 bg-transparent text-eza-blue border border-eza-blue rounded-lg text-base font-medium hover:bg-eza-blue/5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:border-[#0077ed]"
             >
-              EZA Core Platformu
+              EZA-Core Platformu
               <Icon name="ExternalLink" size={18} />
             </Link>
           </div>

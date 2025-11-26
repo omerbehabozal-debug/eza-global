@@ -16,10 +16,24 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Products */}
+          {/* EZA-Core Platform */}
           <div>
-            <h3 className="text-sm font-semibold text-eza-text mb-4">Products</h3>
+            <h3 className="text-sm font-semibold text-eza-text mb-4 flex items-center gap-2">
+              <Icon name="Cpu" size={16} className="text-eza-blue" />
+              EZA-Core Platform
+            </h3>
             <ul className="space-y-3">
+              <li>
+                <a
+                  href="https://ezacore.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm flex items-center gap-1"
+                >
+                  EZA-Core Platformu
+                  <Icon name="ExternalLink" size={12} />
+                </a>
+              </li>
               <li>
                 <Link
                   href="/products/standalone"
@@ -44,6 +58,14 @@ export default function Footer() {
                   Proxy-Lite
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/panels/developer"
+                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
+                >
+                  Developer Console
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -65,14 +87,6 @@ export default function Footer() {
                   className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
                 >
                   Corporate Panel
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/panels/developer"
-                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
-                >
-                  Developer Console
                 </Link>
               </li>
             </ul>

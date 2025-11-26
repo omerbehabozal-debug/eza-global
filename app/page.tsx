@@ -6,25 +6,31 @@ import VisionSection from "./components/VisionSection";
 import WhyEZA from "./components/WhyEZA";
 import Manifesto from "./components/Manifesto";
 import FAQ from "./components/FAQ";
+import EZACoreIntro from "./components/EZACoreIntro";
 
 export default function Home() {
   return (
     <>
-      {/* Section 1: Hero */}
+      {/* Section 1: Hero - EZA Felsefesi ve İlk İzlenim */}
       <Hero />
 
-      {/* Section 2: EZA Vizyonu */}
+      {/* Section 2: EZA Vizyonu - EZA'nın Ne Olduğu */}
       <Section id="vision" className="bg-white">
         <VisionSection />
       </Section>
 
-      {/* Section 2.5: Neden EZA? */}
+      {/* Section 3: Neden EZA? - Sorun ve Çözüm */}
       <Section id="why-eza" className="bg-eza-gray">
         <WhyEZA />
       </Section>
 
-      {/* Section 3: Ecosystem - Tabbed (Products, Panels, Modules dahil) */}
-      <Section id="ecosystem" className="bg-white">
+      {/* Section 4: EZA-Core - Teknolojik Motor (Vision ve WhyEZA'dan sonra mantıklı) */}
+      <Section className="bg-white">
+        <EZACoreIntro />
+      </Section>
+
+      {/* Section 5: Ecosystem - Nasıl Çalışıyor, Detaylar */}
+      <Section id="ecosystem" className="bg-eza-gray">
         <div className="max-w-7xl mx-auto">
           <TabbedEcosystem />
         </div>

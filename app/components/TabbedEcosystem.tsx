@@ -7,7 +7,7 @@ import FadeIn from "./FadeIn";
 import Icon from "./Icon";
 
 const tabs = [
-  { id: "core", label: "Core Platform", icon: "Cpu" },
+  { id: "core", label: "EZA-Core Engine", icon: "Cpu" },
   { id: "panels", label: "Panels", icon: "LayoutDashboard" },
   { id: "modules", label: "Ethics Modules", icon: "Shield" },
 ];
@@ -36,9 +36,13 @@ export default function TabbedEcosystem() {
             <h2 className="text-4xl md:text-5xl font-semibold text-eza-text mb-4">
               EZA Ekosistemi
             </h2>
-            <p className="text-xl text-eza-text-secondary max-w-2xl mx-auto">
+            <p className="text-xl text-eza-text-secondary max-w-2xl mx-auto mb-4">
               Teknolojinin etik kullanımı için kapsamlı platform ve araçlar
             </p>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-medium rounded-full border border-eza-blue/20">
+              <Icon name="Cpu" size={14} />
+              <span>EZA-Core: Tüm ekosistemin teknolojik motoru</span>
+            </div>
           </div>
         </FadeIn>
 
@@ -65,32 +69,55 @@ export default function TabbedEcosystem() {
         {/* Content */}
         <div className="min-h-[400px]">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {getActiveItems().map((item, index) => (
-              <FadeIn key={item.title} delay={index * 50}>
-                <Link
-                  href={item.href}
-                  className="block bg-white rounded-lg p-6 border border-gray-200 hover:border-eza-blue hover:shadow-md transition-all h-full"
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center">
-                      <Icon name={item.icon} className="text-eza-blue" size={24} />
+            {getActiveItems().map((item, index) => {
+              const isCore = item.title === "EZA-Core Engine";
+              const LinkComponent = item.external ? "a" : Link;
+              const linkProps = item.external 
+                ? { href: item.href, target: "_blank", rel: "noopener noreferrer" }
+                : { href: item.href };
+              
+              return (
+                <FadeIn key={item.title} delay={index * 50}>
+                  <LinkComponent
+                    {...linkProps}
+                    className={`block bg-white rounded-lg p-6 border transition-all h-full ${
+                      isCore 
+                        ? "border-eza-blue/30 bg-gradient-to-br from-eza-blue/5 to-white hover:border-eza-blue hover:shadow-lg" 
+                        : "border-gray-200 hover:border-eza-blue hover:shadow-md"
+                    }`}
+                  >
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className={`flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center ${
+                        isCore ? "bg-eza-blue/20" : "bg-eza-blue/10"
+                      }`}>
+                        <Icon name={item.icon} className="text-eza-blue" size={24} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <h3 className={`text-xl font-semibold text-eza-text ${
+                            isCore ? "text-eza-blue" : ""
+                          }`}>
+                            {item.title}
+                          </h3>
+                          {isCore && (
+                            <span className="px-2 py-0.5 bg-eza-blue/10 text-eza-blue text-xs font-semibold rounded-full border border-eza-blue/20">
+                              Motor
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-eza-text-secondary leading-relaxed text-sm">
+                          {item.description}
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-eza-text mb-2">
-                        {item.title}
-                      </h3>
-                      <p className="text-eza-text-secondary leading-relaxed text-sm">
-                        {item.description}
-                      </p>
+                    <div className="flex items-center text-eza-blue font-medium text-sm mt-4">
+                      {isCore ? "Platforma Git" : "Daha fazla bilgi"}
+                      <Icon name={item.external ? "ExternalLink" : "ArrowRight"} size={16} className="ml-1" />
                     </div>
-                  </div>
-                  <div className="flex items-center text-eza-blue font-medium text-sm mt-4">
-                    Daha fazla bilgi
-                    <Icon name="ArrowRight" size={16} className="ml-1" />
-                  </div>
-                </Link>
-              </FadeIn>
-            ))}
+                  </LinkComponent>
+                </FadeIn>
+              );
+            })}
           </div>
         </div>
       </div>

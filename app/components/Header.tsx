@@ -6,19 +6,24 @@ import Icon from "./Icon";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [productsOpen, setProductsOpen] = useState(false);
   const [panelsOpen, setPanelsOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
+
+  const [ezaCoreOpen, setEzaCoreOpen] = useState(false);
 
   const navigation = [
     { name: "Home", href: "/" },
     { name: "Ecosystem", href: "/#ecosystem" },
     {
-      name: "Products",
+      name: "EZA-Core Platform",
+      external: true,
+      href: "https://ezacore.ai",
       children: [
         { name: "Standalone", href: "/products/standalone" },
         { name: "Proxy", href: "/products/proxy" },
         { name: "Proxy-Lite", href: "/products/proxy-lite" },
+        { name: "EZA Score", href: "/products" },
+        { name: "Developer Console", href: "/panels/developer" },
       ],
     },
     {
@@ -77,12 +82,12 @@ export default function Header() {
                     key={item.name}
                     className="relative group"
                     onMouseEnter={() => {
-                      if (item.name === "Products") setProductsOpen(true);
+                      if (item.name === "EZA-Core Platform") setEzaCoreOpen(true);
                       if (item.name === "Panels") setPanelsOpen(true);
                       if (item.name === "Solutions") setSolutionsOpen(true);
                     }}
                     onMouseLeave={() => {
-                      if (item.name === "Products") setProductsOpen(false);
+                      if (item.name === "EZA-Core Platform") setEzaCoreOpen(false);
                       if (item.name === "Panels") setPanelsOpen(false);
                       if (item.name === "Solutions") setSolutionsOpen(false);
                     }}
@@ -91,11 +96,24 @@ export default function Header() {
                       {item.name}
                       <Icon name="ChevronDown" size={14} />
                     </button>
-                    {(item.name === "Products" && productsOpen) ||
+                    {(item.name === "EZA-Core Platform" && ezaCoreOpen) ||
                     (item.name === "Panels" && panelsOpen) ||
                     (item.name === "Solutions" && solutionsOpen) ? (
-                      <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200/50 py-2 animate-in fade-in slide-in-from-top-2">
-                        {item.children.map((child) => (
+                      <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200/50 py-2 animate-in fade-in slide-in-from-top-2">
+                        {item.external && (
+                          <Link
+                            href={item.href || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block px-4 py-2.5 text-sm font-semibold text-eza-blue hover:bg-eza-blue/5 transition-colors rounded-lg mx-1 border-b border-gray-200/50 mb-1"
+                          >
+                            <span className="flex items-center gap-2">
+                              EZA-Core Platformu
+                              <Icon name="ExternalLink" size={14} />
+                            </span>
+                          </Link>
+                        )}
+                        {item.children?.map((child) => (
                           <Link
                             key={child.name}
                             href={child.href}

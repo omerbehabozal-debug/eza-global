@@ -42,32 +42,39 @@ export const navigation = {
 export const ecosystemItems = {
   core: [
     {
+      title: "EZA-Core Engine",
+      description: "EZA'nın teknolojik motoru. Etik analiz pipeline, skorlama sistemi ve risk değerlendirme çekirdeği.",
+      href: "https://ezacore.ai",
+      icon: "Cpu",
+      external: true,
+    },
+    {
       title: "Standalone",
-      description: "Bağımsız etik değerlendirme platformu. Herhangi bir sistemle entegre olmadan çalışır.",
+      description: "EZA-Core'un bağımsız modu. Herhangi bir sistemle entegre olmadan çalışır.",
       href: "/products/standalone",
       icon: "Shield",
     },
     {
       title: "Proxy",
-      description: "API proxy katmanı olarak çalışan etik kontrol sistemi. Tüm istekleri yönlendirir.",
+      description: "EZA-Core'un API proxy katmanı. Tüm istekleri yönlendirir ve etik kontrol sağlar.",
       href: "/products/proxy",
       icon: "Globe",
     },
     {
       title: "Proxy-Lite",
-      description: "Hafif versiyon proxy çözümü. Düşük kaynak kullanımı ile etik kontrol.",
+      description: "EZA-Core'un hafif versiyonu. Düşük kaynak kullanımı ile etik kontrol.",
       href: "/products/proxy-lite",
       icon: "Zap",
     },
     {
-      title: "EZA Score",
-      description: "Etik davranış skorlama sistemi. Sürekli iyileştirme için metrikler.",
+      title: "EZA Score Engine",
+      description: "EZA-Core'un skorlama motoru. Etik davranış metrikleri ve sürekli iyileştirme.",
       href: "/products",
       icon: "BarChart3",
     },
     {
       title: "Advisor",
-      description: "AI destekli etik danışman. Gerçek zamanlı öneriler ve yönlendirmeler.",
+      description: "EZA-Core'un AI destekli danışman modülü. Gerçek zamanlı öneriler ve yönlendirmeler.",
       href: "/products",
       icon: "Brain",
     },
