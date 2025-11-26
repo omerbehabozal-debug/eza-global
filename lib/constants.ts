@@ -69,13 +69,13 @@ export const ecosystemItems = {
     {
       title: "EZA Score Engine",
       description: "EZA-Core'un skorlama motoru. Etik davranış metrikleri ve sürekli iyileştirme.",
-      href: "/products",
+      href: "/products/score-engine",
       icon: "BarChart3",
     },
     {
       title: "Advisor",
       description: "EZA-Core'un AI destekli danışman modülü. Gerçek zamanlı öneriler ve yönlendirmeler.",
-      href: "/products",
+      href: "/products/advisor",
       icon: "Brain",
     },
   ],
@@ -103,7 +103,7 @@ export const ecosystemItems = {
     {
       title: "LLM Safety",
       description: "Büyük dil modelleri için etik güvenlik modülü. Zararlı içerik tespiti ve yönlendirme.",
-      href: "/solutions",
+      href: "/modules/llm-safety",
       icon: "Brain",
     },
     {
@@ -121,13 +121,13 @@ export const ecosystemItems = {
     {
       title: "Children Safety",
       description: "Çocuk güvenliği odaklı etik modül. Yaşa uygun içerik filtreleme ve koruma.",
-      href: "/solutions",
+      href: "/modules/children-safety",
       icon: "Users",
     },
     {
       title: "Social & Communication Ethics",
       description: "Sosyal platformlar ve iletişim için etik standartlar. Zararlı etkileşim önleme.",
-      href: "/solutions",
+      href: "/modules/social-communication-ethics",
       icon: "MessageCircle",
     },
   ],
