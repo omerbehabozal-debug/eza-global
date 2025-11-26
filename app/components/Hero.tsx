@@ -47,10 +47,10 @@ export default function Hero() {
               href="https://ezacore.ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-transparent text-eza-blue border border-eza-blue rounded-lg text-base font-medium hover:bg-eza-blue/5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:border-[#0077ed]"
+              className="inline-flex items-center gap-2 px-6 py-3 text-eza-text-secondary hover:text-eza-text transition-colors text-sm font-medium"
             >
               EZA-Core Platformu
-              <Icon name="ExternalLink" size={18} />
+              <Icon name="ExternalLink" size={16} />
             </Link>
           </div>
         </div>
