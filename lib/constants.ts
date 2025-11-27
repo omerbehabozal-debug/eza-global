@@ -98,6 +98,18 @@ export const ecosystemItems = {
       href: "/panels/developer",
       icon: "Code",
     },
+    {
+      title: "EU AI Act Compliance Panel",
+      description: "Avrupa Birliği Yapay Zekâ Yasasına uyum sağlamak isteyen şirketler için özel panel.",
+      href: "/panels/eu-ai-act",
+      icon: "Scale",
+    },
+    {
+      title: "Select Portal",
+      description: "Kurumlar arası portal. Birden fazla kurumla çalışan holdingler için çok tenantlı portal.",
+      href: "/panels/select-portal",
+      icon: "Layers",
+    },
   ],
   modules: [
     {

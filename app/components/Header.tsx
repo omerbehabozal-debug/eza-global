@@ -33,6 +33,8 @@ export default function Header() {
         { name: "Regulator Panel", href: "/panels/regulator" },
         { name: "Corporate Panel", href: "/panels/corporate" },
         { name: "Developer Console", href: "/panels/developer" },
+        { name: "EU AI Act Compliance", href: "/panels/eu-ai-act" },
+        { name: "Select Portal", href: "/panels/select-portal" },
       ],
     },
     {

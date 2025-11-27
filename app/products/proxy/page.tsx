@@ -1,6 +1,7 @@
 import { generatePageMetadata } from "@/lib/seo";
 import Section from "@/app/components/Section";
 import Link from "next/link";
+import Icon from "@/app/components/Icon";
 
 export const metadata = generatePageMetadata(
   "Proxy",
@@ -91,12 +92,23 @@ export default function ProxyPage() {
 
       <Section className="bg-eza-gray">
         <div className="max-w-4xl mx-auto text-center">
-          <Link
-            href="/#ecosystem"
-            className="inline-block px-8 py-4 bg-eza-blue text-white rounded-lg font-semibold hover:bg-opacity-90 transition-all shadow-lg hover:shadow-xl"
-          >
-            EZA Ekosistemine Dön
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://proxy.ezacore.ai/proxy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-eza-blue text-white rounded-lg font-semibold hover:bg-[#0077ed] transition-all shadow-lg hover:shadow-xl"
+            >
+              Proxy Platform'a Git
+              <Icon name="ExternalLink" size={18} />
+            </a>
+            <Link
+              href="/#ecosystem"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-eza-blue border border-eza-blue rounded-lg font-semibold hover:bg-eza-blue/5 transition-all"
+            >
+              EZA Ekosistemine Dön
+            </Link>
+          </div>
         </div>
       </Section>
     </>
