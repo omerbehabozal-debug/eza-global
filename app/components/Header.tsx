@@ -12,7 +12,7 @@ export default function Header() {
 
   const navigation = [
     { name: "Home", href: "/" },
-    { name: "EZA-Core Platform", href: "/platform/eza-core" },
+    { name: "EZA-Core API", href: "/platform/eza-core" },
     { name: "Ecosystem", href: "/#ecosystem" },
     {
       name: "EZA-Core Products",
@@ -99,9 +99,23 @@ export default function Header() {
                       if (item.name === "Solutions") setSolutionsOpen(false);
                     }}
                   >
-                    <button className="px-4 py-2 text-eza-text-secondary hover:text-eza-text transition-colors text-sm font-medium flex items-center gap-1">
-                      {item.name}
-                      <Icon name="ChevronDown" size={14} />
+                    <button className={`px-4 py-2 text-eza-text-secondary hover:text-eza-text transition-colors text-sm font-medium relative ${
+                      item.name === "EZA-Core Products" 
+                        ? "flex flex-col items-center justify-center leading-[1.1] whitespace-nowrap min-w-[110px] pr-6" 
+                        : "flex items-center gap-1"
+                    }`}>
+                      {item.name === "EZA-Core Products" ? (
+                        <>
+                          <span className="block">EZA-Core</span>
+                          <span className="block -mt-0.5">Products</span>
+                          <Icon name="ChevronDown" size={14} className="absolute right-2 top-1/2 -translate-y-1/2" />
+                        </>
+                      ) : (
+                        <>
+                          {item.name}
+                          <Icon name="ChevronDown" size={14} />
+                        </>
+                      )}
                     </button>
                     {isOpen ? (
                       <div 
@@ -133,20 +147,45 @@ export default function Header() {
                   </div>
                 );
               }
+              const DesktopLinkComponent = item.external ? "a" : Link;
+              const desktopLinkProps = item.external
+                ? {
+                    href: item.href,
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                  }
+                : {
+                    href: item.href,
+                    onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
+                      if (item.href.startsWith("#")) {
+                        e.preventDefault();
+                        handleScrollTo(item.href);
+                      }
+                    },
+                  };
+
               return (
-                <Link
+                <DesktopLinkComponent
                   key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    if (item.href.startsWith("#")) {
-                      e.preventDefault();
-                      handleScrollTo(item.href);
-                    }
-                  }}
-                  className="px-4 py-2 text-eza-text-secondary hover:text-eza-text transition-colors text-sm font-medium"
+                  {...desktopLinkProps}
+                  className={`px-4 py-2 text-eza-text-secondary hover:text-eza-text transition-colors text-sm font-medium ${
+                    item.name === "EZA-Core API" 
+                      ? "flex flex-col items-center justify-center leading-[1.1] whitespace-nowrap min-w-[110px]" 
+                      : "flex items-center gap-1"
+                  }`}
                 >
-                  {item.name}
-                </Link>
+                  {item.name === "EZA-Core API" ? (
+                    <>
+                      <span className="block">EZA-Core</span>
+                      <span className="block -mt-0.5">API</span>
+                    </>
+                  ) : (
+                    <>
+                      {item.name}
+                      {item.external && <Icon name="ExternalLink" size={14} />}
+                    </>
+                  )}
+                </DesktopLinkComponent>
               );
             })}
           </div>
@@ -187,21 +226,49 @@ export default function Header() {
                   </div>
                 );
               }
+              const LinkComponent = item.external ? "a" : Link;
+              const linkProps = item.external
+                ? {
+                    href: item.href,
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    onClick: () => setMobileMenuOpen(false),
+                  }
+                : {
+                    href: item.href,
+                    onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
+                      if (item.href.startsWith("#")) {
+                        e.preventDefault();
+                        handleScrollTo(item.href);
+                      }
+                      setMobileMenuOpen(false);
+                    },
+                  };
+
               return (
-                <Link
+                <LinkComponent
                   key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    if (item.href.startsWith("#")) {
-                      e.preventDefault();
-                      handleScrollTo(item.href);
-                    }
-                    setMobileMenuOpen(false);
-                  }}
-                  className="block px-3 py-2 text-eza-text-secondary hover:text-eza-text hover:bg-eza-gray/50 rounded-lg transition-colors text-sm font-medium"
+                  {...linkProps}
+                  className={`px-3 py-2 text-eza-text-secondary hover:text-eza-text hover:bg-eza-gray/50 rounded-lg transition-colors text-sm font-medium ${
+                    item.name === "EZA-Core API" 
+                      ? "flex flex-col items-center justify-center leading-none" 
+                      : "block"
+                  }`}
                 >
-                  {item.name}
-                </Link>
+                  {item.name === "EZA-Core API" ? (
+                    <>
+                      <span>EZA-Core</span>
+                      <span>API</span>
+                    </>
+                  ) : (
+                    <>
+                      {item.name}
+                      {item.external && (
+                        <Icon name="ExternalLink" size={12} className="inline ml-1" />
+                      )}
+                    </>
+                  )}
+                </LinkComponent>
               );
             })}
           </div>

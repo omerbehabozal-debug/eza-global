@@ -42,11 +42,11 @@ export const navigation = {
 export const ecosystemItems = {
   core: [
     {
-      title: "EZA-Core Engine",
+      title: "Platform",
       description: "EZA'nın teknolojik motoru. Etik analiz pipeline, skorlama sistemi ve risk değerlendirme çekirdeği.",
-      href: "https://ezacore.ai",
+      href: "/platform/eza-core",
       icon: "Cpu",
-      external: true,
+      external: false,
     },
     {
       title: "Standalone",

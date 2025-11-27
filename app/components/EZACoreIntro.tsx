@@ -25,26 +25,15 @@ export default function EZACoreIntro() {
                 EZA-Core, Standalone, Proxy, Proxy-Lite ve tüm panelleri çalıştıran çekirdek sistemdir. 
                 Etik analiz, skorlama ve risk değerlendirme motorlarını içeren kapsamlı bir teknoloji platformu.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link
-                  href="https://platform.ezacore.ai/proxy/platform"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-3 bg-eza-blue text-white rounded-lg font-medium hover:bg-[#0077ed] transition-all duration-300 hover:scale-[1.02] shadow-sm hover:shadow-md"
-                >
-                  EZA-Core Platformu
-                  <Icon name="ExternalLink" size={18} />
-                </Link>
-                <Link
-                  href="https://ezacore.ai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-3 bg-white text-eza-blue border border-eza-blue rounded-lg font-medium hover:bg-eza-blue/5 transition-all duration-300 hover:scale-[1.02]"
-                >
-                  Ana Platform
-                  <Icon name="ExternalLink" size={18} />
-                </Link>
-              </div>
+              <Link
+                href="https://platform.ezacore.ai/proxy/platform"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-eza-blue text-white rounded-lg font-medium hover:bg-[#0077ed] transition-all duration-300 hover:scale-[1.02] shadow-sm hover:shadow-md"
+              >
+                EZA-Core Platformu
+                <Icon name="ExternalLink" size={18} />
+              </Link>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-gray-200">

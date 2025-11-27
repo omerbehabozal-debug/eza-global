@@ -1,15 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Icon from "../Icon";
 
 export default function CoreHero() {
-  const handleScrollToModules = () => {
-    const element = document.querySelector("#modules");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
@@ -77,19 +70,12 @@ export default function CoreHero() {
           EZA'nın etik değerlendirme, risk analizi ve yönlendirme süreçlerinin çekirdeğidir.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button
-            onClick={handleScrollToModules}
-            className="inline-flex items-center gap-2 px-8 py-3 bg-eza-blue text-white rounded-lg text-base font-medium hover:bg-[#0077ed] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
-          >
-            Modları Keşfet
-            <Icon name="ArrowDown" size={18} />
-          </button>
+        <div className="flex justify-center items-center">
           <a
             href="https://ezacore.ai"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-white/80 backdrop-blur-sm text-eza-blue border border-eza-blue rounded-lg text-base font-medium hover:bg-eza-blue/5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-sm hover:shadow-md"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-eza-blue text-white rounded-lg text-base font-medium hover:bg-[#0077ed] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
           >
             EZA Core API
             <Icon name="ExternalLink" size={18} />

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import Icon from "./Icon";
 import HeroVisual from "./HeroVisual";
 
@@ -35,7 +34,7 @@ export default function Hero() {
             EZA, insan ve teknoloji arasında etik bir köprü kurar. Yasaklamaz, ceza vermez; sadece daha iyi bir davranış önerir.
           </p>
           
-          <div className="hero-buttons flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="hero-buttons flex justify-center items-center">
             <button
               onClick={handleScrollToEcosystem}
               className="inline-flex items-center gap-2 px-8 py-3 bg-eza-blue text-white rounded-lg text-base font-medium hover:bg-[#0077ed] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-sm hover:shadow-md"
@@ -43,15 +42,6 @@ export default function Hero() {
               Ekosistemi Keşfet
               <Icon name="ArrowDown" size={18} />
             </button>
-            <Link
-              href="https://ezacore.ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 text-eza-text-secondary hover:text-eza-text transition-colors text-sm font-medium"
-            >
-              EZA-Core Platformu
-              <Icon name="ExternalLink" size={16} />
-            </Link>
           </div>
         </div>
       </div>
