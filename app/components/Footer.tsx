@@ -16,13 +16,21 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* EZA-Core Platform */}
+          {/* Platform */}
           <div>
             <h3 className="text-sm font-semibold text-eza-text mb-4 flex items-center gap-2">
               <Icon name="Cpu" size={16} className="text-eza-blue" />
-              EZA-Core Platform
+              Platform
             </h3>
             <ul className="space-y-3">
+              <li>
+                <Link
+                  href="/platform/eza-core"
+                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
+                >
+                  EZA-Core Platform
+                </Link>
+              </li>
               <li>
                 <a
                   href="https://ezacore.ai"
@@ -30,7 +38,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm flex items-center gap-1"
                 >
-                  EZA-Core Platformu
+                  EZA-Core API
                   <Icon name="ExternalLink" size={12} />
                 </a>
               </li>
