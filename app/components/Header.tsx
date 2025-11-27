@@ -147,8 +147,8 @@ export default function Header() {
                   </div>
                 );
               }
-              const DesktopLinkComponent = item.external ? "a" : Link;
-              const desktopLinkProps = item.external
+              const DesktopLinkComponent = (item as any).external ? "a" : Link;
+              const desktopLinkProps = (item as any).external
                 ? {
                     href: item.href,
                     target: "_blank",
@@ -182,7 +182,7 @@ export default function Header() {
                   ) : (
                     <>
                       {item.name}
-                      {item.external && <Icon name="ExternalLink" size={14} />}
+                      {(item as any).external && <Icon name="ExternalLink" size={14} />}
                     </>
                   )}
                 </DesktopLinkComponent>
@@ -226,8 +226,8 @@ export default function Header() {
                   </div>
                 );
               }
-              const LinkComponent = item.external ? "a" : Link;
-              const linkProps = item.external
+              const LinkComponent = (item as any).external ? "a" : Link;
+              const linkProps = (item as any).external
                 ? {
                     href: item.href,
                     target: "_blank",
@@ -263,7 +263,7 @@ export default function Header() {
                   ) : (
                     <>
                       {item.name}
-                      {item.external && (
+                      {(item as any).external && (
                         <Icon name="ExternalLink" size={12} className="inline ml-1" />
                       )}
                     </>

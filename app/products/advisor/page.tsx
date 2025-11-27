@@ -2,6 +2,7 @@ import { generatePageMetadata } from "@/lib/seo";
 import Section from "@/app/components/Section";
 import Link from "next/link";
 import Icon from "@/app/components/Icon";
+import FadeIn from "@/app/components/FadeIn";
 
 export const metadata = generatePageMetadata(
   "EZA Advisor",
@@ -13,21 +14,24 @@ export default function AdvisorPage() {
     <>
       <div className="bg-gradient-to-br from-eza-gray via-white to-eza-gray py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-4">
-            <Icon name="Brain" size={16} />
-            EZA-Core Engine
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-eza-dark mb-6">
-            EZA Advisor
-          </h1>
-          <p className="text-xl text-gray-700">
-            EZA-Core'un AI destekli danışman modülü. Gerçek zamanlı öneriler ve yönlendirmeler.
-          </p>
+          <FadeIn>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-4">
+              <Icon name="Brain" size={16} />
+              EZA-Core Engine
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-eza-text mb-6">
+              EZA Advisor
+            </h1>
+            <p className="text-xl text-eza-text-secondary">
+              EZA-Core'un AI destekli danışman modülü. Gerçek zamanlı öneriler ve yönlendirmeler.
+            </p>
+          </FadeIn>
         </div>
       </div>
 
       <Section className="bg-white">
-        <div className="max-w-4xl mx-auto space-y-6 text-lg text-gray-700 leading-relaxed">
+        <FadeIn delay={100}>
+          <div className="max-w-4xl mx-auto space-y-6 text-lg text-eza-text-secondary leading-relaxed">
           <p>
             EZA Advisor, EZA-Core'un yapay zeka destekli danışman modülüdür. İçerikleri, etkileşimleri 
             ve davranışları analiz ederek gerçek zamanlı etik öneriler ve yönlendirmeler sunar. 
@@ -44,12 +48,14 @@ export default function AdvisorPage() {
             kullanıcılar için özelleştirilebilir kurallar ve sektörel gereksinimlere göre ayarlanabilir 
             yönlendirmeler sunar.
           </p>
-        </div>
+          </div>
+        </FadeIn>
       </Section>
 
       <Section className="bg-eza-gray">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-eza-dark mb-8">Advisor Özellikleri</h2>
+        <FadeIn delay={200}>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-eza-text mb-8">Advisor Özellikleri</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white rounded-lg p-6 border border-gray-200">
               <div className="flex items-center gap-3 mb-4">
@@ -103,12 +109,14 @@ export default function AdvisorPage() {
               </p>
             </div>
           </div>
-        </div>
+          </div>
+        </FadeIn>
       </Section>
 
       <Section className="bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-eza-dark mb-6">Advisor Nasıl Çalışır?</h2>
+        <FadeIn delay={300}>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-eza-text mb-6">Advisor Nasıl Çalışır?</h2>
           <div className="space-y-6">
             <div className="flex gap-6">
               <div className="flex-shrink-0 w-12 h-12 rounded-full bg-eza-blue text-white flex items-center justify-center font-bold text-lg">
@@ -116,7 +124,7 @@ export default function AdvisorPage() {
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-eza-text mb-2">İçerik Analizi</h3>
-                <p className="text-gray-700">
+                <p className="text-eza-text-secondary">
                   Advisor, içeriği çok boyutlu olarak analiz eder: dil tonu, manipülasyon riski, 
                   saygı seviyesi, şeffaflık ve adalet gibi faktörleri değerlendirir.
                 </p>
@@ -128,7 +136,7 @@ export default function AdvisorPage() {
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-eza-text mb-2">Risk Değerlendirmesi</h3>
-                <p className="text-gray-700">
+                <p className="text-eza-text-secondary">
                   Tespit edilen etik riskleri kategorize eder ve önceliklendirir. Her risk için 
                   açıklama ve bağlam sağlar.
                 </p>
@@ -140,7 +148,7 @@ export default function AdvisorPage() {
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-eza-text mb-2">Öneri Üretimi</h3>
-                <p className="text-gray-700">
+                <p className="text-eza-text-secondary">
                   Her risk için yapıcı alternatifler önerir. Öneriler, neden daha etik olduğu 
                   açıklanarak sunulur ve uygulanabilir örnekler içerir.
                 </p>
@@ -152,20 +160,22 @@ export default function AdvisorPage() {
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-eza-text mb-2">Sürekli Öğrenme</h3>
-                <p className="text-gray-700">
+                <p className="text-eza-text-secondary">
                   Kullanıcı geri bildirimlerini ve sonuçları öğrenerek önerilerini sürekli 
                   iyileştirir ve daha doğru yönlendirmeler sunar.
                 </p>
               </div>
             </div>
           </div>
-        </div>
+          </div>
+        </FadeIn>
       </Section>
 
       <Section className="bg-eza-gray">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-eza-dark mb-6">Kullanım Senaryoları</h2>
-          <ul className="space-y-4 text-lg text-gray-700">
+        <FadeIn delay={400}>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-eza-text mb-6">Kullanım Senaryoları</h2>
+            <ul className="space-y-4 text-lg text-eza-text-secondary">
             <li className="flex items-start">
               <span className="text-eza-green text-2xl mr-3">✓</span>
               <span>
@@ -195,33 +205,37 @@ export default function AdvisorPage() {
               </span>
             </li>
           </ul>
-        </div>
+          </div>
+        </FadeIn>
       </Section>
 
       <Section className="bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-eza-dark mb-6">EZA Felsefesi</h2>
-          <div className="bg-gradient-to-br from-eza-blue/5 to-white rounded-xl p-6 border border-eza-blue/10">
-            <p className="text-lg text-gray-700 leading-relaxed mb-4">
+        <FadeIn delay={500}>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-eza-text mb-6">EZA Felsefesi</h2>
+            <div className="bg-gradient-to-br from-eza-blue/5 to-white rounded-xl p-6 border border-eza-blue/10">
+              <p className="text-lg text-eza-text-secondary leading-relaxed mb-4">
               EZA Advisor, EZA'nın temel felsefesini yansıtır: <strong className="text-eza-text">yasaklamaz, 
               ceza vermez; sadece daha iyi bir davranış önerir.</strong>
             </p>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              Advisor, kullanıcıları engellemez veya içerikleri sansürlemez. Bunun yerine, daha etik 
-              bir yaklaşımın neden tercih edilmesi gerektiğini açıklar ve uygulanabilir alternatifler 
-              sunar. Bu sayede teknoloji, insanlığa karşı daha saygılı ve sorumlu davranır.
-            </p>
+              <p className="text-lg text-eza-text-secondary leading-relaxed">
+                Advisor, kullanıcıları engellemez veya içerikleri sansürlemez. Bunun yerine, daha etik 
+                bir yaklaşımın neden tercih edilmesi gerektiğini açıklar ve uygulanabilir alternatifler 
+                sunar. Bu sayede teknoloji, insanlığa karşı daha saygılı ve sorumlu davranır.
+              </p>
+            </div>
           </div>
-        </div>
+        </FadeIn>
       </Section>
 
       <Section className="bg-eza-gray">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-gradient-to-br from-eza-blue/5 to-white rounded-2xl p-8 border border-eza-blue/10">
-            <h3 className="text-2xl font-semibold text-eza-text mb-4">
-              EZA Advisor'ı Keşfedin
-            </h3>
-            <p className="text-gray-700 mb-6">
+        <FadeIn delay={600}>
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="bg-gradient-to-br from-eza-blue/5 to-white rounded-2xl p-8 border border-eza-blue/10">
+              <h3 className="text-2xl font-semibold text-eza-text mb-4">
+                EZA Advisor'ı Keşfedin
+              </h3>
+              <p className="text-eza-text-secondary mb-6">
               EZA-Core platformu üzerinden EZA Advisor'a erişebilir ve API entegrasyonu 
               yapabilirsiniz.
             </p>
@@ -243,8 +257,9 @@ export default function AdvisorPage() {
                 <Icon name="ArrowLeft" size={18} />
               </Link>
             </div>
+            </div>
           </div>
-        </div>
+        </FadeIn>
       </Section>
     </>
   );

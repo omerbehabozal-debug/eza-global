@@ -27,7 +27,7 @@ const demos = [
     description: "Regulator ve kurumsal paneller için etik analiz ve risk değerlendirme",
     videoSrc: "/demos/panel-demo.mp4", // Video eklendiğinde güncellenecek
     badge: "Panel",
-    icon: "LayoutDashboard",
+    icon: "LayoutGrid",
   },
 ];
 
@@ -39,7 +39,7 @@ export default function DemoShowcase() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-4">
-            <Icon name="PlayCircle" size={14} />
+            <Icon name="Play" size={14} />
             Premium Demos
           </div>
           <h2 className="text-4xl md:text-5xl font-semibold text-eza-text mb-4">
@@ -74,15 +74,21 @@ export default function DemoShowcase() {
                     }`}
                     onError={(e) => {
                       // Video yüklenemezse placeholder göster
-                      const target = e.target as HTMLVideoElement;
-                      target.style.display = 'none';
-                      const placeholder = target.nextElementSibling as HTMLElement;
-                      if (placeholder) placeholder.style.display = 'flex';
+                      try {
+                        const target = e.target as HTMLVideoElement;
+                        if (target) {
+                          target.style.display = 'none';
+                          const placeholder = target.nextElementSibling as HTMLElement;
+                          if (placeholder) placeholder.style.display = 'flex';
+                        }
+                      } catch (error) {
+                        // Hata yakalama - sessizce devam et
+                      }
                     }}
                   />
                   
                   {/* Placeholder - Video yoksa gösterilir */}
-                  <div className="absolute inset-0 hidden items-center justify-center flex-col gap-3">
+                  <div className="absolute inset-0 flex items-center justify-center flex-col gap-3">
                     <div className="w-16 h-16 rounded-full bg-eza-blue/10 flex items-center justify-center">
                       <Icon name={demo.icon} size={32} className="text-eza-blue" />
                     </div>
@@ -105,7 +111,7 @@ export default function DemoShowcase() {
                   {/* Play indicator (subtle) */}
                   <div className="absolute bottom-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm">
-                      <Icon name="PlayCircle" size={14} className="text-eza-blue" />
+                      <Icon name="Play" size={14} className="text-eza-blue" />
                     </div>
                   </div>
                 </div>

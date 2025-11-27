@@ -2,6 +2,7 @@ import { generatePageMetadata } from "@/lib/seo";
 import Section from "@/app/components/Section";
 import Link from "next/link";
 import Icon from "@/app/components/Icon";
+import FadeIn from "@/app/components/FadeIn";
 
 export const metadata = generatePageMetadata(
   "Social & Communication Ethics",
@@ -13,21 +14,24 @@ export default function SocialCommunicationEthicsPage() {
     <>
       <div className="bg-gradient-to-br from-eza-gray via-white to-eza-gray py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-4">
-            <Icon name="Shield" size={16} />
-            Ethics Modules
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-eza-dark mb-6">
-            Social & Communication Ethics
-          </h1>
-          <p className="text-xl text-gray-700">
-            Sosyal platformlar ve iletişim için etik standartlar. Zararlı etkileşim önleme.
-          </p>
+          <FadeIn>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-4">
+              <Icon name="MessageCircle" size={16} />
+              Ethics Modules
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-eza-text mb-6">
+              Social & Communication Ethics
+            </h1>
+            <p className="text-xl text-eza-text-secondary">
+              Sosyal platformlar ve iletişim için etik standartlar. Zararlı etkileşim önleme.
+            </p>
+          </FadeIn>
         </div>
       </div>
 
       <Section className="bg-white">
-        <div className="max-w-4xl mx-auto space-y-6 text-lg text-gray-700 leading-relaxed">
+        <FadeIn delay={100}>
+          <div className="max-w-4xl mx-auto space-y-6 text-lg text-eza-text-secondary leading-relaxed">
           <p>
             Social & Communication Ethics, sosyal medya platformları, mesajlaşma uygulamaları 
             ve dijital iletişim araçları için özel olarak tasarlanmış etik modüldür. Kullanıcı 
@@ -46,12 +50,14 @@ export default function SocialCommunicationEthicsPage() {
             iletişimin neden etik olmadığını açıklar ve daha saygılı, dürüst ve yapıcı alternatifler 
             sunar. Bu sayede dijital iletişim, insanlığa karşı daha saygılı ve sorumlu davranır.
           </p>
-        </div>
+          </div>
+        </FadeIn>
       </Section>
 
       <Section className="bg-eza-gray">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-eza-dark mb-8">Modül Özellikleri</h2>
+        <FadeIn delay={200}>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-eza-text mb-8">Modül Özellikleri</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white rounded-lg p-6 border border-gray-200">
               <div className="flex items-center gap-3 mb-4">
@@ -60,7 +66,7 @@ export default function SocialCommunicationEthicsPage() {
                 </div>
                 <h3 className="text-xl font-semibold text-eza-text">İletişim Analizi</h3>
               </div>
-              <p className="text-gray-700">
+                <p className="text-eza-text-secondary">
                 Mesajları, yorumları ve etkileşimleri analiz eder, dil tonu, saygı seviyesi ve 
                 etik uyumluluğu değerlendirir.
               </p>
@@ -73,7 +79,7 @@ export default function SocialCommunicationEthicsPage() {
                 </div>
                 <h3 className="text-xl font-semibold text-eza-text">Zararlı Etkileşim Tespiti</h3>
               </div>
-              <p className="text-gray-700">
+                <p className="text-eza-text-secondary">
                 Siber zorbalık, nefret söylemi, manipülatif iletişim ve zararlı davranışları 
                 tespit eder ve kategorize eder.
               </p>
@@ -86,7 +92,7 @@ export default function SocialCommunicationEthicsPage() {
                 </div>
                 <h3 className="text-xl font-semibold text-eza-text">Saygılı Alternatifler</h3>
               </div>
-              <p className="text-gray-700">
+                <p className="text-eza-text-secondary">
                 Tespit edilen sorunlar için daha saygılı, yapıcı ve etik alternatifler önerir 
                 ve iletişim kalitesini artırır.
               </p>
@@ -99,61 +105,65 @@ export default function SocialCommunicationEthicsPage() {
                 </div>
                 <h3 className="text-xl font-semibold text-eza-text">Topluluk Yönetimi</h3>
               </div>
-              <p className="text-gray-700">
+                <p className="text-eza-text-secondary">
                 Platform yöneticilerine topluluk standartlarını korumak için araçlar ve 
                 rehberlik sağlar.
               </p>
             </div>
           </div>
-        </div>
+          </div>
+        </FadeIn>
       </Section>
 
       <Section className="bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-eza-dark mb-6">Tespit Edilen Riskler</h2>
+        <FadeIn delay={300}>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-eza-text mb-6">Tespit Edilen Riskler</h2>
           <div className="space-y-6">
             <div className="border-l-4 border-eza-blue pl-6">
               <h3 className="text-xl font-semibold text-eza-text mb-2">Siber Zorbalık</h3>
-              <p className="text-gray-700">
+                <p className="text-eza-text-secondary">
                 Kullanıcıları hedef alan zorbalık içerikleri, tehditler, aşağılama ve 
                 psikolojik zarar vermeye yönelik davranışlar.
               </p>
             </div>
             <div className="border-l-4 border-eza-green pl-6">
               <h3 className="text-xl font-semibold text-eza-text mb-2">Nefret Söylemi</h3>
-              <p className="text-gray-700">
+                <p className="text-eza-text-secondary">
                 Irk, din, cinsiyet, etnik köken veya diğer özelliklere dayalı nefret içeren 
                 mesajlar ve ayrımcı dil.
               </p>
             </div>
             <div className="border-l-4 border-eza-gold pl-6">
               <h3 className="text-xl font-semibold text-eza-text mb-2">Manipülatif İletişim</h3>
-              <p className="text-gray-700">
+                <p className="text-eza-text-secondary">
                 Kullanıcıları yanıltmaya veya zorlamaya yönelik iletişim teknikleri, duygusal 
                 manipülasyon ve yanıltıcı bilgiler.
               </p>
             </div>
             <div className="border-l-4 border-eza-text pl-6">
               <h3 className="text-xl font-semibold text-eza-text mb-2">Yanıltıcı Bilgi</h3>
-              <p className="text-gray-700">
+                <p className="text-eza-text-secondary">
                 Sahte haberler, yanıltıcı bilgiler, komplo teorileri ve doğrulanmamış iddialar.
               </p>
             </div>
             <div className="border-l-4 border-eza-blue pl-6">
               <h3 className="text-xl font-semibold text-eza-text mb-2">Saygısız Davranış</h3>
-              <p className="text-gray-700">
+                <p className="text-eza-text-secondary">
                 Kaba, saygısız veya saldırgan dil kullanımı, kişisel saldırılar ve yıkıcı 
                 etkileşimler.
               </p>
             </div>
           </div>
-        </div>
+          </div>
+        </FadeIn>
       </Section>
 
       <Section className="bg-eza-gray">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-eza-dark mb-6">Kullanım Senaryoları</h2>
-          <ul className="space-y-4 text-lg text-gray-700">
+        <FadeIn delay={400}>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-eza-text mb-6">Kullanım Senaryoları</h2>
+            <ul className="space-y-4 text-lg text-eza-text-secondary">
             <li className="flex items-start">
               <span className="text-eza-green text-2xl mr-3">✓</span>
               <span>
@@ -190,34 +200,38 @@ export default function SocialCommunicationEthicsPage() {
               </span>
             </li>
           </ul>
-        </div>
+          </div>
+        </FadeIn>
       </Section>
 
       <Section className="bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-eza-dark mb-6">EZA Yaklaşımı</h2>
-          <div className="bg-gradient-to-br from-eza-blue/5 to-white rounded-xl p-6 border border-eza-blue/10">
-            <p className="text-lg text-gray-700 leading-relaxed mb-4">
+        <FadeIn delay={500}>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-eza-text mb-6">EZA Yaklaşımı</h2>
+            <div className="bg-gradient-to-br from-eza-blue/5 to-white rounded-xl p-6 border border-eza-blue/10">
+              <p className="text-lg text-eza-text-secondary leading-relaxed mb-4">
               Social & Communication Ethics, EZA'nın temel felsefesini yansıtır: <strong className="text-eza-text">yasaklamaz, 
               ceza vermez; sadece daha iyi bir davranış önerir.</strong>
             </p>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              Modül, içerikleri engellemez veya sansürlemez. Bunun yerine, iletişimin neden 
-              etik olmadığını açıklar ve daha saygılı, yapıcı alternatifler sunar. Platform 
-              yöneticilerine ve kullanıcılara karar verme sürecinde rehberlik sağlar. Bu sayede 
-              dijital iletişim, insanlığa karşı daha saygılı ve sorumlu davranır.
-            </p>
+              <p className="text-lg text-eza-text-secondary leading-relaxed">
+                Modül, içerikleri engellemez veya sansürlemez. Bunun yerine, iletişimin neden 
+                etik olmadığını açıklar ve daha saygılı, yapıcı alternatifler sunar. Platform 
+                yöneticilerine ve kullanıcılara karar verme sürecinde rehberlik sağlar. Bu sayede 
+                dijital iletişim, insanlığa karşı daha saygılı ve sorumlu davranır.
+              </p>
+            </div>
           </div>
-        </div>
+        </FadeIn>
       </Section>
 
       <Section className="bg-eza-gray">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-gradient-to-br from-eza-blue/5 to-white rounded-2xl p-8 border border-eza-blue/10">
-            <h3 className="text-2xl font-semibold text-eza-text mb-4">
-              Social & Communication Ethics Modülünü Keşfedin
-            </h3>
-            <p className="text-gray-700 mb-6">
+        <FadeIn delay={600}>
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="bg-gradient-to-br from-eza-blue/5 to-white rounded-2xl p-8 border border-eza-blue/10">
+              <h3 className="text-2xl font-semibold text-eza-text mb-4">
+                Social & Communication Ethics Modülünü Keşfedin
+              </h3>
+              <p className="text-eza-text-secondary mb-6">
               EZA-Core platformu üzerinden Social & Communication Ethics modülüne erişebilir ve 
               API entegrasyonu yapabilirsiniz.
             </p>
@@ -239,8 +253,9 @@ export default function SocialCommunicationEthicsPage() {
                 <Icon name="ArrowLeft" size={18} />
               </Link>
             </div>
+            </div>
           </div>
-        </div>
+        </FadeIn>
       </Section>
     </>
   );

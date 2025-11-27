@@ -8,7 +8,7 @@ import Icon from "./Icon";
 
 const tabs = [
   { id: "core", label: "Platform", icon: "Cpu" },
-  { id: "panels", label: "Panels", icon: "LayoutDashboard" },
+  { id: "panels", label: "Panels", icon: "LayoutGrid" },
   { id: "modules", label: "Ethics Modules", icon: "Shield" },
 ];
 
@@ -71,8 +71,8 @@ export default function TabbedEcosystem() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {getActiveItems().map((item, index) => {
               const isPlatform = item.title === "Platform";
-              const LinkComponent = item.external ? "a" : Link;
-              const linkProps = item.external 
+              const LinkComponent = (item as any).external ? "a" : Link;
+              const linkProps = (item as any).external 
                 ? { href: item.href, target: "_blank", rel: "noopener noreferrer" }
                 : { href: item.href };
               
@@ -112,7 +112,7 @@ export default function TabbedEcosystem() {
                     </div>
                     <div className="flex items-center text-eza-blue font-medium text-sm mt-4">
                       {isPlatform ? "Platforma Git" : "Daha fazla bilgi"}
-                      <Icon name={item.external ? "ExternalLink" : "ArrowRight"} size={16} className="ml-1" />
+                      <Icon name={(item as any).external ? "ExternalLink" : "ArrowRight"} size={16} className="ml-1" />
                     </div>
                   </LinkComponent>
                 </FadeIn>
