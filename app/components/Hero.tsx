@@ -3,7 +3,17 @@
 import Icon from "./Icon";
 import HeroVisual from "./HeroVisual";
 
-export default function Hero() {
+interface HeroProps {
+  videoSrc?: string; // Video dosya yolu (örn: "/videos/hero-video.mp4") veya URL
+  videoType?: string; // Video formatı (örn: "video/mp4")
+  showVideo?: boolean; // Video gösterilsin mi?
+}
+
+export default function Hero({ 
+  videoSrc = "/videos/hero-video.mp4", 
+  videoType = "video/mp4",
+  showVideo = false 
+}: HeroProps) {
   const handleScrollToEcosystem = () => {
     const element = document.querySelector("#ecosystem");
     if (element) {
@@ -14,7 +24,7 @@ export default function Hero() {
   return (
     <div className="relative bg-white min-h-screen flex items-center overflow-hidden">
       {/* Premium background visual */}
-      <HeroVisual />
+      <HeroVisual videoSrc={videoSrc} videoType={videoType} showVideo={showVideo} />
       
       {/* Content layer */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-24 w-full">

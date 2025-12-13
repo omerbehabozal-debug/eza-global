@@ -13,7 +13,11 @@ export default function Home() {
   return (
     <>
       {/* Section 1: Hero - EZA Felsefesi ve İlk İzlenim */}
-      <Hero />
+      <Hero 
+        showVideo={true}
+        videoSrc="/videos/ce313605-5baa-49e2-b91f-951898ff530e_watermark.mp4"
+        videoType="video/mp4"
+      />
 
       {/* Section 2: EZA Vizyonu - EZA'nın Ne Olduğu */}
       <Section id="vision" className="bg-white">

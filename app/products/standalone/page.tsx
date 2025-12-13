@@ -3,27 +3,35 @@ import Section from "@/app/components/Section";
 import Link from "next/link";
 import Icon from "@/app/components/Icon";
 import FadeIn from "@/app/components/FadeIn";
+import HeroVisual from "@/app/components/HeroVisual";
 
 export const metadata = generatePageMetadata(
   "Standalone",
-  "Bağımsız etik değerlendirme platformu. Herhangi bir sistemle entegre olmadan çalışır."
+  "Bağımsız etik değerlendirme chat arayüzü. Kullanıcı girişlerini analiz eder ve etik yönlendirmeli cevaplar üretir."
 );
 
 export default function StandalonePage() {
   return (
     <>
-      <div className="bg-gradient-to-br from-eza-gray via-white to-eza-gray py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative bg-gradient-to-br from-eza-gray via-white to-eza-gray py-20 min-h-[60vh] flex items-center overflow-hidden">
+        {/* Video Background */}
+        <HeroVisual 
+          videoSrc="/videos/8a491491-2330-493d-a26f-5297f32ab0e6_watermark.mp4"
+          videoType="video/mp4"
+          showVideo={true}
+        />
+        
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-4">
-              <Icon name="Shield" size={16} />
+              <Icon name="MessageSquare" size={16} />
               EZA-Core Products
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-eza-dark mb-6">
               Standalone
             </h1>
             <p className="text-xl text-eza-text-secondary">
-              Bağımsız etik değerlendirme platformu. Herhangi bir sistemle entegre olmadan çalışır.
+              Bağımsız etik değerlendirme chat arayüzü. Kullanıcı girişlerini analiz eder ve etik yönlendirmeli cevaplar üretir.
             </p>
           </FadeIn>
         </div>
@@ -33,72 +41,20 @@ export default function StandalonePage() {
         <FadeIn>
           <div className="max-w-4xl mx-auto space-y-6 text-lg text-eza-text-secondary leading-relaxed">
           <p>
-            EZA Standalone, bağımsız çalışan bir etik değerlendirme platformudur. Herhangi bir 
-            sistemle entegre olmadan, kendi başına etik analiz yapar ve yönlendirmeler sunar. 
-            Bu yaklaşım, mevcut sistemlerinize müdahale etmeden etik kontrol sağlar.
+            EZA Standalone, bağımsız çalışan bir etik değerlendirme chat arayüzüdür. Kullanıcıların 
+            girişlerini analiz eder ve etik yönlendirmeli cevaplar üretir. Herhangi bir sistemle 
+            entegre olmadan, kendi başına çalışarak etik sohbet deneyimi sunar.
           </p>
           <p>
-            Standalone platform, içerikleri analiz eder, etik değerlendirmeler yapar ve daha iyi 
-            alternatifler önerir. Yasaklamaz, engellemez; sadece rehberlik eder. Bu sayede 
-            teknolojinizin daha etik davranmasını sağlarken, sisteminizin bağımsızlığını korursunuz.
+            Standalone chat arayüzü, kullanıcı mesajlarını analiz eder, etik değerlendirmeler yapar 
+            ve daha iyi alternatifler önerir. Yasaklamaz, engellemez; sadece rehberlik eder. 
+            Kullanıcılarla etik bir sohbet ortamı sağlarken, mevcut sistemlerinize müdahale etmez.
           </p>
           <p>
-            EZA Standalone, özellikle mevcut sistemlerini değiştirmek istemeyen kurumlar için 
-            idealdir. Bağımsız çalışma özelliği sayesinde, herhangi bir entegrasyon gerektirmeden 
-            etik kontrol sağlayabilirsiniz.
+            EZA Standalone, özellikle chat tabanlı uygulamalar ve müşteri hizmetleri için idealdir. 
+            Bağımsız çalışma özelliği sayesinde, herhangi bir entegrasyon gerektirmeden etik 
+            sohbet deneyimi sağlayabilirsiniz.
           </p>
-          </div>
-        </FadeIn>
-      </Section>
-
-      <Section className="bg-eza-gray">
-        <FadeIn delay={100}>
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-eza-text mb-6">Faydalar</h2>
-            <ul className="space-y-4 text-lg text-eza-text-secondary">
-            <li className="flex items-start">
-              <span className="text-eza-green text-2xl mr-3">✓</span>
-              <span>Bağımsız çalışma - entegrasyon gerektirmez</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-eza-green text-2xl mr-3">✓</span>
-              <span>Mevcut sistemlere müdahale etmez</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-eza-green text-2xl mr-3">✓</span>
-              <span>Esnek kullanım ve kolay kurulum</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-eza-green text-2xl mr-3">✓</span>
-              <span>Etik değerlendirme ve yönlendirme</span>
-            </li>
-          </ul>
-          </div>
-        </FadeIn>
-      </Section>
-
-      <Section className="bg-white">
-        <FadeIn delay={200}>
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-eza-text mb-6">EZA Nasıl Yardımcı Olur?</h2>
-            <ul className="space-y-4 text-lg text-eza-text-secondary">
-            <li className="flex items-start">
-              <span className="text-eza-blue text-xl mr-3">•</span>
-              <span>İçerikleri bağımsız olarak analiz eder ve etik değerlendirme yapar</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-eza-blue text-xl mr-3">•</span>
-              <span>Daha iyi alternatifler önerir ve yönlendirir</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-eza-blue text-xl mr-3">•</span>
-              <span>Mevcut sistemlerinize müdahale etmeden çalışır</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-eza-blue text-xl mr-3">•</span>
-              <span>Esnek kullanım ile ihtiyaçlarınıza göre özelleştirilebilir</span>
-            </li>
-          </ul>
           </div>
         </FadeIn>
       </Section>
@@ -113,7 +69,7 @@ export default function StandalonePage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 bg-eza-blue text-white rounded-lg font-semibold hover:bg-[#0077ed] transition-all shadow-lg hover:shadow-xl"
             >
-              Standalone Platform'a Git
+              Standalone Chat'a Git
               <Icon name="ExternalLink" size={18} />
             </a>
             <Link

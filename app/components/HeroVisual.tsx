@@ -1,8 +1,40 @@
 "use client";
 
-export default function HeroVisual() {
+interface HeroVisualProps {
+  videoSrc?: string; // Video dosya yolu (örn: "/videos/hero-video.mp4") veya URL
+  videoType?: string; // Video formatı (örn: "video/mp4")
+  showVideo?: boolean; // Video gösterilsin mi?
+}
+
+export default function HeroVisual({ 
+  videoSrc = "/videos/hero-video.mp4", 
+  videoType = "video/mp4",
+  showVideo = false 
+}: HeroVisualProps) {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      {/* Video Background - Optional */}
+      {showVideo && videoSrc && (
+        <div className="absolute inset-0 w-full h-full">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-30"
+            style={{ objectFit: 'cover' }}
+          >
+            {videoSrc.startsWith('http') ? (
+              <source src={videoSrc} type={videoType} />
+            ) : (
+              <source src={videoSrc} type={videoType} />
+            )}
+            Tarayıcınız video oynatmayı desteklemiyor.
+          </video>
+          {/* Video overlay for better text readability */}
+          <div className="absolute inset-0 bg-white/40" />
+        </div>
+      )}
       {/* Premium layered gradient background - Apple style */}
       <div className="absolute inset-0">
         {/* Primary soft gradient - top center */}
