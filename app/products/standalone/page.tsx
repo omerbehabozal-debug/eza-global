@@ -38,25 +38,45 @@ export default function StandalonePage() {
       </div>
 
       <Section className="bg-white">
-        <FadeIn>
-          <div className="max-w-4xl mx-auto space-y-6 text-lg text-eza-text-secondary leading-relaxed">
-          <p>
-            EZA Standalone, bağımsız çalışan bir etik değerlendirme chat arayüzüdür. Kullanıcıların 
-            girişlerini analiz eder ve etik yönlendirmeli cevaplar üretir. Herhangi bir sistemle 
-            entegre olmadan, kendi başına çalışarak etik sohbet deneyimi sunar.
-          </p>
-          <p>
-            Standalone chat arayüzü, kullanıcı mesajlarını analiz eder, etik değerlendirmeler yapar 
-            ve daha iyi alternatifler önerir. Yasaklamaz, engellemez; sadece rehberlik eder. 
-            Kullanıcılarla etik bir sohbet ortamı sağlarken, mevcut sistemlerinize müdahale etmez.
-          </p>
-          <p>
-            EZA Standalone, özellikle chat tabanlı uygulamalar ve müşteri hizmetleri için idealdir. 
-            Bağımsız çalışma özelliği sayesinde, herhangi bir entegrasyon gerektirmeden etik 
-            sohbet deneyimi sağlayabilirsiniz.
-          </p>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <FadeIn>
+              <div className="space-y-6 text-lg text-eza-text-secondary leading-relaxed">
+                <p>
+                  EZA Standalone, bağımsız çalışan bir etik değerlendirme chat arayüzüdür. Kullanıcıların 
+                  girişlerini analiz eder ve etik yönlendirmeli cevaplar üretir. Herhangi bir sistemle 
+                  entegre olmadan, kendi başına çalışarak etik sohbet deneyimi sunar.
+                </p>
+                <p>
+                  Standalone chat arayüzü, kullanıcı mesajlarını analiz eder, etik değerlendirmeler yapar 
+                  ve daha iyi alternatifler önerir. Yasaklamaz, engellemez; sadece rehberlik eder. 
+                  Kullanıcılarla etik bir sohbet ortamı sağlarken, mevcut sistemlerinize müdahale etmez.
+                </p>
+                <p>
+                  EZA Standalone, özellikle chat tabanlı uygulamalar ve müşteri hizmetleri için idealdir. 
+                  Bağımsız çalışma özelliği sayesinde, herhangi bir entegrasyon gerektirmeden etik 
+                  sohbet deneyimi sağlayabilirsiniz.
+                </p>
+              </div>
+            </FadeIn>
+            
+            {/* Premium Image */}
+            <FadeIn delay={200}>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200/50">
+                <div className="absolute inset-0 bg-gradient-to-br from-eza-blue/5 via-transparent to-purple-500/5 pointer-events-none z-10" />
+                <img 
+                  src="/videos/standalone.png" 
+                  alt="EZA Standalone - Etik Değerlendirme Chat Arayüzü"
+                  className="w-full h-auto object-cover relative z-0"
+                  style={{
+                    maxHeight: '600px',
+                    objectFit: 'cover'
+                  }}
+                />
+              </div>
+            </FadeIn>
           </div>
-        </FadeIn>
+        </div>
       </Section>
 
       <Section className="bg-eza-gray">
