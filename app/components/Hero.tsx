@@ -35,13 +35,13 @@ export default function Hero({
             </span>
           </div>
           <h1 className="hero-title text-5xl md:text-6xl lg:text-7xl font-semibold text-eza-text mb-6 leading-tight">
-            Teknolojinin insanlığa karşı{" "}
-            <span className="text-eza-blue">etik davranmasını</span>{" "}
-            sağlayan rehber.
+            Yapay zekâ çıktılarının etik etkisini ölçen bağımsız gözlem altyapısı.
           </h1>
           
           <p className="hero-description text-xl md:text-2xl text-eza-text-secondary mb-12 leading-relaxed max-w-2xl mx-auto">
-            EZA, insan ve teknoloji arasında etik bir köprü kurar. Yasaklamaz, ceza vermez; sadece daha iyi bir davranış önerir.
+            EZA, yapay zekâ çıktılarının etik, toplumsal ve regülasyonel etkisini sansürlemeden analiz eder.
+            <br />
+            Müdahale etmez; ölçer, açıklar ve görünür kılar.
           </p>
           
           <div className="hero-buttons flex justify-center items-center">

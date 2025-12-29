@@ -3,57 +3,52 @@ import Icon from "./Icon";
 
 const whyNeeded = [
   {
-    icon: "MessageSquare",
-    title: "Teknoloji bazen insan niyetini doğru anlamayabilir",
-    description: "EZA, iletişimi daha anlaşılır ve güvenli hâle getirir.",
+    icon: "BarChart3",
+    title: "Çıktı Riski Ölçülemez",
+    description: "AI çıktıları etik olarak sayısallaştırılamazsa yönetilemez.",
   },
   {
-    icon: "Brain",
-    title: "Yapay zekâlar öğrenirken hatalar yapabilir",
-    description: "EZA, bu hataları yargılamadan tespit eder ve daha uygun bir sonuç önerir.",
+    icon: "Shield",
+    title: "Regülasyon Uyumu",
+    description: "Sektörel kurallar çıktı üzerinde görünür olmalı.",
   },
   {
-    icon: "Car",
-    title: "Otonom sistemler her durumda insan önceliğini kolayca değerlendiremeyebilir",
-    description: 'EZA, bu alanlarda "insana göre daha iyi davranış" önerileri sunar.',
+    icon: "Eye",
+    title: "Şeffaflık Eksikliği",
+    description: "Kurum içi kullanımda kim ne üretti izlenebilir olmalı.",
+  },
+  {
+    icon: "AlertTriangle",
+    title: "Marka & Güven Riski",
+    description: "Yanlış tonda bir çıktı itibar riskidir.",
   },
   {
     icon: "Cpu",
-    title: "İnsansı robotlar ile insanlığın etik iletişimi",
-    description: "EZA, insansı robotların insanlarla etkileşiminde saygılı, anlaşılır ve güvenli bir iletişim ortamı sağlar.",
+    title: "Otonom Sistem Etkisi",
+    description: "Karar destek çıktıları etki analizi ister.",
   },
   {
-    icon: "Video",
-    title: "Medya akışı çok hızlı",
-    description: 'EZA "yasaklama" değil, daha sağlıklı içerik sunumu için iyileştirme önerileri geliştirir.',
-  },
-  {
-    icon: "Users",
-    title: "Aileler, çocuklarının dijital dünyada güvende olmasını ister",
-    description: "EZA, sadece \"uyarı\" yapar ve ailelere karar desteği sunar.",
+    icon: "Zap",
+    title: "İçerik Ekosistemi",
+    description: "Medya akışında risk hızlı tespit edilmelidir.",
   },
 ];
 
 const howItWorks = [
   {
     step: "1",
-    title: "Analiz",
-    description: "İçeriği veya davranışı analiz eder",
+    title: "Algıla",
+    description: "Context + intent",
   },
   {
     step: "2",
-    title: "İşaretleme",
-    description: "Riskli veya sorunlu bir durum görürse hafifçe işaret eder",
+    title: "Ölç",
+    description: "Skor + risk başlıkları",
   },
   {
     step: "3",
-    title: "Öneri",
-    description: "Daha doğru, daha güvenli, daha etik bir alternatif önerir",
-  },
-  {
-    step: "4",
-    title: "Rehberlik",
-    description: "Sisteme ya da kullanıcıya rehberlik sunar",
+    title: "Raporla",
+    description: "Açıklama + log + paylaşımla",
   },
 ];
 
@@ -85,19 +80,19 @@ const contributions = [
   },
   {
     icon: "Shield",
-    title: "Daha Az Yanlış Bilgi",
-    description: "EZA, doğruluk kontrolünü bir kalkan gibi değil, bir yönlendirici pusula gibi yapar.",
+    title: "Zararlı Yönlendirme Risklerinin Görünürlüğü",
+    description: "EZA, zararlı yönlendirme risklerini ve yanıltıcı etkileri görünür kılar.",
   },
 ];
 
 const targetAudience = [
-  "Teknoloji geliştiricileri",
+  "AI ürün ekipleri",
   "Medya kuruluşları",
   "Otonom araç üreticileri",
   "İnsansı robot üreticileri",
-  "Devlet kurumları",
+  "Regülatörler",
   "Eğitim dünyası",
-  "Aileler",
+  "Kurumsal ekipler",
   "Günlük kullanıcılar",
 ];
 
@@ -111,7 +106,7 @@ export default function WhyEZA() {
             Neden EZA?
           </h2>
           <div className="inline-block px-8 py-3 bg-eza-blue/10 border border-eza-blue/20 rounded-lg mb-6">
-            <span className="text-eza-blue font-semibold text-xl">"İnsanlık için emniyet kemeri"</span>
+            <span className="text-eza-blue font-semibold text-xl">"Etik gözlem katmanı"</span>
           </div>
           <p className="text-xl text-eza-text-secondary max-w-2xl mx-auto mb-12">
             Teknolojinin hızla geliştiği bir dünyada, insan ile yapay zekâ arasındaki etik ilişkiyi görünür kılar.
@@ -178,7 +173,7 @@ export default function WhyEZA() {
             Bu süreç "engelleme" değil, daha iyiye yönlendirme sürecidir.
           </p>
         </FadeIn>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-3 gap-6">
           {howItWorks.map((item, index) => (
             <FadeIn key={index} delay={index * 50}>
               <div className="bg-white rounded-lg p-6 border border-gray-200 text-center relative">
@@ -195,6 +190,11 @@ export default function WhyEZA() {
             </FadeIn>
           ))}
         </div>
+        <FadeIn delay={200}>
+          <p className="text-center text-sm text-eza-text-secondary/70 mt-6 max-w-2xl mx-auto">
+            İyileştirme önerileri isteğe bağlıdır.
+          </p>
+        </FadeIn>
       </div>
 
       {/* EZA İnsanlığa Nasıl Katkı Sağlar? */}
