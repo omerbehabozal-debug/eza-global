@@ -1,14 +1,17 @@
+"use client";
+
+import { useEffect } from "react";
 import Section from "@/app/components/Section";
 import Link from "next/link";
 import Icon from "@/app/components/Icon";
 import FadeIn from "@/app/components/FadeIn";
 
-export const metadata = {
-  title: "Global Ölçekli Paneller | EZA",
-  description: "Çok uluslu kurumlar ve global operasyonlar için etik izleme ve raporlama panelleri.",
-};
-
 export default function GlobalOversightPage() {
+  useEffect(() => {
+    // Sayfa yüklendiğinde scroll pozisyonunu en üste al
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
+
   return (
     <>
       <div className="bg-gradient-to-br from-eza-gray via-white to-eza-gray py-20">
