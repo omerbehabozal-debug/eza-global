@@ -5,7 +5,6 @@ import Section from "@/app/components/Section";
 import Link from "next/link";
 import Icon from "@/app/components/Icon";
 import FadeIn from "@/app/components/FadeIn";
-import HeroVisual from "@/app/components/HeroVisual";
 
 export default function StandalonePage() {
   useEffect(() => {
@@ -26,24 +25,17 @@ export default function StandalonePage() {
 
   return (
     <>
-      <div className="relative bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-20 min-h-[60vh] flex items-center overflow-hidden">
-        {/* Video Background */}
-        <HeroVisual 
-          videoSrc="/videos/8a491491-2330-493d-a26f-5297f32ab0e6_watermark.mp4"
-          videoType="video/mp4"
-          showVideo={true}
-        />
-        
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
+      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-4">
               EZA Ürünler
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-eza-dark mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-eza-text mb-6">
               Standalone
             </h1>
             <p className="text-xl text-eza-text-secondary">
-              Bağımsız etik değerlendirme chat arayüzü. Kullanıcı girişlerini analiz eder ve etik yönlendirmeli cevaplar üretir.
+              Bireysel kullanıcılar için bağımsız etik gözlem ve analiz chat arayüzü.
             </p>
           </FadeIn>
         </div>
@@ -55,20 +47,17 @@ export default function StandalonePage() {
             <FadeIn>
               <div className="space-y-6 text-lg text-eza-text-secondary leading-relaxed">
                 <p>
-                  EZA Standalone, bağımsız çalışan bir etik değerlendirme chat arayüzüdür. Kullanıcıların 
-                  girişlerini analiz eder ve etik yönlendirmeli cevaplar üretir. Herhangi bir sistemle 
-                  entegre olmadan, kendi başına çalışarak etik sohbet deneyimi sunar.
+                  EZA Standalone, bireysel kullanıcılar için tasarlanmış bağımsız bir etik gözlem aracıdır. 
+                  Chat sırasında mesajları analiz eder, etik etkileri skorlar ve görünür kılar. Herhangi bir 
+                  entegrasyon gerektirmeden, kendi başına çalışır.
                 </p>
                 <p>
-                  Standalone chat arayüzü, kullanıcı mesajlarını analiz eder, etik değerlendirmeler yapar 
-                  ve kullanıcı talep ettiğinde etik iyileştirme önerileri sunar. Otomatik olarak yasaklamaz, 
-                  engellemez; sadece gözlem yapar ve görünür kılar. Kullanıcılarla etik bir sohbet ortamı 
-                  sağlarken, mevcut sistemlerinize otomatik veya zorunlu müdahale etmez.
+                  Standalone otomatik karar vermez, yasaklamaz veya zorunlu yönlendirme yapmaz. Sadece 
+                  gözlemler, analiz eder ve etik farkındalık sağlar. Kullanıcı talep ettiğinde, etik 
+                  çerçeve içinde bilgilendirici öneriler sunabilir; ancak nihai karar her zaman kullanıcıya aittir.
                 </p>
                 <p>
-                  EZA Standalone, özellikle chat tabanlı uygulamalar ve müşteri hizmetleri için idealdir. 
-                  Bağımsız çalışma özelliği sayesinde, herhangi bir entegrasyon gerektirmeden etik 
-                  sohbet deneyimi sağlayabilirsiniz.
+                  Bağımsız çalışma özelliği sayesinde, entegrasyon olmadan chat tabanlı etik gözlem deneyimi sunar.
                 </p>
               </div>
             </FadeIn>

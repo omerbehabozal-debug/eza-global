@@ -35,89 +35,51 @@ export default function ProxyPage() {
               Proxy
             </h1>
             <p className="text-xl text-eza-text-secondary">
-              Kurumsal Yapay Zekâ Etik ve Güvenlik Katmanı
-            </p>
-            <p className="text-lg text-eza-text-secondary mt-4 max-w-3xl mx-auto">
-              EZA Proxy, kurumların yapay zekâ sistemlerini gerçek zamanlı olarak izleyen, analiz eden ve etik riskleri görünür kılan profesyonel bir kontrol altyapısıdır.
+              Kurumsal sistemler için API tabanlı derin etik analiz çözümü.
             </p>
           </FadeIn>
         </div>
       </div>
 
       <Section className="bg-white">
-        <FadeIn delay={100}>
-          <div className="max-w-4xl mx-auto space-y-6 text-lg text-eza-text-secondary leading-relaxed">
-          <p>
-            EZA Proxy, ChatGPT, Claude, Gemini, Llama gibi büyük dil modellerinin üstünde çalışan 
-            bağımsız bir etik zekâ katmanıdır. Yapay zekâ cevaplarını üretmeden önce veya sonra, 
-            etik, hukuki ve güvenlik açısından değerlendirir — otomatik veya zorunlu müdahale etmeden, 
-            şeffaf ve denetlenebilir şekilde.
-          </p>
-          <p>
-            EZA Proxy içeriğe sansür uygulamaz, cevap üretmez, manipüle etmez. Sadece şunu yapar: 
-            "Bu yapay zekâ cevabı kurumun için güvenli mi?" Bu soruyu sorarak, kurumların yapay 
-            zekâ sistemlerini gerçek zamanlı olarak izler, analiz eder ve etik riskleri görünür kılar.
-          </p>
-          <p>
-            Kurumsal yapılar için tasarlanan bu kontrol altyapısı, tüm LLM çıktılarını merkezi bir 
-            noktadan değerlendirerek, sistem genelinde etik standartları görünür kılar. Otomatik veya 
-            zorunlu müdahale etmeden, sadece görünürlük ve denetlenebilirlik sunar. Kullanıcı talep 
-            ettiğinde, etik iyileştirme önerileri sunabilir; ancak bu öneriler bağlayıcı değildir.
-          </p>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <FadeIn>
+              <div className="space-y-6 text-lg text-eza-text-secondary leading-relaxed">
+                <p>
+                  EZA Proxy, kurumsal yapılar için tasarlanmış API tabanlı bir etik gözlem altyapısıdır. 
+                  ChatGPT, Claude, Gemini, Llama gibi büyük dil modellerinin çıktılarını gerçek zamanlı 
+                  olarak analiz eder, etik etkileri skorlar ve görünür kılar.
+                </p>
+                <p>
+                  Proxy otomatik karar vermez, yasaklamaz veya zorunlu yönlendirme yapmaz. Sadece 
+                  gözlemler, analiz eder ve kurumsal etik farkındalık sağlar. Kullanıcı talep ettiğinde, 
+                  etik çerçeve içinde bilgilendirici öneriler sunabilir; ancak nihai karar her zaman kullanıcıya aittir.
+                </p>
+                <p>
+                  Merkezi bir noktadan tüm LLM çıktılarını değerlendirerek, sistem genelinde etik 
+                  standartları görünür kılar ve denetlenebilirlik sunar.
+                </p>
+              </div>
+            </FadeIn>
+            
+            {/* Premium Image */}
+            <FadeIn delay={200}>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200/50">
+                <div className="absolute inset-0 bg-gradient-to-br from-eza-blue/5 via-transparent to-purple-500/5 pointer-events-none z-10" />
+                <img 
+                  src="/videos/proxy.png" 
+                  alt="EZA Proxy - Kurumsal Etik Analiz Çözümü"
+                  className="w-full h-auto object-cover relative z-0"
+                  style={{
+                    maxHeight: '600px',
+                    objectFit: 'cover'
+                  }}
+                />
+              </div>
+            </FadeIn>
           </div>
-        </FadeIn>
-      </Section>
-
-      <Section className="bg-eza-gray">
-        <FadeIn delay={200}>
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-eza-text mb-6">Özellikler</h2>
-            <ul className="space-y-4 text-lg text-eza-text-secondary">
-            <li className="flex items-start">
-              <span className="text-eza-green text-2xl mr-3">✓</span>
-              <span>Gerçek zamanlı izleme ve analiz — yapay zekâ sistemlerini sürekli gözetir</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-eza-green text-2xl mr-3">✓</span>
-              <span>Etik, hukuki ve güvenlik değerlendirmesi — çok boyutlu risk analizi</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-eza-green text-2xl mr-3">✓</span>
-              <span>Otomatik müdahale etmez — sadece görünürlük ve denetlenebilirlik sağlar</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-eza-green text-2xl mr-3">✓</span>
-              <span>ChatGPT, Claude, Gemini, Llama gibi tüm büyük dil modelleri ile uyumlu</span>
-            </li>
-          </ul>
-          </div>
-        </FadeIn>
-      </Section>
-
-      <Section className="bg-white">
-        <FadeIn delay={300}>
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-eza-text mb-6">EZA Proxy Ne Yapmaz?</h2>
-            <ul className="space-y-4 text-lg text-eza-text-secondary">
-            <li className="flex items-start">
-              <span className="text-eza-blue text-xl mr-3">✗</span>
-              <span>İçeriğe sansür uygulamaz — yasaklamaz, engellemez</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-eza-blue text-xl mr-3">✗</span>
-              <span>Cevap üretmez — LLM'lerin yerine geçmez</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-eza-blue text-xl mr-3">✗</span>
-              <span>Manipüle etmez — içeriği değiştirmez veya düzenlemez</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-eza-blue text-xl mr-3">✓</span>
-              <span>Sadece şunu yapar: "Bu yapay zekâ cevabı kurumun için güvenli mi?"</span>
-            </li>
-          </ul>
-          </div>
-        </FadeIn>
+        </div>
       </Section>
 
       <Section className="bg-eza-gray">
