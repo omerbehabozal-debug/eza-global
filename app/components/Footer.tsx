@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Icon from "./Icon";
 
 export default function Footer() {
   return (
@@ -11,135 +10,114 @@ export default function Footer() {
             <div className="mb-6">
               <span className="text-xl font-semibold text-eza-text">EZA.global</span>
             </div>
-            <p className="text-eza-text-secondary text-sm leading-relaxed mb-6">
-              Teknolojinin insanlığa karşı etik davranmasını sağlayan rehber.
+            <p className="text-eza-text-secondary text-sm leading-relaxed mb-4 max-w-xs">
+              Yapay zekâ çıktılarının etik etkilerini
+              müdahale etmeden ölçen ve görünür kılan
+              etik gözlem altyapısı.
+            </p>
+            <p className="text-eza-text-secondary/60 text-xs leading-relaxed italic">
+              EZA is a non-interventionist ethical observation infrastructure.
             </p>
           </div>
 
-          {/* Platform */}
+          {/* Ürünler */}
           <div>
-            <h3 className="text-sm font-semibold text-eza-text mb-4 flex items-center gap-2">
-              <Icon name="Cpu" size={16} className="text-eza-blue" />
-              Platform
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/platform/eza-core"
-                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
-                >
-                  EZA-Core Platform
-                </Link>
-              </li>
-              <li>
-                <a
-                  href="https://ezacore.ai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm flex items-center gap-1"
-                >
-                  EZA-Core API
-                  <Icon name="ExternalLink" size={12} />
-                </a>
-              </li>
+            <h3 className="text-sm font-semibold text-eza-text mb-4">Ürünler</h3>
+            <ul className="space-y-2.5">
               <li>
                 <Link
                   href="/products/standalone"
-                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
+                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm hover:underline"
                 >
                   Standalone
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/products/proxy"
-                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
-                >
-                  Proxy
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/products/proxy-lite"
-                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
+                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm hover:underline"
                 >
                   Proxy-Lite
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/panels/developer"
-                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
+                  href="/products/proxy"
+                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm hover:underline"
                 >
-                  Developer Console
+                  Proxy
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Panels */}
+          {/* Paneller */}
           <div>
-            <h3 className="text-sm font-semibold text-eza-text mb-4">Panels</h3>
-            <ul className="space-y-3">
+            <h3 className="text-sm font-semibold text-eza-text mb-4">Paneller</h3>
+            <ul className="space-y-2.5">
               <li>
                 <Link
                   href="/panels/regulator"
-                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
+                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm hover:underline"
                 >
-                  Regulator Panel
+                  Global Oversight Panel
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/panels/regulator"
+                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm hover:underline"
+                >
+                  Ulusal Regülasyon Panelleri
                 </Link>
               </li>
               <li>
                 <Link
                   href="/panels/corporate"
-                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
+                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm hover:underline"
                 >
-                  Corporate Panel
+                  Sektörel Paneller
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Kaynaklar / Yasal */}
           <div>
-            <h3 className="text-sm font-semibold text-eza-text mb-4">Resources</h3>
-            <ul className="space-y-3">
+            <h3 className="text-sm font-semibold text-eza-text mb-4">Kaynaklar</h3>
+            <ul className="space-y-2.5 mb-6">
               <li>
                 <Link
                   href="/documentation"
-                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
+                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm hover:underline"
                 >
                   Documentation
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/docs/test-suite"
-                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
-                >
-                  Test & Safety Benchmarks
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/whitepaper"
-                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
+                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm hover:underline"
                 >
                   Whitepaper
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/contact"
-                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
+                  href="/docs/test-suite"
+                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm hover:underline"
                 >
-                  Contact
+                  Test & Safety Benchmarks
                 </Link>
               </li>
+            </ul>
+            
+            <h3 className="text-sm font-semibold text-eza-text mb-4">Yasal</h3>
+            <ul className="space-y-2.5 mb-6">
               <li>
                 <Link
                   href="/privacy"
-                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
+                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm hover:underline"
                 >
                   Privacy Policy
                 </Link>
@@ -147,12 +125,21 @@ export default function Footer() {
               <li>
                 <Link
                   href="/terms"
-                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm"
+                  className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm hover:underline"
                 >
                   Terms of Service
                 </Link>
               </li>
             </ul>
+            
+            <div>
+              <Link
+                href="/contact"
+                className="text-eza-text-secondary hover:text-eza-text transition-colors text-sm hover:underline"
+              >
+                Contact
+              </Link>
+            </div>
           </div>
         </div>
 

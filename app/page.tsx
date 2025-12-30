@@ -4,7 +4,7 @@ import TabbedEcosystem from "./components/TabbedEcosystem";
 import SectorGrid from "./components/SectorGrid";
 import VisionSection from "./components/VisionSection";
 import WhyEZA from "./components/WhyEZA";
-import Manifesto from "./components/Manifesto";
+import EZAPosition from "./components/EZAPosition";
 import FAQ from "./components/FAQ";
 import EZACoreIntro from "./components/EZACoreIntro";
 import DemoShowcase from "./components/DemoShowcase";
@@ -53,9 +53,9 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* Section 7: Kurucu Manifestosu */}
-      <Section id="manifesto" className="bg-white">
-        <Manifesto />
+      {/* Section 7: EZA'nın Duruşu */}
+      <Section id="position" className="bg-white">
+        <EZAPosition />
       </Section>
 
       {/* Section 8: FAQ */}
