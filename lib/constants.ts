@@ -65,13 +65,13 @@ export const ecosystemItems = {
     {
       title: "Global Ölçekli Paneller",
       description: "Çok uluslu kurumlar ve global operasyonlar için etik izleme ve raporlama panelleri.",
-      href: "/panels/regulator",
+      href: "/panels/global-oversight",
       icon: "Globe",
     },
     {
       title: "Ulusal Regülasyon Panelleri",
       description: "Ulusal düzenleyici kurumlar ve yerel regülasyonlara uyum için özel paneller.",
-      href: "/panels/regulator",
+      href: "/panels/national-regulation",
       icon: "Building2",
     },
   ],

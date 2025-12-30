@@ -1,16 +1,23 @@
-import { generatePageMetadata } from "@/lib/seo";
+"use client";
+
+import { useEffect } from "react";
 import Section from "@/app/components/Section";
 import Link from "next/link";
 import Icon from "@/app/components/Icon";
 import FadeIn from "@/app/components/FadeIn";
 import HeroVisual from "@/app/components/HeroVisual";
 
-export const metadata = generatePageMetadata(
-  "Standalone",
-  "Bağımsız etik değerlendirme chat arayüzü. Kullanıcı girişlerini analiz eder ve etik yönlendirmeli cevaplar üretir."
-);
-
 export default function StandalonePage() {
+  useEffect(() => {
+    // Sayfa yüklendiğinde scroll pozisyonunu en üste al
+    if (typeof window !== 'undefined') {
+      window.history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+  }, []);
+
   return (
     <>
       <div className="relative bg-gradient-to-br from-eza-gray via-white to-eza-gray py-20 min-h-[60vh] flex items-center overflow-hidden">

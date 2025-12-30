@@ -1,15 +1,22 @@
-import { generatePageMetadata } from "@/lib/seo";
+"use client";
+
+import { useEffect } from "react";
 import Section from "@/app/components/Section";
 import Link from "next/link";
 import Icon from "@/app/components/Icon";
 import FadeIn from "@/app/components/FadeIn";
 
-export const metadata = generatePageMetadata(
-  "Education Solutions",
-  "Eğitim teknolojilerinde etik kullanım. Öğrenci verilerinin korunması ve adil AI kullanımı."
-);
-
 export default function EducationPage() {
+  useEffect(() => {
+    // Sayfa yüklendiğinde scroll pozisyonunu en üste al
+    if (typeof window !== 'undefined') {
+      window.history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+  }, []);
+
   return (
     <>
       <div className="bg-gradient-to-br from-eza-gray via-white to-eza-gray py-20">

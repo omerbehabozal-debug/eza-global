@@ -1,13 +1,20 @@
-import { generatePageMetadata } from "@/lib/seo";
+"use client";
+
+import { useEffect } from "react";
 import Section from "@/app/components/Section";
 import Link from "next/link";
 
-export const metadata = generatePageMetadata(
-  "Media Solutions",
-  "Medya ve içerik üretiminde etik AI. Deepfake tespiti ve sorumlu içerik oluşturma."
-);
-
 export default function MediaPage() {
+  useEffect(() => {
+    // Sayfa yüklendiğinde scroll pozisyonunu en üste al
+    if (typeof window !== 'undefined') {
+      window.history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+  }, []);
+
   return (
     <>
       <div className="bg-gradient-to-br from-eza-gray via-white to-eza-gray py-20">

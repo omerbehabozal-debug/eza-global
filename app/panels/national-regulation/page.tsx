@@ -9,12 +9,17 @@ import FadeIn from "@/app/components/FadeIn";
 export default function NationalRegulationPage() {
   useEffect(() => {
     // Sayfa yüklendiğinde scroll pozisyonunu en üste al
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    if (typeof window !== 'undefined') {
+      window.history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
   }, []);
 
   return (
     <>
-      <div className="bg-gradient-to-br from-eza-gray via-white to-eza-gray py-20">
+      <div className="bg-gradient-to-br from-eza-gray via-white to-eza-gray py-20" id="top">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-4">

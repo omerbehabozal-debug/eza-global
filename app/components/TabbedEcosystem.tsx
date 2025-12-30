@@ -73,7 +73,7 @@ export default function TabbedEcosystem() {
               const LinkComponent = (item as any).external ? "a" : Link;
               const linkProps = (item as any).external 
                 ? { href: item.href, target: "_blank", rel: "noopener noreferrer" }
-                : { href: item.href };
+                : { href: item.href, scroll: false };
               const hasItems = (item as any).items && Array.isArray((item as any).items);
               
               return (
