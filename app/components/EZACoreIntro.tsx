@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import FadeIn from "./FadeIn";
 import Icon from "./Icon";
 
@@ -20,10 +21,17 @@ export default function EZACoreIntro() {
               <p className="text-lg text-eza-text-secondary leading-relaxed mb-4">
                 EZA'nın etik felsefesi ve vizyonu, <strong className="text-eza-text">EZA-Core</strong> adlı teknolojik platform ile hayata geçer.
               </p>
-              <p className="text-base text-eza-text-secondary leading-relaxed">
+              <p className="text-base text-eza-text-secondary leading-relaxed mb-6">
                 EZA-Core, Standalone, Proxy, Proxy-Lite ve tüm panelleri çalıştıran çekirdek sistemdir. 
                 Etik analiz, skorlama ve risk değerlendirme motorlarını içeren kapsamlı bir teknoloji platformu.
               </p>
+              <Link
+                href="/platform/eza-core"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-eza-blue text-white rounded-lg font-semibold hover:bg-[#0077ed] transition-all shadow-lg hover:shadow-xl"
+              >
+                EZA-Core Platform
+                <Icon name="ArrowRight" size={18} />
+              </Link>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-gray-200">

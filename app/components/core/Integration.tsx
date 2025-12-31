@@ -62,18 +62,6 @@ export default function Integration() {
           </FadeIn>
         ))}
       </div>
-
-      <FadeIn delay={400}>
-        <div className="text-center">
-          <Link
-            href="/panels/developer"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-eza-blue text-white rounded-lg font-semibold hover:bg-[#0077ed] transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl"
-          >
-            Geliştirici Konsoluna Git
-            <Icon name="ArrowRight" size={18} />
-          </Link>
-        </div>
-      </FadeIn>
     </div>
   );
 }

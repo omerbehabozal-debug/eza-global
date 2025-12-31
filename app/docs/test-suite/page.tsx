@@ -1,30 +1,51 @@
-import { generatePageMetadata } from "@/lib/seo";
+"use client";
+
+import { useState, useEffect } from "react";
 import Section from "@/app/components/Section";
 import FadeIn from "@/app/components/FadeIn";
 import Icon from "@/app/components/Icon";
 import ComplianceMatrix from "@/app/components/ComplianceMatrix";
 
-export const metadata = generatePageMetadata(
-  "EZA Test & Safety Benchmarks",
-  "EZA, 7 test paketinde toplam 591 testle %100 başarı oranına sahiptir. Test sonuçları, regülasyon kurumları ve kurumsal müşteriler için şeffaflık ve güven sağlar."
-);
-
 // API Response Interface
-interface ApiTestResults {
-  totalTests: number;
-  totalPassed: number;
-  totalFailed: number;
-  totalSkipped: number;
-  overallSuccessRate: number;
-  suites: TestSuite[];
-  lastUpdated?: string;
+interface ComprehensiveTestResults {
+  overall: {
+    total_runs: number;
+    total_tests: number;
+    success_rate: number;
+  };
+  test_suites: TestSuite[];
 }
 
-// API Fetch Function (SSR)
-async function getTestResults(): Promise<ApiTestResults | null> {
+interface TestSuite {
+  name: string;
+  success_rate: number;
+  status: "pass" | "warning" | "fail";
+  improvement?: string;
+  major_runs?: Array<{
+    improvement?: string;
+    [key: string]: any;
+  }>;
+  improvements?: string[];
+}
+
+// Test Suite Veri Yapısı (UI için)
+interface UITestSuite {
+  id: string;
+  name: string;
+  testCount: number;
+  successRate: number;
+  status: "completed" | "pending" | "failed";
+  description: string;
+  improvement?: string;
+  details?: string;
+  testType: "fake-llm" | "real-llm";
+}
+
+// API Fetch Function
+async function fetchComprehensiveTestResults(): Promise<ComprehensiveTestResults | null> {
   try {
-    const apiUrl = process.env.EZA_BACKEND_URL || "https://api.ezacore.ai";
-    const res = await fetch(`${apiUrl}/api/test-results/latest`, {
+    const apiUrl = process.env.NEXT_PUBLIC_EZA_BACKEND_URL || "https://api.ezacore.ai";
+    const res = await fetch(`${apiUrl}/api/test-results/comprehensive`, {
       cache: "no-store",
       headers: {
         "Content-Type": "application/json",
@@ -36,134 +57,100 @@ async function getTestResults(): Promise<ApiTestResults | null> {
     }
 
     const data = await res.json();
-    return data as ApiTestResults;
+    return data as ComprehensiveTestResults;
   } catch (error) {
     console.error("API fetch error:", error);
     return null;
   }
 }
 
-// Test Suite Veri Yapısı
-interface TestSuite {
-  id: string;
-  name: string;
-  testCount: number;
+// API verisini UI formatına dönüştür
+function transformApiDataToUI(apiData: ComprehensiveTestResults): {
+  suites: UITestSuite[];
+  totalTests: number;
   successRate: number;
-  status: "completed" | "pending" | "failed";
-  description: string;
-  improvement?: string; // Örn: "%30.3 → %100"
-  details?: string; // Örn: "OpenAI, Groq, Mistral" veya "Latency 12, Burst/Throughput 12..."
-  testType: "fake-llm" | "real-llm";
+  suiteCount: number;
+} {
+  const suites: UITestSuite[] = apiData.test_suites.map((suite, index) => {
+    // Improvement string'ini oluştur
+    let improvement: string | undefined;
+    if (suite.improvement) {
+      improvement = suite.improvement;
+    } else if (suite.improvements && suite.improvements.length > 0) {
+      improvement = suite.improvements[suite.improvements.length - 1];
+    } else if (suite.major_runs && suite.major_runs.length > 0) {
+      const lastRun = suite.major_runs[suite.major_runs.length - 1];
+      if (lastRun.improvement) {
+        improvement = lastRun.improvement;
+      }
+    }
+
+    // Status mapping
+    let uiStatus: "completed" | "pending" | "failed" = "completed";
+    if (suite.status === "fail") {
+      uiStatus = "failed";
+    } else if (suite.status === "warning") {
+      uiStatus = "pending";
+    }
+
+    // Test type tahmini (name'e göre)
+    const testType: "fake-llm" | "real-llm" = 
+      suite.name.toLowerCase().includes("performance") || suite.name.toLowerCase().includes("core")
+        ? "fake-llm"
+        : "real-llm";
+
+    return {
+      id: suite.name.toLowerCase().replace(/\s+/g, "-"),
+      name: suite.name,
+      testCount: 0, // API'den gelmiyorsa 0, hesaplanabilir
+      successRate: suite.success_rate,
+      status: uiStatus,
+      description: `${suite.name} test suite'i. Başarı oranı: %${suite.success_rate}`,
+      improvement,
+      testType,
+    };
+  });
+
+  return {
+    suites,
+    totalTests: apiData.overall.total_tests,
+    successRate: apiData.overall.success_rate,
+    suiteCount: suites.length,
+  };
 }
-
-const TEST_SUITES: TestSuite[] = [
-  {
-    id: "core",
-    name: "Core",
-    testCount: 50,
-    successRate: 100,
-    status: "completed",
-    description: "Temel fonksiyonellik, pipeline ve skor hesaplama testleri.",
-    testType: "fake-llm",
-  },
-  {
-    id: "behavioral-extended",
-    name: "Behavioral Extended",
-    testCount: 100,
-    successRate: 100,
-    status: "completed",
-    description: "Gelişmiş davranışsal senaryolar ve risk kategorileri.",
-    testType: "real-llm",
-  },
-  {
-    id: "policy",
-    name: "Policy",
-    testCount: 127,
-    successRate: 100,
-    status: "completed",
-    description: "Politika ihlali tespiti, F1-F3 ve Z1-Z3 policy testleri.",
-    testType: "real-llm",
-  },
-  {
-    id: "multi-turn",
-    name: "Multi-Turn",
-    testCount: 100,
-    successRate: 100,
-    status: "completed",
-    description: "Çoklu tur konuşmalar, bağlam korunması ve risk artışı senaryoları.",
-    testType: "real-llm",
-  },
-  {
-    id: "adversarial",
-    name: "Adversarial",
-    testCount: 132,
-    successRate: 100,
-    status: "completed",
-    description: "Jailbreak, prompt injection ve red-team saldırı senaryoları.",
-    improvement: "%30.3 → %100",
-    testType: "real-llm",
-  },
-  {
-    id: "multi-model",
-    name: "Multi-Model",
-    testCount: 30,
-    successRate: 100,
-    status: "completed",
-    description: "OpenAI, Groq ve Mistral modelleri arasında skor tutarlılığı ve alignment.",
-    improvement: "%60 → %100",
-    details: "OpenAI, Groq, Mistral",
-    testType: "real-llm",
-  },
-  {
-    id: "performance",
-    name: "Performance",
-    testCount: 52,
-    successRate: 100,
-    status: "completed",
-    description: "Gecikme, eşzamanlılık, throughput, bellek ve uzun süreli stabilite testleri.",
-    details: "Latency 12, Burst/Throughput 12, Concurrency 12, Memory 8, Stability 8",
-    testType: "fake-llm",
-  },
-];
-
-// Toplam istatistikler
-const TOTAL_STATS = {
-  totalTests: TEST_SUITES.reduce((sum, suite) => sum + suite.testCount, 0),
-  totalPassed: TEST_SUITES.reduce((sum, suite) => sum + suite.testCount, 0),
-  totalFailed: 0,
-  totalSkipped: 0,
-  overallSuccessRate: 100,
-  totalDuration: "20-25 dakika",
-};
 
 // Özet Kartları Component
 function TestSummaryCards({ 
   totalTests, 
   successRate, 
-  suiteCount 
+  suiteCount,
+  isLoading,
+  hasError
 }: { 
   totalTests: number; 
   successRate: number; 
   suiteCount: number;
+  isLoading: boolean;
+  hasError: boolean;
 }) {
   const cards = [
     {
       label: "Toplam Test",
-      value: totalTests.toString(),
+      value: isLoading ? "..." : (hasError ? "N/A" : totalTests.toString()),
       icon: "CheckCircle",
       bgColor: "bg-eza-blue/10",
       textColor: "text-eza-blue",
     },
     {
       label: "Genel Başarı Oranı",
-      value: `%${successRate}`,
+      value: isLoading ? "..." : (hasError ? "N/A" : `%${successRate.toFixed(1)}`),
       icon: "TrendingUp",
       bgColor: "bg-eza-green/10",
       textColor: "text-eza-green",
     },
     {
       label: "Test Suite Sayısı",
-      value: suiteCount.toString(),
+      value: isLoading ? "..." : (hasError ? "N/A" : suiteCount.toString()),
       icon: "Layers",
       bgColor: "bg-eza-blue/10",
       textColor: "text-eza-blue",
@@ -192,7 +179,38 @@ function TestSummaryCards({
 }
 
 // Test Suite Kartı Component
-function TestSuiteCard({ suite, index }: { suite: TestSuite; index: number }) {
+function TestSuiteCard({ suite, index }: { suite: UITestSuite; index: number }) {
+  // Başarı oranına göre renk belirleme
+  const getStatusColor = (rate: number) => {
+    if (rate >= 95) {
+      return {
+        bg: "bg-green-100",
+        text: "text-green-700",
+        border: "border-green-200",
+        icon: "CheckCircle",
+        label: "Mükemmel",
+      };
+    } else if (rate >= 80) {
+      return {
+        bg: "bg-yellow-100",
+        text: "text-yellow-700",
+        border: "border-yellow-200",
+        icon: "AlertTriangle",
+        label: "İyi",
+      };
+    } else {
+      return {
+        bg: "bg-red-100",
+        text: "text-red-700",
+        border: "border-red-200",
+        icon: "XCircle",
+        label: "İyileştirme Gerekli",
+      };
+    }
+  };
+
+  const statusColor = getStatusColor(suite.successRate);
+
   return (
     <FadeIn delay={index * 50}>
       <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-xl hover:border-eza-blue/30 transition-all duration-300 h-full flex flex-col">
@@ -200,32 +218,38 @@ function TestSuiteCard({ suite, index }: { suite: TestSuite; index: number }) {
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
             <h3 className="text-2xl font-bold text-eza-text mb-2">{suite.name}</h3>
-            {suite.status === "completed" && (
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-eza-green/10 text-eza-green text-xs font-semibold rounded-full border border-eza-green/20">
-                <Icon name="CheckCircle" size={14} />
-                Tamamlandı
-              </div>
-            )}
+            <div className={`inline-flex items-center gap-2 px-3 py-1 ${statusColor.bg} ${statusColor.text} text-xs font-semibold rounded-full border ${statusColor.border}`}>
+              <Icon name={statusColor.icon} size={14} />
+              {statusColor.label}
+            </div>
           </div>
         </div>
 
         {/* İstatistikler */}
         <div className="grid grid-cols-2 gap-4 mb-6">
           <div>
-            <p className="text-xs text-eza-text-secondary mb-1">Test Sayısı</p>
-            <p className="text-2xl font-bold text-eza-text">{suite.testCount}</p>
-          </div>
-          <div>
             <p className="text-xs text-eza-text-secondary mb-1">Başarı Oranı</p>
-            <p className="text-2xl font-bold text-eza-green">%{suite.successRate}</p>
+            <p className={`text-2xl font-bold ${statusColor.text}`}>%{suite.successRate.toFixed(1)}</p>
           </div>
+          {suite.testCount > 0 && (
+            <div>
+              <p className="text-xs text-eza-text-secondary mb-1">Test Sayısı</p>
+              <p className="text-2xl font-bold text-eza-text">{suite.testCount}</p>
+            </div>
+          )}
         </div>
 
         {/* Progress Bar */}
         <div className="mb-6">
           <div className="w-full h-2 bg-eza-gray rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-eza-green to-eza-blue transition-all duration-1000"
+              className={`h-full transition-all duration-1000 ${
+                suite.successRate >= 95
+                  ? "bg-gradient-to-r from-green-500 to-green-600"
+                  : suite.successRate >= 80
+                  ? "bg-gradient-to-r from-yellow-500 to-yellow-600"
+                  : "bg-gradient-to-r from-red-500 to-red-600"
+              }`}
               style={{ width: `${suite.successRate}%` }}
             />
           </div>
@@ -236,7 +260,7 @@ function TestSuiteCard({ suite, index }: { suite: TestSuite; index: number }) {
           {suite.description}
         </p>
 
-        {/* İyileştirme veya Detaylar */}
+        {/* İyileştirme */}
         {suite.improvement && (
           <div className="mt-4 p-3 bg-eza-blue/5 rounded-lg border border-eza-blue/10">
             <p className="text-xs font-semibold text-eza-blue mb-1">İyileştirme</p>
@@ -263,7 +287,35 @@ function TestSuiteCard({ suite, index }: { suite: TestSuite; index: number }) {
 }
 
 // Test Suite Grid Component
-function TestSuiteGrid({ suites }: { suites: TestSuite[] }) {
+function TestSuiteGrid({ suites, isLoading, hasError }: { suites: UITestSuite[]; isLoading: boolean; hasError: boolean }) {
+  if (isLoading) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-eza-text-secondary">Test verileri yükleniyor...</p>
+      </div>
+    );
+  }
+
+  if (hasError) {
+    return (
+      <div className="text-center py-12">
+        <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 max-w-2xl mx-auto">
+          <Icon name="AlertCircle" className="text-yellow-600 mx-auto mb-4" size={32} />
+          <p className="text-yellow-800 font-semibold mb-2">Test verileri geçici olarak alınamıyor</p>
+          <p className="text-sm text-yellow-700">Lütfen daha sonra tekrar deneyin.</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (suites.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-eza-text-secondary">Henüz test verisi bulunmamaktadır.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {suites.map((suite, index) => (
@@ -546,16 +598,46 @@ function TestFrequencyCalendar() {
   );
 }
 
-// Ana Sayfa Component (Async Server Component)
-export default async function TestSuitePage() {
-  // API'den veri çek (fallback ile)
-  const apiData = await getTestResults();
-  
-  // Fallback verileri kullan
-  const suites = apiData?.suites || TEST_SUITES;
-  const totalTests = apiData?.totalTests || TOTAL_STATS.totalTests;
-  const successRate = apiData?.overallSuccessRate || TOTAL_STATS.overallSuccessRate;
-  const suiteCount = suites.length;
+// Ana Sayfa Component (Client Component)
+export default function TestSuitePage() {
+  const [data, setData] = useState<{
+    suites: UITestSuite[];
+    totalTests: number;
+    successRate: number;
+    suiteCount: number;
+  } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    async function loadData() {
+      setIsLoading(true);
+      setHasError(false);
+      
+      try {
+        const apiData = await fetchComprehensiveTestResults();
+        
+        if (apiData) {
+          const transformed = transformApiDataToUI(apiData);
+          setData(transformed);
+        } else {
+          setHasError(true);
+        }
+      } catch (error) {
+        console.error("Error loading test results:", error);
+        setHasError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadData();
+  }, []);
+
+  const suites = data?.suites || [];
+  const totalTests = data?.totalTests || 0;
+  const successRate = data?.successRate || 0;
+  const suiteCount = data?.suiteCount || 0;
 
   return (
     <>
@@ -577,7 +659,7 @@ export default async function TestSuitePage() {
                 EZA Test & Safety Benchmarks
               </h1>
               <p className="text-xl md:text-2xl text-eza-text-secondary max-w-4xl mx-auto leading-relaxed mb-12">
-                EZA, yapay zekâ güvenliği için dünya standartlarında <strong className="text-eza-text">{totalTests} kapsamlı testten</strong> oluşan çok katmanlı bir değerlendirme ekosistemi sunar.
+                EZA, yapay zekâ güvenliği için dünya standartlarında <strong className="text-eza-text">{isLoading ? "..." : (hasError ? "kapsamlı" : `${totalTests} kapsamlı`)} testten</strong> oluşan çok katmanlı bir değerlendirme ekosistemi sunar.
               </p>
             </div>
           </FadeIn>
@@ -587,6 +669,8 @@ export default async function TestSuitePage() {
             totalTests={totalTests} 
             successRate={successRate} 
             suiteCount={suiteCount}
+            isLoading={isLoading}
+            hasError={hasError}
           />
         </div>
       </div>
@@ -604,12 +688,12 @@ export default async function TestSuitePage() {
                 <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-0.5 bg-gradient-to-r from-transparent via-eza-blue to-transparent"></span>
               </h2>
               <p className="text-lg text-eza-text-secondary max-w-2xl mx-auto">
-                7 farklı test paketi ile EZA'nın güvenilirliği ve performansı kapsamlı şekilde değerlendirilmektedir.
+                {suiteCount > 0 ? `${suiteCount} farklı test paketi ile EZA'nın güvenilirliği ve performansı kapsamlı şekilde değerlendirilmektedir.` : "EZA'nın güvenilirliği ve performansı kapsamlı şekilde değerlendirilmektedir."}
               </p>
             </div>
           </FadeIn>
 
-          <TestSuiteGrid suites={suites} />
+          <TestSuiteGrid suites={suites} isLoading={isLoading} hasError={hasError} />
         </div>
       </Section>
 
@@ -669,17 +753,6 @@ export default async function TestSuitePage() {
                   entegre edilebilecek bir altyapı sunar.
                 </p>
               </div>
-
-              {/* Toplam Süre Bilgisi */}
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <div className="flex items-center gap-3">
-                  <Icon name="Timer" className="text-eza-blue" size={20} />
-                  <div>
-                    <p className="text-sm font-semibold text-eza-text">Toplam Test Süresi</p>
-                    <p className="text-lg text-eza-text-secondary">{TOTAL_STATS.totalDuration}</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </FadeIn>
         </div>
@@ -696,4 +769,3 @@ export default async function TestSuitePage() {
     </>
   );
 }
-

@@ -13,14 +13,15 @@ const quickStartSteps = [
   {
     step: 1,
     title: "API Key Oluştur",
-    description: "Developer Console'dan API key'inizi oluşturun",
+    description: "Platform Panel'e giriş yaparak organizasyonunuza ait API anahtarını oluşturun",
     icon: "Key",
   },
   {
     step: 2,
     title: "İlk İsteği Gönder",
-    description: "Standalone endpoint'ine test isteği gönderin",
+    description: "Proxy analiz endpoint'ine test isteği göndererek entegrasyonunuzu doğrulayın",
     icon: "Send",
+    note: "Proxy, harici sistemlerin EZA-Core etik analiz altyapısına API üzerinden bağlandığı kurumsal entegrasyon katmanıdır.",
   },
   {
     step: 3,
@@ -33,49 +34,49 @@ const quickStartSteps = [
 const integrationMethods = [
   {
     title: "REST API",
-    description: "HTTP istekleri ile direkt entegrasyon. Tüm diller ve framework'ler için uyumlu.",
+    description: "HTTP istekleri ile direkt entegrasyon. Tüm diller ve framework'ler için uyumlu. Bu entegrasyon yöntemi, Platform Panel üzerinden oluşturulan API anahtarı ile çalışır.",
     icon: "Globe",
     features: ["HTTP/HTTPS", "JSON format", "Tüm endpoint'ler", "Webhook desteği"],
-    codeExample: `curl -X POST https://api.ezacore.ai/api/v1/standalone/analyze \\
+    codeExample: `curl -X POST https://api.ezacore.ai/api/v5/proxy/analyze \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{"input": "Your text here"}'`,
   },
   {
     title: "Python SDK",
-    description: "Resmi Python SDK ile hızlı entegrasyon. Async/await desteği ile performanslı.",
+    description: "Resmi Python SDK ile hızlı entegrasyon. Async/await desteği ile performanslı. Platform Panel üzerinden oluşturulan API anahtarı ile kullanılır.",
     icon: "Code",
     features: ["pip install ezacore", "Async/await", "Type hints", "Error handling"],
     codeExample: `from ezacore import EZACore
 
 client = EZACore(api_key="YOUR_API_KEY")
-result = await client.standalone.analyze("Your text here")
+result = await client.proxy.analyze("Your text here")
 print(result.score)`,
   },
   {
     title: "JavaScript/TypeScript SDK",
-    description: "Node.js ve browser için TypeScript desteği ile modern entegrasyon.",
+    description: "Node.js ve browser için TypeScript desteği ile modern entegrasyon. Platform Panel üzerinden oluşturulan API anahtarı ile çalışır.",
     icon: "FileCode",
     features: ["npm install @ezacore/sdk", "TypeScript", "Browser/Node.js", "Promise-based"],
     codeExample: `import { EZACore } from '@ezacore/sdk';
 
 const client = new EZACore({ apiKey: 'YOUR_API_KEY' });
-const result = await client.standalone.analyze('Your text here');
+const result = await client.proxy.analyze('Your text here');
 console.log(result.score);`,
   },
 ];
 
 const webhookGuide = {
   title: "Webhook Entegrasyonu",
-  description: "Gerçek zamanlı olay bildirimleri için webhook endpoint'inizi yapılandırın.",
+  description: "Gerçek zamanlı olay bildirimleri için webhook endpoint'inizi yapılandırın. Webhook ayarları, Platform Panel üzerinden yapılandırılır ve doğrulanır.",
   steps: [
     {
       title: "Endpoint Oluştur",
       description: "Webhook'ları alacak HTTPS endpoint'inizi hazırlayın",
     },
     {
-      title: "Developer Console'da Kaydet",
-      description: "Webhook URL'inizi Developer Console'da kaydedin",
+      title: "Platform Panel'de Yapılandır",
+      description: "Webhook URL'inizi Platform Panel üzerinden yapılandırın ve doğrulayın",
     },
     {
       title: "İmza Doğrulama",
@@ -97,6 +98,7 @@ const bestPractices = [
       "HTTPS kullanın, asla HTTP üzerinden API key göndermeyin",
       "Webhook imzalarını mutlaka doğrulayın",
       "Rate limit'leri aşmamak için retry logic kullanın",
+      "API anahtarları ve webhook ayarları organizasyon bazlıdır ve Platform Panel üzerinden merkezi olarak yönetilir",
     ],
   },
   {
@@ -137,7 +139,7 @@ export default function IntegrationGuidePage() {
             REST API, Python SDK, JavaScript SDK ve webhook entegrasyonu için detaylı kılavuzlar.
           </p>
           <p className="text-base text-eza-text-secondary/80">
-            5 dakikada entegrasyon yapın, production'a hızlıca geçin.
+            Platform Panel üzerinden organizasyonunuzu oluşturun, API anahtarınızı tanımlayın ve EZA-Core'u sistemlerinize entegre edin.
           </p>
         </div>
       </div>
@@ -164,7 +166,12 @@ export default function IntegrationGuidePage() {
                       <Icon name={step.icon} className="text-eza-blue" size={24} />
                     </div>
                     <h3 className="text-xl font-semibold text-eza-text mb-2">{step.title}</h3>
-                    <p className="text-eza-text-secondary text-sm">{step.description}</p>
+                    <p className="text-eza-text-secondary text-sm mb-2">{step.description}</p>
+                    {step.note && (
+                      <p className="text-xs text-eza-text-secondary/70 italic border-t border-gray-100 pt-2 mt-2">
+                        {step.note}
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>
@@ -173,12 +180,11 @@ export default function IntegrationGuidePage() {
                   <Icon name="Info" className="text-blue-600 flex-shrink-0 mt-0.5" size={20} />
                   <div>
                     <h4 className="font-semibold text-blue-900 mb-2">API Key Gerekli</h4>
-                    <p className="text-blue-800 text-sm">
-                      Başlamak için{" "}
-                      <Link href="/panels/developer" className="underline font-semibold">
-                        Developer Console
-                      </Link>
-                      'dan API key oluşturun.
+                    <p className="text-blue-800 text-sm mb-2">
+                      Başlamak için Platform Panel üzerinden organizasyonunuza ait API anahtarını oluşturun.
+                    </p>
+                    <p className="text-blue-700 text-xs">
+                      API anahtarları, Platform Panel'de organizasyon bazlı olarak yönetilir ve izlenir.
                     </p>
                   </div>
                 </div>
@@ -205,7 +211,10 @@ export default function IntegrationGuidePage() {
                       </div>
                       <div className="flex-1">
                         <h3 className="text-2xl font-bold text-eza-text mb-2">{method.title}</h3>
-                        <p className="text-eza-text-secondary">{method.description}</p>
+                        <p className="text-eza-text-secondary mb-2">{method.description}</p>
+                        <p className="text-sm text-eza-text-secondary/80 italic">
+                          API kullanımı, organizasyon ve yetkilendirme kuralları çerçevesinde izlenir.
+                        </p>
                       </div>
                     </div>
                     <div className="grid md:grid-cols-2 gap-6">
@@ -353,18 +362,21 @@ export default function IntegrationGuidePage() {
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link
-                  href="/contact"
+                  href="/panels/platform"
                   className="bg-white text-eza-blue px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+                >
+                  Platform Panel'e Git
+                </Link>
+                <Link
+                  href="/contact"
+                  className="bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition-colors border border-blue-500"
                 >
                   İletişime Geç
                 </Link>
-                <Link
-                  href="/panels/developer"
-                  className="bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition-colors border border-blue-500"
-                >
-                  Developer Console
-                </Link>
               </div>
+              <p className="text-sm text-blue-100 mt-6 max-w-2xl mx-auto">
+                Entegrasyon, yetkilendirme ve etik izleme süreçleri Platform Panel üzerinden yürütülür.
+              </p>
             </div>
           </FadeIn>
         </div>

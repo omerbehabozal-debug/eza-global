@@ -64,23 +64,11 @@ export default function CoreHero() {
           <span className="text-eza-blue">Etik Zeka Motoru</span>
         </h1>
 
-        <p className="text-xl md:text-2xl text-eza-text-secondary mb-12 leading-relaxed max-w-3xl mx-auto">
+        <p className="text-xl md:text-2xl text-eza-text-secondary leading-relaxed max-w-3xl mx-auto">
           Tüm Standalone, Proxy ve kurumsal panelleri çalıştıran merkezi etik zekâ platformu.
           <br />
           EZA'nın etik değerlendirme, risk analizi ve yönlendirme süreçlerinin çekirdeğidir.
         </p>
-
-        <div className="flex justify-center items-center">
-          <a
-            href="https://ezacore.ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-eza-blue text-white rounded-lg text-base font-medium hover:bg-[#0077ed] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
-          >
-            EZA Core API
-            <Icon name="ExternalLink" size={18} />
-          </a>
-        </div>
       </div>
     </div>
   );

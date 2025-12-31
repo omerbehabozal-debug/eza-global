@@ -20,19 +20,19 @@ const modules = [
     icon: "Zap",
   },
   {
-    title: "Regulator Panel",
-    description: "Düzenleyici kurumlar için özel panel. EZA-Core'un sektör genelinde etik izleme ve raporlama özelliklerini kullanır.",
+    title: "Global Ölçekli Paneller",
+    description: "Çok uluslu kurumlar ve global operasyonlar için etik izleme ve raporlama panelleri. EZA-Core'un küresel regülasyon uyum özelliklerini kullanır.",
+    icon: "Globe",
+  },
+  {
+    title: "Ulusal Regülasyon Panelleri",
+    description: "Ulusal düzenleyici kurumlar için özel paneller. EZA-Core platformu üzerinde sektöre özel etik izleme ve uyumluluk sağlar.",
     icon: "Building2",
   },
   {
-    title: "Corporate Panel",
-    description: "Kurumsal yönetim paneli. EZA-Core platformu üzerinde organizasyon içi etik uyumluluk ve izleme sağlar.",
-    icon: "Briefcase",
-  },
-  {
-    title: "Developer Console",
-    description: "Geliştiriciler için API yönetim konsolu. EZA-Core API'lerini yönetir, entegrasyonları test eder ve izler.",
-    icon: "Code",
+    title: "Platform Panel",
+    description: "Tüm EZA ürünlerini ve sistemlerini tek merkezden yöneten kurumsal gözlem paneli. EZA-Core'un merkezi yönetim özelliklerini kullanır.",
+    icon: "LayoutGrid",
   },
 ];
 

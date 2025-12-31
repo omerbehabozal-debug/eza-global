@@ -11,62 +11,14 @@ export const metadata = generatePageMetadata(
 
 const apiEndpoints = [
   {
-    category: "Standalone",
-    endpoints: [
-      {
-        method: "POST",
-        path: "/api/v1/standalone/analyze",
-        description: "Kullanıcı girişini analiz eder ve etik yönlendirmeli cevap üretir",
-        params: ["input (string)", "context (object, optional)"],
-      },
-      {
-        method: "GET",
-        path: "/api/v1/standalone/status",
-        description: "Standalone servis durumunu kontrol eder",
-      },
-    ],
-  },
-  {
     category: "Proxy",
+    description: "Proxy endpoint'i, LLM veya kullanıcı çıktılarının etik etkilerini analiz eder ve görünür kılar. İçeriği değiştirmez, engellemez veya sansürlemez.",
     endpoints: [
       {
         method: "POST",
-        path: "/api/v1/proxy/analyze",
-        description: "LLM cevaplarını etik açıdan analiz eder ve iyileştirir",
-        params: ["input (string)", "llm_response (string)", "model (string, optional)"],
-      },
-      {
-        method: "POST",
-        path: "/api/v1/proxy/rewrite",
-        description: "Riskli içeriği güvenli alternatiflerle yeniden yazar",
-        params: ["content (string)", "risk_level (string)"],
-      },
-    ],
-  },
-  {
-    category: "Score Engine",
-    endpoints: [
-      {
-        method: "POST",
-        path: "/api/v1/score/calculate",
-        description: "İçerik için EZA Score hesaplar",
-        params: ["content (string)", "context (object, optional)"],
-      },
-      {
-        method: "GET",
-        path: "/api/v1/score/metrics",
-        description: "Score hesaplama metriklerini döndürür",
-      },
-    ],
-  },
-  {
-    category: "Advisor",
-    endpoints: [
-      {
-        method: "POST",
-        path: "/api/v1/advisor/suggest",
-        description: "İçerik için etik öneriler sunar",
-        params: ["content (string)", "scenario (string)"],
+        path: "/api/v5/proxy/analyze",
+        description: "LLM veya kullanıcı çıktılarının etik etkilerini analiz eder ve görünür kılar",
+        params: ["input (string)", "llm_response (string, optional)", "model (string, optional)"],
       },
     ],
   },
@@ -75,13 +27,13 @@ const apiEndpoints = [
 const authMethods = [
   {
     title: "API Key Authentication",
-    description: "Her istekte Authorization header'ında API key gönderilir",
+    description: "API anahtarları, EZA Platform Dashboard üzerinden organizasyon bazlı olarak oluşturulur ve yönetilir. Her istek, Authorization header'ında API key ile yapılır.",
     example: "Authorization: Bearer YOUR_API_KEY",
   },
   {
     title: "Token Management",
-    description: "API key'ler Developer Console'dan oluşturulur ve yönetilir",
-    example: "Token'lar 90 gün geçerlidir, yenileme otomatiktir",
+    description: "API anahtarları organizasyona bağlıdır ve erişim yetkileri platform üzerinden kontrol edilir.",
+    example: "",
   },
 ];
 
@@ -107,10 +59,13 @@ export default function APIDocumentationPage() {
             EZA-Core API Referansı
           </h1>
           <p className="text-xl text-eza-text-secondary mb-4">
-            Tüm API endpoint'leri, authentication, rate limits ve webhook dokümantasyonu.
+            EZA-Core API, organizasyon bazlı etik analiz entegrasyonları için tasarlanmıştır. Tüm API erişimleri, EZA Platform üzerinden oluşturulan organizasyonlar ve Proxy katmanı üzerinden gerçekleştirilir.
+          </p>
+          <p className="text-base text-eza-text-secondary/80 mb-2">
+            EZA-Core API, v5 mimarisi üzerine inşa edilmiştir. Tüm güncel entegrasyonlar /api/v5 namespace'i üzerinden gerçekleştirilir.
           </p>
           <p className="text-base text-eza-text-secondary/80">
-            Geliştiriciler için detaylı teknik referans.
+            Bu dokümantasyon, kurumsal entegrasyonlar için geçerli olan API yüzeyini kapsar.
           </p>
         </div>
       </div>
@@ -135,7 +90,7 @@ export default function APIDocumentationPage() {
                   <div>
                     <h3 className="text-lg font-semibold text-eza-text mb-2">Versiyonlama</h3>
                     <p className="text-eza-text-secondary">
-                      API versiyonlama URL path'inde yapılır. Şu anda <code className="bg-eza-gray/50 px-2 py-0.5 rounded">v1</code> aktif.
+                      API versiyonlama URL path'inde yapılır. Şu anda <code className="bg-eza-gray/50 px-2 py-0.5 rounded">v5</code> aktif.
                     </p>
                   </div>
                   <div>
@@ -143,6 +98,17 @@ export default function APIDocumentationPage() {
                     <p className="text-eza-text-secondary">
                       Tüm request'ler <code className="bg-eza-gray/50 px-2 py-0.5 rounded">application/json</code> formatında olmalıdır.
                     </p>
+                  </div>
+                </div>
+                <div className="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-6">
+                  <div className="flex items-start gap-3">
+                    <Icon name="Info" className="text-blue-600 flex-shrink-0 mt-0.5" size={20} />
+                    <div>
+                      <h4 className="font-semibold text-blue-900 mb-2">Çalışma Modeli</h4>
+                      <p className="text-blue-800 text-sm">
+                        EZA API çağrıları, bireysel anahtarlar üzerinden değil; Platform Dashboard'ta tanımlanan organizasyon, kullanım amacı ve etik politika setleri üzerinden değerlendirilir.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -164,26 +130,13 @@ export default function APIDocumentationPage() {
                   >
                     <h3 className="text-xl font-semibold text-eza-text mb-3">{method.title}</h3>
                     <p className="text-eza-text-secondary mb-4">{method.description}</p>
-                    <code className="block bg-eza-gray/50 rounded-lg p-3 text-xs font-mono text-eza-text break-all">
-                      {method.example}
-                    </code>
+                    {method.example && (
+                      <code className="block bg-eza-gray/50 rounded-lg p-3 text-xs font-mono text-eza-text break-all">
+                        {method.example}
+                      </code>
+                    )}
                   </div>
                 ))}
-              </div>
-              <div className="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-6">
-                <div className="flex items-start gap-3">
-                  <Icon name="Info" className="text-blue-600 flex-shrink-0 mt-0.5" size={20} />
-                  <div>
-                    <h4 className="font-semibold text-blue-900 mb-2">API Key Nasıl Alınır?</h4>
-                    <p className="text-blue-800 text-sm">
-                      API key'lerinizi oluşturmak ve yönetmek için{" "}
-                      <Link href="/panels/developer" className="underline font-semibold">
-                        Developer Console
-                      </Link>
-                      'u kullanın.
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </FadeIn>
@@ -193,12 +146,20 @@ export default function APIDocumentationPage() {
             <div className="mb-16">
               <h2 className="text-3xl font-bold text-eza-text mb-6 flex items-center gap-3">
                 <div className="h-1 w-12 bg-gradient-to-r from-eza-blue to-blue-400 rounded-full"></div>
-                API Endpoint'leri
+                Proxy API
               </h2>
               <div className="space-y-8">
                 {apiEndpoints.map((category, catIndex) => (
                   <div key={category.category} className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
-                    <h3 className="text-2xl font-bold text-eza-text mb-6">{category.category}</h3>
+                    <h3 className="text-2xl font-bold text-eza-text mb-3">{category.category}</h3>
+                    {category.description && (
+                      <p className="text-eza-text-secondary mb-4">{category.description}</p>
+                    )}
+                    {category.note && (
+                      <div className="mb-4 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                        <p className="text-sm text-yellow-800 italic">{category.note}</p>
+                      </div>
+                    )}
                     <div className="space-y-6">
                       {category.endpoints.map((endpoint, epIndex) => (
                         <div
@@ -263,18 +224,10 @@ export default function APIDocumentationPage() {
                     <div className="text-sm text-eza-text-secondary">429 hatasında header'da</div>
                   </div>
                 </div>
-                <div className="mt-6 bg-yellow-50 border border-yellow-200 rounded-xl p-6">
-                  <div className="flex items-start gap-3">
-                    <Icon name="AlertCircle" className="text-yellow-600 flex-shrink-0 mt-0.5" size={20} />
-                    <div>
-                      <h4 className="font-semibold text-yellow-900 mb-2">Rate Limit Aşımı</h4>
-                      <p className="text-yellow-800 text-sm">
-                        Rate limit aşıldığında <code className="bg-yellow-100 px-2 py-0.5 rounded">429</code> hatası
-                        döner. Response header'ında <code className="bg-yellow-100 px-2 py-0.5 rounded">Retry-After</code>{" "}
-                        saniye cinsinden bekleme süresini gösterir.
-                      </p>
-                    </div>
-                  </div>
+                <div className="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-4">
+                  <p className="text-sm text-blue-800">
+                    Rate limit'ler organizasyon bazlı uygulanır. Limit aşımı durumunda 429 hatası ve Retry-After header'ı döner.
+                  </p>
                 </div>
               </div>
             </div>
@@ -306,63 +259,25 @@ export default function APIDocumentationPage() {
             </div>
           </FadeIn>
 
-          {/* Webhooks */}
-          <FadeIn delay={500}>
-            <div className="mb-16">
-              <h2 className="text-3xl font-bold text-eza-text mb-6 flex items-center gap-3">
-                <div className="h-1 w-12 bg-gradient-to-r from-eza-blue to-blue-400 rounded-full"></div>
-                Webhooks
-              </h2>
-              <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
-                <p className="text-eza-text-secondary mb-6">
-                  Webhook'lar gerçek zamanlı olay bildirimleri için kullanılır. Detaylı webhook dokümantasyonu için{" "}
-                  <Link href="/docs/integration" className="text-eza-blue underline font-semibold">
-                    Entegrasyon Kılavuzları
-                  </Link>
-                  'na bakın.
-                </p>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-eza-gray/30 rounded-xl p-6">
-                    <h3 className="font-semibold text-eza-text mb-3">Event Tipleri</h3>
-                    <ul className="space-y-2 text-sm text-eza-text-secondary">
-                      <li>• analysis.completed</li>
-                      <li>• risk.detected</li>
-                      <li>• score.calculated</li>
-                      <li>• content.rewritten</li>
-                    </ul>
-                  </div>
-                  <div className="bg-eza-gray/30 rounded-xl p-6">
-                    <h3 className="font-semibold text-eza-text mb-3">Güvenlik</h3>
-                    <p className="text-sm text-eza-text-secondary">
-                      Tüm webhook payload'ları imzalanır. İmza doğrulama için{" "}
-                      <code className="bg-white px-2 py-0.5 rounded text-xs">X-EZA-Signature</code> header'ını kontrol
-                      edin.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </FadeIn>
-
           {/* CTA */}
-          <FadeIn delay={600}>
+          <FadeIn delay={500}>
             <div className="bg-gradient-to-r from-eza-blue to-blue-600 rounded-2xl p-12 text-center text-white">
               <h2 className="text-3xl font-bold mb-4">Hazır mısınız?</h2>
               <p className="text-xl mb-8 text-blue-100">
-                API'yi kullanmaya başlamak için entegrasyon kılavuzlarımıza göz atın.
+                EZA'yı kurumsal kullanım için entegre etmek üzere organizasyonunuzu oluşturun ve Proxy entegrasyonunu başlatın.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link
-                  href="/docs/integration"
+                  href="/panels/platform"
                   className="bg-white text-eza-blue px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
                 >
-                  Entegrasyon Kılavuzları
+                  Platform Dashboard
                 </Link>
                 <Link
-                  href="/panels/developer"
+                  href="/docs/integration"
                   className="bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition-colors border border-blue-500"
                 >
-                  Developer Console
+                  Entegrasyon Kılavuzları
                 </Link>
               </div>
             </div>
