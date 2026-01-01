@@ -5,6 +5,7 @@ import Section from "@/app/components/Section";
 import FadeIn from "@/app/components/FadeIn";
 import Icon from "@/app/components/Icon";
 import ComplianceMatrix from "@/app/components/ComplianceMatrix";
+import { formatImprovement, formatDetails, formatAnyValue } from "@/lib/formatUtils";
 
 // API Response Interface - Backend'den gelen yapı
 interface ComprehensiveTestResults {
@@ -34,8 +35,8 @@ interface UITestSuite {
   successRate: number;
   status: "completed" | "pending" | "failed";
   description: string;
-  improvement?: string;
-  details?: string;
+  improvement?: string | { from?: number; to?: number; change?: number; percentage?: number };
+  details?: string | string[] | Record<string, any>;
   testType: "fake-llm" | "real-llm";
 }
 
@@ -260,20 +261,26 @@ function TestSuiteCard({ suite, index }: { suite: UITestSuite; index: number }) 
           {suite.description}
         </p>
 
-        {/* İyileştirme */}
-        {suite.improvement && (
-          <div className="mt-4 p-3 bg-eza-blue/5 rounded-lg border border-eza-blue/10">
-            <p className="text-xs font-semibold text-eza-blue mb-1">İyileştirme</p>
-            <p className="text-sm text-eza-text">{suite.improvement}</p>
-          </div>
-        )}
+        {/* İyileştirme - Safe rendering */}
+        {(() => {
+          const improvementText = formatImprovement(suite.improvement);
+          return improvementText ? (
+            <div className="mt-4 p-3 bg-eza-blue/5 rounded-lg border border-eza-blue/10">
+              <p className="text-xs font-semibold text-eza-blue mb-1">İyileştirme</p>
+              <p className="text-sm text-eza-text">{improvementText}</p>
+            </div>
+          ) : null;
+        })()}
 
-        {suite.details && (
-          <div className="mt-4 p-3 bg-eza-gray/50 rounded-lg">
-            <p className="text-xs font-semibold text-eza-text-secondary mb-1">Detaylar</p>
-            <p className="text-sm text-eza-text">{suite.details}</p>
-          </div>
-        )}
+        {(() => {
+          const detailsText = formatDetails(suite.details);
+          return detailsText ? (
+            <div className="mt-4 p-3 bg-eza-gray/50 rounded-lg">
+              <p className="text-xs font-semibold text-eza-text-secondary mb-1">Detaylar</p>
+              <p className="text-sm text-eza-text">{detailsText}</p>
+            </div>
+          ) : null;
+        })()}
 
         {/* Test Tipi Badge */}
         <div className="mt-4 pt-4 border-t border-gray-100">

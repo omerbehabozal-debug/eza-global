@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Section from "@/app/components/Section";
 import FadeIn from "@/app/components/FadeIn";
 import Icon from "@/app/components/Icon";
+import { formatImprovement, formatDetails, formatAnyValue } from "@/lib/formatUtils";
 
 // API Response Interface
 interface TestResultsResponse {
@@ -42,73 +43,7 @@ interface LatestRun {
   success_rate: number;
 }
 
-// Format improvement string safely
-function formatImprovement(improvement: string | { from?: number; to?: number; change?: number; percentage?: number } | undefined): string | null {
-  if (!improvement) return null;
-  
-  if (typeof improvement === 'string') {
-    return improvement;
-  }
-  
-  if (typeof improvement === 'object' && improvement !== null) {
-    const from = improvement.from;
-    const to = improvement.to;
-    const change = improvement.change;
-    const percentage = improvement.percentage;
-    
-    // Format: "from% → to% (change)"
-    if (typeof from === 'number' && typeof to === 'number') {
-      const changeValue = typeof change === 'number' ? change : (to - from);
-      const sign = changeValue >= 0 ? '+' : '';
-      return `${from.toFixed(1)}% → ${to.toFixed(1)}% (${sign}${changeValue.toFixed(1)}%)`;
-    }
-    
-    // Fallback to change or percentage
-    if (typeof change === 'number') {
-      return `${change >= 0 ? '+' : ''}${change.toFixed(1)}%`;
-    }
-    
-    if (typeof percentage === 'number') {
-      return `${percentage >= 0 ? '+' : ''}${percentage.toFixed(1)}%`;
-    }
-  }
-  
-  return null;
-}
-
-// Format details safely
-function formatDetails(details: string | string[] | Record<string, any> | undefined): string | null {
-  if (!details) return null;
-  
-  if (typeof details === 'string') {
-    return details;
-  }
-  
-  if (Array.isArray(details)) {
-    return details
-      .filter(item => item != null)
-      .map(item => typeof item === 'string' ? item : String(item))
-      .join(", ");
-  }
-  
-  if (typeof details === 'object' && details !== null) {
-    // Render key-value pairs as rows
-    const entries = Object.entries(details)
-      .filter(([key, value]) => key != null && value != null)
-      .map(([key, value]) => {
-        const valueStr = typeof value === 'string' || typeof value === 'number' 
-          ? String(value) 
-          : Array.isArray(value)
-          ? value.join(", ")
-          : "—";
-        return `${String(key)}: ${valueStr}`;
-      });
-    
-    return entries.length > 0 ? entries.join(" | ") : null;
-  }
-  
-  return null;
-}
+// Helper functions are imported from @/lib/formatUtils
 
 // Format date safely
 function formatDate(dateString: string | undefined): string {
