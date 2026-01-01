@@ -6,26 +6,24 @@ import FadeIn from "@/app/components/FadeIn";
 import Icon from "@/app/components/Icon";
 import ComplianceMatrix from "@/app/components/ComplianceMatrix";
 
-// API Response Interface
+// API Response Interface - Backend'den gelen yapı
 interface ComprehensiveTestResults {
   overall: {
     total_runs: number;
     total_tests: number;
     success_rate: number;
+    success_count?: number;
+    failure_count?: number;
   };
   test_suites: TestSuite[];
 }
 
 interface TestSuite {
   name: string;
+  total?: number;
   success_rate: number;
-  status: "pass" | "warning" | "fail";
+  status: "pass" | "warning" | "fail" | "success";
   improvement?: string;
-  major_runs?: Array<{
-    improvement?: string;
-    [key: string]: any;
-  }>;
-  improvements?: string[];
 }
 
 // Test Suite Veri Yapısı (UI için)
@@ -41,25 +39,38 @@ interface UITestSuite {
   testType: "fake-llm" | "real-llm";
 }
 
-// API Fetch Function
+// API Fetch Function - Next.js API route proxy kullan (CORS sorununu çözer)
 async function fetchComprehensiveTestResults(): Promise<ComprehensiveTestResults | null> {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_EZA_BACKEND_URL || "https://api.ezacore.ai";
-    const res = await fetch(`${apiUrl}/api/test-results/comprehensive`, {
-      cache: "no-store",
+    // Next.js API route proxy kullan (server-side fetch, CORS yok)
+    const proxyUrl = '/api/test-results';
+    
+    console.log("Fetching from proxy:", proxyUrl);
+    
+    const res = await fetch(proxyUrl, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
+      cache: "no-store",
     });
 
-    if (!res.ok) {
+    console.log("Response status:", res.status, res.statusText);
+
+    if (res.ok) {
+      const data = await res.json();
+      console.log("API response data:", data);
+      return data as ComprehensiveTestResults;
+    } else {
+      const errorData = await res.json().catch(() => ({ error: "Unknown error" }));
+      console.error(`API proxy returned status ${res.status}:`, errorData);
       return null;
     }
-
-    const data = await res.json();
-    return data as ComprehensiveTestResults;
   } catch (error) {
     console.error("API fetch error:", error);
+    if (error instanceof Error) {
+      console.error("Error message:", error.message);
+    }
     return null;
   }
 }
@@ -71,26 +82,15 @@ function transformApiDataToUI(apiData: ComprehensiveTestResults): {
   successRate: number;
   suiteCount: number;
 } {
-  const suites: UITestSuite[] = apiData.test_suites.map((suite, index) => {
-    // Improvement string'ini oluştur
-    let improvement: string | undefined;
-    if (suite.improvement) {
-      improvement = suite.improvement;
-    } else if (suite.improvements && suite.improvements.length > 0) {
-      improvement = suite.improvements[suite.improvements.length - 1];
-    } else if (suite.major_runs && suite.major_runs.length > 0) {
-      const lastRun = suite.major_runs[suite.major_runs.length - 1];
-      if (lastRun.improvement) {
-        improvement = lastRun.improvement;
-      }
-    }
-
-    // Status mapping
+  const suites: UITestSuite[] = apiData.test_suites.map((suite) => {
+    // Status mapping: success_rate >= 90 → success
     let uiStatus: "completed" | "pending" | "failed" = "completed";
-    if (suite.status === "fail") {
+    if (suite.status === "fail" || suite.success_rate < 80) {
       uiStatus = "failed";
-    } else if (suite.status === "warning") {
+    } else if (suite.status === "warning" || (suite.success_rate >= 80 && suite.success_rate < 90)) {
       uiStatus = "pending";
+    } else if (suite.status === "success" || suite.success_rate >= 90) {
+      uiStatus = "completed";
     }
 
     // Test type tahmini (name'e göre)
@@ -102,12 +102,12 @@ function transformApiDataToUI(apiData: ComprehensiveTestResults): {
     return {
       id: suite.name.toLowerCase().replace(/\s+/g, "-"),
       name: suite.name,
-      testCount: 0, // API'den gelmiyorsa 0, hesaplanabilir
+      testCount: suite.total || 0,
       successRate: suite.success_rate,
       status: uiStatus,
-      description: `${suite.name} test suite'i. Başarı oranı: %${suite.success_rate}`,
-      improvement,
-      testType,
+      description: `${suite.name} test suite`,
+      improvement: suite.improvement,
+      testType: testType,
     };
   });
 
@@ -136,21 +136,21 @@ function TestSummaryCards({
   const cards = [
     {
       label: "Toplam Test",
-      value: isLoading ? "..." : (hasError ? "N/A" : totalTests.toString()),
+      value: isLoading ? "..." : (hasError ? "—" : totalTests.toString()),
       icon: "CheckCircle",
       bgColor: "bg-eza-blue/10",
       textColor: "text-eza-blue",
     },
     {
       label: "Genel Başarı Oranı",
-      value: isLoading ? "..." : (hasError ? "N/A" : `%${successRate.toFixed(1)}`),
+      value: isLoading ? "..." : (hasError ? "—" : `%${successRate.toFixed(1)}`),
       icon: "TrendingUp",
       bgColor: "bg-eza-green/10",
       textColor: "text-eza-green",
     },
     {
       label: "Test Suite Sayısı",
-      value: isLoading ? "..." : (hasError ? "N/A" : suiteCount.toString()),
+      value: isLoading ? "..." : (hasError ? "—" : suiteCount.toString()),
       icon: "Layers",
       bgColor: "bg-eza-blue/10",
       textColor: "text-eza-blue",
@@ -180,15 +180,15 @@ function TestSummaryCards({
 
 // Test Suite Kartı Component
 function TestSuiteCard({ suite, index }: { suite: UITestSuite; index: number }) {
-  // Başarı oranına göre renk belirleme
+  // Başarı oranına göre renk belirleme: success_rate >= 90 → success
   const getStatusColor = (rate: number) => {
-    if (rate >= 95) {
+    if (rate >= 90) {
       return {
         bg: "bg-green-100",
         text: "text-green-700",
         border: "border-green-200",
         icon: "CheckCircle",
-        label: "Mükemmel",
+        label: "Başarılı",
       };
     } else if (rate >= 80) {
       return {
@@ -196,7 +196,7 @@ function TestSuiteCard({ suite, index }: { suite: UITestSuite; index: number }) 
         text: "text-yellow-700",
         border: "border-yellow-200",
         icon: "AlertTriangle",
-        label: "İyi",
+        label: "Uyarı",
       };
     } else {
       return {
@@ -244,7 +244,7 @@ function TestSuiteCard({ suite, index }: { suite: UITestSuite; index: number }) 
           <div className="w-full h-2 bg-eza-gray rounded-full overflow-hidden">
             <div
               className={`h-full transition-all duration-1000 ${
-                suite.successRate >= 95
+                suite.successRate >= 90
                   ? "bg-gradient-to-r from-green-500 to-green-600"
                   : suite.successRate >= 80
                   ? "bg-gradient-to-r from-yellow-500 to-yellow-600"
@@ -301,7 +301,7 @@ function TestSuiteGrid({ suites, isLoading, hasError }: { suites: UITestSuite[];
       <div className="text-center py-12">
         <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 max-w-2xl mx-auto">
           <Icon name="AlertCircle" className="text-yellow-600 mx-auto mb-4" size={32} />
-          <p className="text-yellow-800 font-semibold mb-2">Test verileri geçici olarak alınamıyor</p>
+          <p className="text-yellow-800 font-semibold mb-2">Veri yüklenemedi</p>
           <p className="text-sm text-yellow-700">Lütfen daha sonra tekrar deneyin.</p>
         </div>
       </div>
@@ -610,6 +610,8 @@ export default function TestSuitePage() {
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
+    let isMounted = true; // StrictMode double-fetch guard
+    
     async function loadData() {
       setIsLoading(true);
       setHasError(false);
@@ -617,21 +619,48 @@ export default function TestSuitePage() {
       try {
         const apiData = await fetchComprehensiveTestResults();
         
-        if (apiData) {
-          const transformed = transformApiDataToUI(apiData);
-          setData(transformed);
+        // Component unmount olduysa state güncelleme
+        if (!isMounted) return;
+        
+        if (apiData && apiData.overall && apiData.test_suites) {
+          try {
+            const transformed = transformApiDataToUI(apiData);
+            if (isMounted) {
+              setData(transformed);
+            }
+          } catch (transformError) {
+            console.error("Error transforming API data:", transformError);
+            if (isMounted) {
+              setHasError(true);
+            }
+          }
         } else {
-          setHasError(true);
+          console.warn("API returned invalid data structure:", apiData);
+          if (isMounted) {
+            setHasError(true);
+          }
         }
       } catch (error) {
         console.error("Error loading test results:", error);
-        setHasError(true);
+        if (error instanceof Error) {
+          console.error("Error details:", error.message);
+        }
+        if (isMounted) {
+          setHasError(true);
+        }
       } finally {
-        setIsLoading(false);
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     }
 
     loadData();
+    
+    // Cleanup function
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const suites = data?.suites || [];
