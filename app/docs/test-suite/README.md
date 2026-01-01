@@ -1,36 +1,18 @@
 # Test & Safety Benchmarks Sayfası
 
-Bu sayfa, EZA test sonuçlarını ezacore backend'inden çekerek gösterir.
+Bu sayfa, EZA test sonuçlarını server-side API route üzerinden çekerek gösterir.
 
 ## API Yapılandırması
 
-Sayfa, test sonuçlarını şu sırayla API URL'lerinden çekmeye çalışır:
-
-1. `NEXT_PUBLIC_EZA_BACKEND_URL` (environment variable)
-2. `EZA_BACKEND_URL` (environment variable)
-3. `https://eza-core-v5-production.up.railway.app` (default)
-
-## Environment Variable Ayarlama
-
-`.env.local` dosyasına ekleyin:
-
-```env
-# Backend API URL
-NEXT_PUBLIC_EZA_BACKEND_URL=https://eza-core-v5-production.up.railway.app
-# veya
-EZA_BACKEND_URL=https://eza-core-v5-production.up.railway.app
-
-# API Key (gerekli)
-NEXT_PUBLIC_EZA_API_KEY=your-api-key-here
-# veya
-EZA_API_KEY=your-api-key-here
-```
+Sayfa, test sonuçlarını server-side API route (`/api/public-benchmark`) üzerinden çeker. API key server tarafında korunur ve client'a sızmayacak şekilde yapılandırılmıştır.
 
 ## API Endpoint
 
 Sayfa şu endpoint'i çağırır:
-- `GET /api/test-results/latest`
-- **Authentication:** `X-Api-Key` header gerekli
+- `GET /api/public-benchmark?period=daily`
+- **Server-side:** Key korumalı (`x-eza-publish-key` header server tarafında eklenir)
+- **Client cache:** 15 gün localStorage cache
+- **Server cache:** 24 saat (force-cache + revalidate: 86400)
 
 ## API Response Formatı (Backend)
 
@@ -65,11 +47,13 @@ Eğer API'den veri çekilemezse, sayfa statik fallback verileri kullanır (`TEST
 
 ## Özellikler
 
-- ✅ SSR (Server-Side Rendering) ile API'den veri çekme
-- ✅ 60 saniyede bir otomatik yenileme (revalidate)
-- ✅ Fallback veriler ile çalışma
+- ✅ Client-side rendering ile API'den veri çekme
+- ✅ Server-side key koruması (x-eza-publish-key client'a sızmaz)
+- ✅ 15 gün localStorage cache (API çağrısı minimize edilir)
+- ✅ 24 saat server-side cache (Next.js force-cache)
+- ✅ Cache fallback (API başarısız olursa eski cache gösterilir)
+- ✅ Render güvenliği (null/bozuk veri durumunda "—" gösterilir)
 - ✅ API durum göstergesi
 - ✅ Son güncelleme zamanı gösterimi
-- ✅ Canlı test sonuçları badge'i
-- ✅ API Key authentication desteği
+- ✅ Güvenli key yönetimi (environment variable: PUBLIC_SNAPSHOT_KEY)
 

@@ -40,31 +40,24 @@ interface UITestSuite {
   testType: "fake-llm" | "real-llm";
 }
 
-// API Fetch Function - Next.js API route proxy kullan (CORS sorununu çözer)
+// API Fetch Function - Server-side route (key protected)
 async function fetchComprehensiveTestResults(): Promise<ComprehensiveTestResults | null> {
   try {
-    // Next.js API route proxy kullan (server-side fetch, CORS yok)
-    const proxyUrl = '/api/test-results';
+    // Use server-side API route (key is protected on server)
+    const endpoint = "/api/public-benchmark?period=daily";
     
-    console.log("Fetching from proxy:", proxyUrl);
-    
-    const res = await fetch(proxyUrl, {
+    const res = await fetch(endpoint, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      cache: "no-store",
     });
-
-    console.log("Response status:", res.status, res.statusText);
 
     if (res.ok) {
       const data = await res.json();
-      console.log("API response data:", data);
       return data as ComprehensiveTestResults;
     } else {
-      const errorData = await res.json().catch(() => ({ error: "Unknown error" }));
-      console.error(`API proxy returned status ${res.status}:`, errorData);
+      console.error(`API returned status ${res.status}`);
       return null;
     }
   } catch (error) {

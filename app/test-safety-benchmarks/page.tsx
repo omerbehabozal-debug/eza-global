@@ -71,10 +71,40 @@ function formatDate(dateString: string | undefined): string {
   }
 }
 
-// Fetch snapshot-based test results from API
+// Validate API response structure
+function validateResponse(data: any): data is TestResultsResponse {
+  try {
+    if (!data || typeof data !== 'object') {
+      return false;
+    }
+    
+    // Check if overall exists and has required fields
+    if (!data.overall || typeof data.overall !== 'object') {
+      return false;
+    }
+    
+    // Check required fields in overall
+    if (typeof data.overall.total_tests !== 'number' || 
+        typeof data.overall.success_rate !== 'number') {
+      return false;
+    }
+    
+    // Check if test_suites is an array
+    if (!Array.isArray(data.test_suites)) {
+      return false;
+    }
+    
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+// Fetch snapshot-based test results from API via server-side route
 async function fetchTestResultsFromAPI(): Promise<TestResultsResponse | null> {
   try {
-    const endpoint = "https://api.ezacore.ai/api/public/test-safety-benchmarks?period=daily";
+    // Use server-side API route (key is protected on server)
+    const endpoint = "/api/public-benchmark?period=daily";
     
     const res = await fetch(endpoint, {
       method: "GET",
@@ -85,7 +115,14 @@ async function fetchTestResultsFromAPI(): Promise<TestResultsResponse | null> {
 
     if (res.ok) {
       const data = await res.json();
-      return data as TestResultsResponse;
+      
+      // Validate response structure
+      if (validateResponse(data)) {
+        return data as TestResultsResponse;
+      } else {
+        console.error("API response validation failed: Invalid data structure", data);
+        return null;
+      }
     } else {
       console.error(`API returned status ${res.status}`);
       return null;
@@ -156,11 +193,25 @@ export default function TestSafetyBenchmarksPage() {
       // Check localStorage first
       const { data: cachedData, timestamp } = getCachedData();
 
+      // If cache exists and is still valid (less than 15 days), use it without API call
       if (cachedData && isCacheValid(timestamp)) {
-        // Use cached data, no API call needed
-        setData(cachedData);
-        setIsLoading(false);
-        return;
+        // Validate cached data structure
+        if (validateResponse(cachedData)) {
+          setData(cachedData);
+          setIsLoading(false);
+          return;
+        } else {
+          // Cached data is corrupted, remove it
+          console.error("Cached data is corrupted, removing from localStorage");
+          if (typeof window !== "undefined") {
+            try {
+              localStorage.removeItem(STORAGE_DATA_KEY);
+              localStorage.removeItem(STORAGE_TIMESTAMP_KEY);
+            } catch (error) {
+              console.error("Error removing corrupted cache:", error);
+            }
+          }
+        }
       }
 
       // Cache is invalid or doesn't exist, fetch from API
@@ -172,11 +223,15 @@ export default function TestSafetyBenchmarksPage() {
         setData(apiData);
         setHasError(false);
       } else {
-        // API failed, try to use stale cache if available
-        if (cachedData) {
+        // API failed, try to use stale cache if available (even if expired)
+        if (cachedData && validateResponse(cachedData)) {
+          console.warn("API failed, using stale cache");
           setData(cachedData);
           setHasError(false);
         } else {
+          // No valid cache available, but don't crash - show empty state with fallback
+          console.error("No valid data available from API or cache");
+          setData(null);
           setHasError(true);
         }
       }
@@ -226,21 +281,15 @@ export default function TestSafetyBenchmarksPage() {
                 </div>
               ))}
             </div>
-          ) : hasError && !data ? (
-            <div className="text-center py-12">
-              <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 max-w-2xl mx-auto">
-                <Icon name="Info" className="text-blue-600 mx-auto mb-4" size={32} />
-                <p className="text-blue-800 font-semibold mb-2">Veriler güncelleniyor</p>
-                <p className="text-sm text-blue-700">Lütfen daha sonra tekrar deneyin.</p>
-              </div>
-            </div>
-          ) : overall ? (
+          ) : (
             <div className="grid md:grid-cols-3 gap-6">
               <FadeIn delay={100}>
                 <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
                   <p className="text-sm font-medium text-eza-text-secondary mb-2">Toplam Test</p>
                   <p className="text-3xl font-bold text-eza-text">
-                    {typeof overall.total_tests === 'number' ? overall.total_tests.toLocaleString() : '—'}
+                    {overall && typeof overall.total_tests === 'number' 
+                      ? overall.total_tests.toLocaleString() 
+                      : '—'}
                   </p>
                 </div>
               </FadeIn>
@@ -249,7 +298,9 @@ export default function TestSafetyBenchmarksPage() {
                 <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
                   <p className="text-sm font-medium text-eza-text-secondary mb-2">Genel Başarı Oranı</p>
                   <p className="text-3xl font-bold text-eza-text">
-                    {typeof overall.success_rate === 'number' ? `${overall.success_rate.toFixed(1)}%` : '—'}
+                    {overall && typeof overall.success_rate === 'number' 
+                      ? `${overall.success_rate.toFixed(1)}%` 
+                      : '—'}
                   </p>
                 </div>
               </FadeIn>
@@ -258,12 +309,25 @@ export default function TestSafetyBenchmarksPage() {
                 <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
                   <p className="text-sm font-medium text-eza-text-secondary mb-2">Test Suite Sayısı</p>
                   <p className="text-3xl font-bold text-eza-text">
-                    {testSuites.length > 0 ? testSuites.length.toLocaleString() : '—'}
+                    {Array.isArray(testSuites) && testSuites.length > 0 
+                      ? testSuites.length.toLocaleString() 
+                      : '—'}
                   </p>
                 </div>
               </FadeIn>
             </div>
-          ) : null}
+          )}
+          
+          {/* Error message - only show if no data at all and not loading */}
+          {!isLoading && hasError && !data && (
+            <div className="text-center py-8 mt-6">
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 max-w-2xl mx-auto">
+                <Icon name="Info" className="text-blue-600 mx-auto mb-4" size={32} />
+                <p className="text-blue-800 font-semibold mb-2">Veriler güncelleniyor</p>
+                <p className="text-sm text-blue-700">Lütfen daha sonra tekrar deneyin.</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -286,33 +350,39 @@ export default function TestSafetyBenchmarksPage() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {testSuites.map((suite, index) => {
-                const improvementText = formatImprovement(suite.improvement);
-                const detailsText = formatDetails(suite.details);
-                const statusColor = suite.success_rate >= 90 
+                // Safe value extraction with fallbacks
+                const suiteSuccessRate = typeof suite?.success_rate === 'number' ? suite.success_rate : 0;
+                const suiteName = typeof suite?.name === 'string' ? suite.name : `Suite ${index + 1}`;
+                const suiteStatus = typeof suite?.status === 'string' ? suite.status : 'unknown';
+                
+                const improvementText = suite?.improvement ? formatImprovement(suite.improvement) : null;
+                const detailsText = suite?.details ? formatDetails(suite.details) : null;
+                
+                const statusColor = suiteSuccessRate >= 90 
                   ? { bg: "bg-green-100", text: "text-green-700", border: "border-green-200" }
-                  : suite.success_rate >= 80
+                  : suiteSuccessRate >= 80
                   ? { bg: "bg-yellow-100", text: "text-yellow-700", border: "border-yellow-200" }
                   : { bg: "bg-red-100", text: "text-red-700", border: "border-red-200" };
 
                 return (
-                  <FadeIn key={typeof suite.name === 'string' ? suite.name : index} delay={index * 50}>
+                  <FadeIn key={suiteName || index} delay={index * 50}>
                     <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-lg transition-all h-full flex flex-col">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-1">
                           <h3 className="text-xl font-bold text-eza-text mb-2">
-                            {typeof suite.name === 'string' ? suite.name : 'Unnamed Suite'}
+                            {suiteName}
                           </h3>
                           <div className={`inline-flex items-center gap-2 px-3 py-1 ${statusColor.bg} ${statusColor.text} text-xs font-semibold rounded-full border ${statusColor.border}`}>
                             <Icon 
-                              name={typeof suite.success_rate === 'number' && suite.success_rate >= 90 ? "CheckCircle" : typeof suite.success_rate === 'number' && suite.success_rate >= 80 ? "AlertTriangle" : "XCircle"} 
+                              name={suiteSuccessRate >= 90 ? "CheckCircle" : suiteSuccessRate >= 80 ? "AlertTriangle" : "XCircle"} 
                               size={14} 
                             />
-                            {typeof suite.status === 'string' ? suite.status.toUpperCase() : 'UNKNOWN'}
+                            {suiteStatus.toUpperCase()}
                           </div>
                         </div>
                       </div>
 
-                      {typeof suite.description === 'string' && suite.description && (
+                      {typeof suite?.description === 'string' && suite.description && (
                         <p className="text-sm text-eza-text-secondary mb-4 flex-1">
                           {suite.description}
                         </p>
@@ -329,7 +399,7 @@ export default function TestSafetyBenchmarksPage() {
                         <div className="mb-4">
                           <p className="text-xs text-eza-text-secondary mb-1">Başarı Oranı</p>
                           <p className={`text-2xl font-bold ${statusColor.text}`}>
-                            {typeof suite.success_rate === 'number' ? `${suite.success_rate.toFixed(1)}%` : '—'}
+                            {suiteSuccessRate > 0 ? `${suiteSuccessRate.toFixed(1)}%` : '—'}
                           </p>
                         </div>
 
@@ -365,47 +435,56 @@ export default function TestSafetyBenchmarksPage() {
             </FadeIn>
 
             <div className="grid md:grid-cols-3 gap-6">
-              {latestRuns.slice(0, 3).map((run, index) => (
-                <FadeIn key={run.timestamp || index} delay={index * 100}>
-                  <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-                    <p className="text-xs text-eza-text-secondary mb-4">
-                      {formatDate(run.timestamp)}
-                    </p>
-                    
-                    <div className="space-y-3">
-                      <div className="flex justify-between">
-                        <span className="text-sm text-eza-text-secondary">Toplam</span>
-                        <span className="text-sm font-semibold text-eza-text">
-                          {typeof run.total === 'number' ? run.total : '—'}
-                        </span>
-                      </div>
+              {latestRuns.slice(0, 3).map((run, index) => {
+                // Safe value extraction with fallbacks
+                const runTotal = typeof run?.total === 'number' ? run.total : 0;
+                const runPassed = typeof run?.passed === 'number' ? run.passed : 0;
+                const runFailed = typeof run?.failed === 'number' ? run.failed : 0;
+                const runSuccessRate = typeof run?.success_rate === 'number' ? run.success_rate : 0;
+                const runTimestamp = run?.timestamp || '';
+                
+                return (
+                  <FadeIn key={runTimestamp || index} delay={index * 100}>
+                    <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                      <p className="text-xs text-eza-text-secondary mb-4">
+                        {formatDate(runTimestamp)}
+                      </p>
                       
-                      <div className="flex justify-between">
-                        <span className="text-sm text-eza-text-secondary">Başarılı</span>
-                        <span className="text-sm font-semibold text-green-600">
-                          {typeof run.passed === 'number' ? run.passed : '—'}
-                        </span>
-                      </div>
-                      
-                      <div className="flex justify-between">
-                        <span className="text-sm text-eza-text-secondary">Başarısız</span>
-                        <span className="text-sm font-semibold text-red-600">
-                          {typeof run.failed === 'number' ? run.failed : '—'}
-                        </span>
-                      </div>
-                      
-                      <div className="pt-3 border-t border-gray-200">
-                        <div className="flex justify-between items-center">
-                          <span className="text-sm font-medium text-eza-text">Başarı Oranı</span>
-                          <span className="text-lg font-bold text-eza-text">
-                            {typeof run.success_rate === 'number' ? `${run.success_rate.toFixed(1)}%` : '—'}
+                      <div className="space-y-3">
+                        <div className="flex justify-between">
+                          <span className="text-sm text-eza-text-secondary">Toplam</span>
+                          <span className="text-sm font-semibold text-eza-text">
+                            {runTotal > 0 ? runTotal : '—'}
                           </span>
+                        </div>
+                        
+                        <div className="flex justify-between">
+                          <span className="text-sm text-eza-text-secondary">Başarılı</span>
+                          <span className="text-sm font-semibold text-green-600">
+                            {runPassed > 0 ? runPassed : '—'}
+                          </span>
+                        </div>
+                        
+                        <div className="flex justify-between">
+                          <span className="text-sm text-eza-text-secondary">Başarısız</span>
+                          <span className="text-sm font-semibold text-red-600">
+                            {runFailed > 0 ? runFailed : '—'}
+                          </span>
+                        </div>
+                        
+                        <div className="pt-3 border-t border-gray-200">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm font-medium text-eza-text">Başarı Oranı</span>
+                            <span className="text-lg font-bold text-eza-text">
+                              {runSuccessRate > 0 ? `${runSuccessRate.toFixed(1)}%` : '—'}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </FadeIn>
-              ))}
+                  </FadeIn>
+                );
+              })}
             </div>
           </div>
         </Section>
