@@ -1,16 +1,17 @@
-import { generatePageMetadata } from "@/lib/seo";
+"use client";
+
+import { useEffect, useState } from "react";
 import Section from "@/app/components/Section";
 import FadeIn from "@/app/components/FadeIn";
 import Icon from "@/app/components/Icon";
 import { formatImprovement, formatDetails } from "@/lib/formatUtils";
 
-// Disable revalidation - snapshot-based data
-export const revalidate = false;
+// localStorage keys
+const STORAGE_DATA_KEY = "eza_test_snapshot_data";
+const STORAGE_TIMESTAMP_KEY = "eza_test_snapshot_timestamp";
 
-export const metadata = generatePageMetadata(
-  "Test ve Güvenlik Karşılaştırmaları",
-  "EZA'nın etik zekası sürekli olarak test edilir, ölçülür ve doğrulanır. Bu veriler periyodik olarak yayınlanır."
-);
+// 15 days in milliseconds
+const CACHE_DURATION_MS = 1000 * 60 * 60 * 24 * 15;
 
 // API Response Interface - Snapshot-based public API
 interface TestResultsResponse {
@@ -70,8 +71,8 @@ function formatDate(dateString: string | undefined): string {
   }
 }
 
-// Fetch snapshot-based test results (server-side, cached)
-async function fetchTestResults(): Promise<TestResultsResponse | null> {
+// Fetch snapshot-based test results from API
+async function fetchTestResultsFromAPI(): Promise<TestResultsResponse | null> {
   try {
     const endpoint = "https://api.ezacore.ai/api/public/test-safety-benchmarks?period=daily";
     
@@ -80,8 +81,6 @@ async function fetchTestResults(): Promise<TestResultsResponse | null> {
       headers: {
         "Content-Type": "application/json",
       },
-      cache: 'force-cache', // Aggressive caching - snapshot data doesn't change until backend publishes new snapshot
-      next: { revalidate: false }, // Explicitly disable revalidation
     });
 
     if (res.ok) {
@@ -97,9 +96,97 @@ async function fetchTestResults(): Promise<TestResultsResponse | null> {
   }
 }
 
-export default async function TestSafetyBenchmarksPage() {
-  const data = await fetchTestResults();
-  
+// Get cached data from localStorage
+function getCachedData(): { data: TestResultsResponse | null; timestamp: number | null } {
+  if (typeof window === "undefined") {
+    return { data: null, timestamp: null };
+  }
+
+  try {
+    const cachedData = localStorage.getItem(STORAGE_DATA_KEY);
+    const cachedTimestamp = localStorage.getItem(STORAGE_TIMESTAMP_KEY);
+
+    if (cachedData && cachedTimestamp) {
+      const data = JSON.parse(cachedData) as TestResultsResponse;
+      const timestamp = parseInt(cachedTimestamp, 10);
+      return { data, timestamp };
+    }
+  } catch (error) {
+    console.error("Error reading from localStorage:", error);
+  }
+
+  return { data: null, timestamp: null };
+}
+
+// Save data to localStorage
+function saveToCache(data: TestResultsResponse): void {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    localStorage.setItem(STORAGE_DATA_KEY, JSON.stringify(data));
+    localStorage.setItem(STORAGE_TIMESTAMP_KEY, Date.now().toString());
+  } catch (error) {
+    console.error("Error saving to localStorage:", error);
+  }
+}
+
+// Check if cache is still valid (less than 15 days old)
+function isCacheValid(timestamp: number | null): boolean {
+  if (timestamp === null) {
+    return false;
+  }
+
+  const now = Date.now();
+  const age = now - timestamp;
+  return age < CACHE_DURATION_MS;
+}
+
+export default function TestSafetyBenchmarksPage() {
+  const [data, setData] = useState<TestResultsResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    async function loadData() {
+      setIsLoading(true);
+      setHasError(false);
+
+      // Check localStorage first
+      const { data: cachedData, timestamp } = getCachedData();
+
+      if (cachedData && isCacheValid(timestamp)) {
+        // Use cached data, no API call needed
+        setData(cachedData);
+        setIsLoading(false);
+        return;
+      }
+
+      // Cache is invalid or doesn't exist, fetch from API
+      const apiData = await fetchTestResultsFromAPI();
+
+      if (apiData) {
+        // Save to cache
+        saveToCache(apiData);
+        setData(apiData);
+        setHasError(false);
+      } else {
+        // API failed, try to use stale cache if available
+        if (cachedData) {
+          setData(cachedData);
+          setHasError(false);
+        } else {
+          setHasError(true);
+        }
+      }
+
+      setIsLoading(false);
+    }
+
+    loadData();
+  }, []);
+
   const overall = data?.overall;
   const testSuites = data?.test_suites || [];
   const latestRuns = data?.latest_runs || [];
@@ -130,26 +217,26 @@ export default async function TestSafetyBenchmarksPage() {
           </FadeIn>
 
           {/* Overview Metrics */}
-          {!data ? (
+          {isLoading ? (
+            <div className="grid md:grid-cols-3 gap-6">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm animate-pulse">
+                  <div className="h-4 bg-gray-200 rounded w-24 mb-4"></div>
+                  <div className="h-10 bg-gray-200 rounded w-32"></div>
+                </div>
+              ))}
+            </div>
+          ) : hasError && !data ? (
             <div className="text-center py-12">
-              <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 max-w-2xl mx-auto">
-                <Icon name="AlertCircle" className="text-yellow-600 mx-auto mb-4" size={32} />
-                <p className="text-yellow-800 font-semibold mb-2">Veri yüklenemedi</p>
-                <p className="text-sm text-yellow-700">Lütfen daha sonra tekrar deneyin.</p>
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 max-w-2xl mx-auto">
+                <Icon name="Info" className="text-blue-600 mx-auto mb-4" size={32} />
+                <p className="text-blue-800 font-semibold mb-2">Veriler güncelleniyor</p>
+                <p className="text-sm text-blue-700">Lütfen daha sonra tekrar deneyin.</p>
               </div>
             </div>
           ) : overall ? (
-            <div className="grid md:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               <FadeIn delay={100}>
-                <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-                  <p className="text-sm font-medium text-eza-text-secondary mb-2">Toplam Çalıştırma</p>
-                  <p className="text-3xl font-bold text-eza-text">
-                    {typeof overall.total_runs === 'number' ? overall.total_runs.toLocaleString() : '—'}
-                  </p>
-                </div>
-              </FadeIn>
-              
-              <FadeIn delay={200}>
                 <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
                   <p className="text-sm font-medium text-eza-text-secondary mb-2">Toplam Test</p>
                   <p className="text-3xl font-bold text-eza-text">
@@ -158,23 +245,20 @@ export default async function TestSafetyBenchmarksPage() {
                 </div>
               </FadeIn>
               
-              <FadeIn delay={300}>
+              <FadeIn delay={200}>
                 <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-                  <p className="text-sm font-medium text-eza-text-secondary mb-2">Başarı Oranı</p>
+                  <p className="text-sm font-medium text-eza-text-secondary mb-2">Genel Başarı Oranı</p>
                   <p className="text-3xl font-bold text-eza-text">
                     {typeof overall.success_rate === 'number' ? `${overall.success_rate.toFixed(1)}%` : '—'}
                   </p>
                 </div>
               </FadeIn>
               
-              <FadeIn delay={400}>
+              <FadeIn delay={300}>
                 <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-                  <p className="text-sm font-medium text-eza-text-secondary mb-2">Son Güncelleme</p>
-                  <p className="text-sm font-semibold text-eza-text">
-                    {formatDate(generatedAt)}
-                  </p>
-                  <p className="text-xs text-eza-text-secondary/70 mt-1 italic">
-                    Snapshot: {data?.period || 'daily'}
+                  <p className="text-sm font-medium text-eza-text-secondary mb-2">Test Suite Sayısı</p>
+                  <p className="text-3xl font-bold text-eza-text">
+                    {testSuites.length > 0 ? testSuites.length.toLocaleString() : '—'}
                   </p>
                 </div>
               </FadeIn>

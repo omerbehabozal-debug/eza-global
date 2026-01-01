@@ -28,9 +28,10 @@ export default function Home() {
       const navEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
       const isBackForward = navEntry?.type === 'back_forward';
       const isReload = navEntry?.type === 'reload';
+      const isNavigate = navEntry?.type === 'navigate' || !navEntry;
 
-      // Sayfa yenilenince scroll pozisyonunu temizle ve sayfa başından başla
-      if (isReload) {
+      // Sayfa yenilenince veya ilk yüklemede scroll pozisyonunu temizle ve sayfa başından başla
+      if (isReload || isNavigate) {
         sessionStorage.removeItem('homeScrollPosition');
         sessionStorage.removeItem('homeScrollSection');
         scrollRestored.current = false;
@@ -64,18 +65,10 @@ export default function Home() {
             document.body.scrollTop = position;
           }
         }
-      } else if (!isBackForward && !isReload && !isReturningToHome) {
-        // İlk yükleme veya doğrudan navigasyon (home link hariç)
-        const savedPosition = sessionStorage.getItem('homeScrollPosition');
-        if (savedPosition === null) {
-          // Home link'e tıklanmış veya ilk yükleme
-          scrollRestored.current = false;
-          isRestoring.current = false;
-        } else {
-          // Normal navigasyon, scroll pozisyonunu koru
-          scrollRestored.current = false;
-          isRestoring.current = false;
-        }
+      } else if (!isBackForward && !isReload && !isNavigate && !isReturningToHome) {
+        // Normal navigasyon durumunda scroll pozisyonunu sıfırla
+        scrollRestored.current = false;
+        isRestoring.current = false;
       }
     }
   }, [pathname]);
@@ -128,6 +121,17 @@ export default function Home() {
   // Pathname değişimini izle ve scroll pozisyonunu kaydet
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      // Reload veya navigate durumunda scroll pozisyonunu kaydetme
+      const navEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+      const isReload = navEntry?.type === 'reload';
+      const isNavigate = navEntry?.type === 'navigate' || !navEntry;
+      
+      // Reload veya navigate durumunda hiçbir şey yapma
+      if (isReload || isNavigate) {
+        previousPathnameRef.current = pathname;
+        return;
+      }
+      
       const prevPath = previousPathnameRef.current;
       
       // Anasayfaya dönüş kontrolü
@@ -209,20 +213,27 @@ export default function Home() {
       // Scroll pozisyonunu kaydetme fonksiyonu
       // Eğer EZA Ekosistemi bölümüne gelmişse, o bölümün başlangıç pozisyonunu kaydet
       const saveScrollPosition = () => {
-        if (!isRestoring.current) {
-          const ecosystemPosition = getEcosystemSectionPosition();
-          const currentScroll = window.scrollY;
-          
-          // Eğer EZA Ekosistemi bölümüne gelmişse (scroll pozisyonu bölümün başlangıcından büyük veya eşitse)
-          // o bölümün başlangıç pozisyonunu kaydet
-          if (ecosystemPosition !== null && currentScroll >= ecosystemPosition) {
-            sessionStorage.setItem('homeScrollPosition', ecosystemPosition.toString());
-            sessionStorage.setItem('homeScrollSection', 'ecosystem');
-          } else {
-            // Eğer EZA Ekosistemi bölümüne gelmemişse, normal scroll pozisyonunu kaydet
-            sessionStorage.setItem('homeScrollPosition', currentScroll.toString());
-            sessionStorage.removeItem('homeScrollSection');
-          }
+        // Reload veya navigate durumunda scroll pozisyonunu kaydetme
+        const navEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+        const isReload = navEntry?.type === 'reload';
+        const isNavigate = navEntry?.type === 'navigate' || !navEntry;
+        
+        if (isRestoring.current || isReload || isNavigate) {
+          return;
+        }
+        
+        const ecosystemPosition = getEcosystemSectionPosition();
+        const currentScroll = window.scrollY;
+        
+        // Eğer EZA Ekosistemi bölümüne gelmişse (scroll pozisyonu bölümün başlangıcından büyük veya eşitse)
+        // o bölümün başlangıç pozisyonunu kaydet
+        if (ecosystemPosition !== null && currentScroll >= ecosystemPosition) {
+          sessionStorage.setItem('homeScrollPosition', ecosystemPosition.toString());
+          sessionStorage.setItem('homeScrollSection', 'ecosystem');
+        } else {
+          // Eğer EZA Ekosistemi bölümüne gelmemişse, normal scroll pozisyonunu kaydet
+          sessionStorage.setItem('homeScrollPosition', currentScroll.toString());
+          sessionStorage.removeItem('homeScrollSection');
         }
       };
 
@@ -249,9 +260,10 @@ export default function Home() {
         // İlk yükleme veya doğrudan navigasyon
         const navEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
         const isReload = navEntry?.type === 'reload';
+        const isNavigate = navEntry?.type === 'navigate' || !navEntry;
         
-        if (!isReload) {
-          // Reload durumunda zaten useLayoutEffect'te temizlendi
+        if (!isReload && !isNavigate) {
+          // Reload ve navigate durumunda zaten useLayoutEffect'te temizlendi
           scrollRestored.current = false;
           isRestoring.current = false;
         }
