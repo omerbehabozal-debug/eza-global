@@ -155,11 +155,6 @@ export default function APIDocumentationPage() {
                     {category.description && (
                       <p className="text-eza-text-secondary mb-4">{category.description}</p>
                     )}
-                    {category.note && (
-                      <div className="mb-4 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                        <p className="text-sm text-yellow-800 italic">{category.note}</p>
-                      </div>
-                    )}
                     <div className="space-y-6">
                       {category.endpoints.map((endpoint, epIndex) => (
                         <div

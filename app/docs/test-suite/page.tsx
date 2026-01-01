@@ -692,7 +692,7 @@ export default function TestSuitePage() {
                 Test & Safety Benchmarks
               </div>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-eza-text mb-8 leading-tight">
-                EZA Test & Safety Benchmarks
+                EZA Test ve Güvenlik Karşılaştırmaları
               </h1>
               <p className="text-xl md:text-2xl text-eza-text-secondary max-w-4xl mx-auto leading-relaxed mb-12">
                 EZA, yapay zekâ güvenliği için dünya standartlarında <strong className="text-eza-text">{isLoading ? "..." : (hasError ? "kapsamlı" : `${totalTests} kapsamlı`)} testten</strong> oluşan çok katmanlı bir değerlendirme ekosistemi sunar.

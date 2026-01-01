@@ -1,12 +1,18 @@
-"use client";
-
-import { useState, useEffect } from "react";
+import { generatePageMetadata } from "@/lib/seo";
 import Section from "@/app/components/Section";
 import FadeIn from "@/app/components/FadeIn";
 import Icon from "@/app/components/Icon";
-import { formatImprovement, formatDetails, formatAnyValue } from "@/lib/formatUtils";
+import { formatImprovement, formatDetails } from "@/lib/formatUtils";
 
-// API Response Interface
+// Disable revalidation - snapshot-based data
+export const revalidate = false;
+
+export const metadata = generatePageMetadata(
+  "Test ve Güvenlik Karşılaştırmaları",
+  "EZA'nın etik zekası sürekli olarak test edilir, ölçülür ve doğrulanır. Bu veriler periyodik olarak yayınlanır."
+);
+
+// API Response Interface - Snapshot-based public API
 interface TestResultsResponse {
   overall: {
     total_runs: number;
@@ -18,7 +24,8 @@ interface TestResultsResponse {
   test_suites: TestSuite[];
   latest_runs?: LatestRun[];
   improvements?: Record<string, any>;
-  last_updated: string;
+  generated_at: string; // Snapshot generation timestamp
+  period?: string; // e.g., "daily"
 }
 
 interface TestSuite {
@@ -43,8 +50,6 @@ interface LatestRun {
   success_rate: number;
 }
 
-// Helper functions are imported from @/lib/formatUtils
-
 // Format date safely
 function formatDate(dateString: string | undefined): string {
   if (!dateString) return "N/A";
@@ -65,17 +70,18 @@ function formatDate(dateString: string | undefined): string {
   }
 }
 
-// Fetch test results
+// Fetch snapshot-based test results (server-side, cached)
 async function fetchTestResults(): Promise<TestResultsResponse | null> {
   try {
-    const endpoint = "https://api.ezacore.ai/api/test-results";
+    const endpoint = "https://api.ezacore.ai/api/public/test-safety-benchmarks?period=daily";
     
     const res = await fetch(endpoint, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      cache: "no-store",
+      cache: 'force-cache', // Aggressive caching - snapshot data doesn't change until backend publishes new snapshot
+      next: { revalidate: false }, // Explicitly disable revalidation
     });
 
     if (res.ok) {
@@ -91,51 +97,13 @@ async function fetchTestResults(): Promise<TestResultsResponse | null> {
   }
 }
 
-export default function TestSafetyBenchmarksPage() {
-  const [data, setData] = useState<TestResultsResponse | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
-
-  useEffect(() => {
-    let isMounted = true;
-    
-    async function loadData() {
-      setIsLoading(true);
-      setHasError(false);
-      
-      try {
-        const apiData = await fetchTestResults();
-        
-        if (!isMounted) return;
-        
-        if (apiData && apiData.overall && apiData.test_suites) {
-          setData(apiData);
-        } else {
-          setHasError(true);
-        }
-      } catch (error) {
-        console.error("Error loading test results:", error);
-        if (isMounted) {
-          setHasError(true);
-        }
-      } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
-      }
-    }
-
-    loadData();
-    
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
+export default async function TestSafetyBenchmarksPage() {
+  const data = await fetchTestResults();
+  
   const overall = data?.overall;
   const testSuites = data?.test_suites || [];
   const latestRuns = data?.latest_runs || [];
-  const lastUpdated = data?.last_updated;
+  const generatedAt = data?.generated_at;
 
   return (
     <>
@@ -150,32 +118,31 @@ export default function TestSafetyBenchmarksPage() {
           <FadeIn>
             <div className="text-center mb-12">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-eza-text mb-6 leading-tight">
-                Continuous Safety & Trust Benchmarks
+                Test ve Güvenlik Karşılaştırmaları
               </h1>
-              <p className="text-xl md:text-2xl text-eza-text-secondary max-w-4xl mx-auto leading-relaxed">
-                EZA's ethical intelligence is continuously tested, measured, and verified.
+              <p className="text-xl md:text-2xl text-eza-text-secondary max-w-4xl mx-auto leading-relaxed mb-4">
+                EZA'nın etik zekası sürekli olarak test edilir, ölçülür ve doğrulanır.
+              </p>
+              <p className="text-base text-eza-text-secondary/80 max-w-3xl mx-auto italic">
+                Bu veriler periyodik olarak yayınlanır, anlık değildir.
               </p>
             </div>
           </FadeIn>
 
           {/* Overview Metrics */}
-          {isLoading ? (
-            <div className="text-center py-12">
-              <p className="text-eza-text-secondary">Loading benchmark data...</p>
-            </div>
-          ) : hasError ? (
+          {!data ? (
             <div className="text-center py-12">
               <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 max-w-2xl mx-auto">
                 <Icon name="AlertCircle" className="text-yellow-600 mx-auto mb-4" size={32} />
-                <p className="text-yellow-800 font-semibold mb-2">Unable to load benchmark data</p>
-                <p className="text-sm text-yellow-700">Please try again later.</p>
+                <p className="text-yellow-800 font-semibold mb-2">Veri yüklenemedi</p>
+                <p className="text-sm text-yellow-700">Lütfen daha sonra tekrar deneyin.</p>
               </div>
             </div>
           ) : overall ? (
             <div className="grid md:grid-cols-4 gap-6">
               <FadeIn delay={100}>
                 <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-                  <p className="text-sm font-medium text-eza-text-secondary mb-2">Total Runs</p>
+                  <p className="text-sm font-medium text-eza-text-secondary mb-2">Toplam Çalıştırma</p>
                   <p className="text-3xl font-bold text-eza-text">
                     {typeof overall.total_runs === 'number' ? overall.total_runs.toLocaleString() : '—'}
                   </p>
@@ -184,7 +151,7 @@ export default function TestSafetyBenchmarksPage() {
               
               <FadeIn delay={200}>
                 <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-                  <p className="text-sm font-medium text-eza-text-secondary mb-2">Total Tests</p>
+                  <p className="text-sm font-medium text-eza-text-secondary mb-2">Toplam Test</p>
                   <p className="text-3xl font-bold text-eza-text">
                     {typeof overall.total_tests === 'number' ? overall.total_tests.toLocaleString() : '—'}
                   </p>
@@ -193,7 +160,7 @@ export default function TestSafetyBenchmarksPage() {
               
               <FadeIn delay={300}>
                 <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-                  <p className="text-sm font-medium text-eza-text-secondary mb-2">Success Rate</p>
+                  <p className="text-sm font-medium text-eza-text-secondary mb-2">Başarı Oranı</p>
                   <p className="text-3xl font-bold text-eza-text">
                     {typeof overall.success_rate === 'number' ? `${overall.success_rate.toFixed(1)}%` : '—'}
                   </p>
@@ -202,9 +169,12 @@ export default function TestSafetyBenchmarksPage() {
               
               <FadeIn delay={400}>
                 <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-                  <p className="text-sm font-medium text-eza-text-secondary mb-2">Last Updated</p>
+                  <p className="text-sm font-medium text-eza-text-secondary mb-2">Son Güncelleme</p>
                   <p className="text-sm font-semibold text-eza-text">
-                    {formatDate(lastUpdated)}
+                    {formatDate(generatedAt)}
+                  </p>
+                  <p className="text-xs text-eza-text-secondary/70 mt-1 italic">
+                    Snapshot: {data?.period || 'daily'}
                   </p>
                 </div>
               </FadeIn>
@@ -214,13 +184,20 @@ export default function TestSafetyBenchmarksPage() {
       </div>
 
       {/* Test Suite Grid */}
-      {!isLoading && !hasError && testSuites.length > 0 && (
+      {data && testSuites.length > 0 && (
         <Section className="bg-white">
           <div className="max-w-7xl mx-auto">
             <FadeIn>
-              <h2 className="text-3xl md:text-4xl font-bold text-eza-text text-center mb-12">
-                Test Suites
-              </h2>
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-eza-text mb-4">
+                  Test Paketleri
+                </h2>
+                {generatedAt && (
+                  <p className="text-sm text-eza-text-secondary/70 italic">
+                    Veri oluşturulma zamanı: {formatDate(generatedAt)}
+                  </p>
+                )}
+              </div>
             </FadeIn>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -259,14 +236,14 @@ export default function TestSafetyBenchmarksPage() {
 
                       {detailsText && (
                         <div className="mb-4">
-                          <p className="text-xs text-eza-text-secondary mb-1">Details</p>
+                          <p className="text-xs text-eza-text-secondary mb-1">Detaylar</p>
                           <p className="text-sm text-eza-text-secondary">{detailsText}</p>
                         </div>
                       )}
 
                       <div className="mt-auto">
                         <div className="mb-4">
-                          <p className="text-xs text-eza-text-secondary mb-1">Success Rate</p>
+                          <p className="text-xs text-eza-text-secondary mb-1">Başarı Oranı</p>
                           <p className={`text-2xl font-bold ${statusColor.text}`}>
                             {typeof suite.success_rate === 'number' ? `${suite.success_rate.toFixed(1)}%` : '—'}
                           </p>
@@ -274,7 +251,7 @@ export default function TestSafetyBenchmarksPage() {
 
                         {improvementText && (
                           <div className="bg-eza-gray rounded-lg p-3 border border-gray-200">
-                            <p className="text-xs text-eza-text-secondary mb-1">Improvement</p>
+                            <p className="text-xs text-eza-text-secondary mb-1">İyileşme</p>
                             <p className="text-sm font-semibold text-eza-text">{improvementText}</p>
                           </div>
                         )}
@@ -289,13 +266,18 @@ export default function TestSafetyBenchmarksPage() {
       )}
 
       {/* Latest Runs Section */}
-      {!isLoading && !hasError && latestRuns.length > 0 && (
+      {data && latestRuns.length > 0 && (
         <Section className="bg-eza-gray">
           <div className="max-w-7xl mx-auto">
             <FadeIn>
-              <h2 className="text-3xl md:text-4xl font-bold text-eza-text text-center mb-12">
-                Latest Test Runs
-              </h2>
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-eza-text mb-4">
+                  Son Test Çalıştırmaları
+                </h2>
+                <p className="text-sm text-eza-text-secondary/70 italic">
+                  Bu veriler snapshot bazlıdır ve periyodik olarak güncellenir.
+                </p>
+              </div>
             </FadeIn>
 
             <div className="grid md:grid-cols-3 gap-6">
@@ -308,21 +290,21 @@ export default function TestSafetyBenchmarksPage() {
                     
                     <div className="space-y-3">
                       <div className="flex justify-between">
-                        <span className="text-sm text-eza-text-secondary">Total</span>
+                        <span className="text-sm text-eza-text-secondary">Toplam</span>
                         <span className="text-sm font-semibold text-eza-text">
                           {typeof run.total === 'number' ? run.total : '—'}
                         </span>
                       </div>
                       
                       <div className="flex justify-between">
-                        <span className="text-sm text-eza-text-secondary">Passed</span>
+                        <span className="text-sm text-eza-text-secondary">Başarılı</span>
                         <span className="text-sm font-semibold text-green-600">
                           {typeof run.passed === 'number' ? run.passed : '—'}
                         </span>
                       </div>
                       
                       <div className="flex justify-between">
-                        <span className="text-sm text-eza-text-secondary">Failed</span>
+                        <span className="text-sm text-eza-text-secondary">Başarısız</span>
                         <span className="text-sm font-semibold text-red-600">
                           {typeof run.failed === 'number' ? run.failed : '—'}
                         </span>
@@ -330,7 +312,7 @@ export default function TestSafetyBenchmarksPage() {
                       
                       <div className="pt-3 border-t border-gray-200">
                         <div className="flex justify-between items-center">
-                          <span className="text-sm font-medium text-eza-text">Success Rate</span>
+                          <span className="text-sm font-medium text-eza-text">Başarı Oranı</span>
                           <span className="text-lg font-bold text-eza-text">
                             {typeof run.success_rate === 'number' ? `${run.success_rate.toFixed(1)}%` : '—'}
                           </span>
