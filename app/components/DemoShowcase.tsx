@@ -57,7 +57,7 @@ export default function DemoShowcase() {
           {demos.map((demo, index) => (
             <FadeIn key={demo.id} delay={index * 100}>
               <div
-                className="group relative bg-white rounded-2xl overflow-hidden border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-500 hover:border-eza-blue/30"
+                className="group relative bg-white rounded-xl md:rounded-2xl overflow-hidden border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-500 hover:border-eza-blue/30"
                 onMouseEnter={() => setHoveredVideo(demo.id)}
                 onMouseLeave={() => setHoveredVideo(null)}
               >
@@ -88,11 +88,12 @@ export default function DemoShowcase() {
                   />
                   
                   {/* Placeholder - Video yoksa gösterilir */}
-                  <div className="absolute inset-0 flex items-center justify-center flex-col gap-3">
-                    <div className="w-16 h-16 rounded-full bg-eza-blue/10 flex items-center justify-center">
-                      <Icon name={demo.icon} size={32} className="text-eza-blue" />
+                  <div className="absolute inset-0 flex items-center justify-center flex-col gap-2 md:gap-3">
+                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-eza-blue/10 flex items-center justify-center">
+                      <Icon name={demo.icon} size={24} className="text-eza-blue md:hidden" />
+                      <Icon name={demo.icon} size={32} className="text-eza-blue hidden md:block" />
                     </div>
-                    <p className="text-sm text-eza-text-secondary font-medium">
+                    <p className="text-xs md:text-sm text-eza-text-secondary font-medium">
                       Demo video yakında
                     </p>
                   </div>
@@ -101,27 +102,27 @@ export default function DemoShowcase() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   
                   {/* Badge */}
-                  <div className="absolute top-4 left-4 z-10">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/90 backdrop-blur-sm text-eza-blue text-xs font-semibold rounded-full border border-eza-blue/20 shadow-sm">
-                      <Icon name={demo.icon} size={12} />
+                  <div className="absolute top-3 md:top-4 left-3 md:left-4 z-10">
+                    <span className="inline-flex items-center gap-1 md:gap-1.5 px-2 md:px-3 py-0.5 md:py-1 bg-white/90 backdrop-blur-sm text-eza-blue text-xs font-semibold rounded-full border border-eza-blue/20 shadow-sm">
+                      <Icon name={demo.icon} size={10} />
                       {demo.badge}
                     </span>
                   </div>
 
                   {/* Play indicator (subtle) */}
-                  <div className="absolute bottom-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm">
-                      <Icon name="Play" size={14} className="text-eza-blue" />
+                  <div className="absolute bottom-3 md:bottom-4 right-3 md:right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm">
+                      <Icon name="Play" size={12} className="text-eza-blue" />
                     </div>
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-eza-text mb-2">
+                <div className="p-4 md:p-6">
+                  <h3 className="text-base md:text-xl font-semibold text-eza-text mb-2">
                     {demo.title}
                   </h3>
-                  <p className="text-sm text-eza-text-secondary leading-relaxed">
+                  <p className="text-xs md:text-sm text-eza-text-secondary leading-relaxed">
                     {demo.description}
                   </p>
                 </div>
@@ -131,8 +132,8 @@ export default function DemoShowcase() {
         </div>
 
         {/* Footer note */}
-        <div className="mt-12 text-center">
-          <p className="text-sm text-eza-text-secondary/70">
+        <div className="mt-6 md:mt-12 text-center">
+          <p className="text-xs md:text-sm text-eza-text-secondary/70">
             Tüm demolar EZA-Core tarafından çalıştırılmaktadır
           </p>
         </div>
