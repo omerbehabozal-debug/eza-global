@@ -142,6 +142,11 @@ export default function Header() {
                   </div>
                 );
               }
+              // This code block should not be reached since all items now have children
+              // But keeping it for type safety
+              if (!item.href) {
+                return null;
+              }
               const DesktopLinkComponent = (item as any).external ? "a" : Link;
               const desktopLinkProps = (item as any).external
                 ? {
@@ -152,7 +157,7 @@ export default function Header() {
                 : {
                     href: item.href,
                     onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
-                      if (item.href.startsWith("#")) {
+                      if (item.href && item.href.startsWith("#")) {
                         e.preventDefault();
                         handleScrollTo(item.href);
                       }
@@ -208,6 +213,11 @@ export default function Header() {
                   </div>
                 );
               }
+              // This code block should not be reached since all items now have children
+              // But keeping it for type safety
+              if (!item.href) {
+                return null;
+              }
               const LinkComponent = (item as any).external ? "a" : Link;
               const linkProps = (item as any).external
                 ? {
@@ -219,7 +229,7 @@ export default function Header() {
                 : {
                     href: item.href,
                     onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
-                      if (item.href.startsWith("#")) {
+                      if (item.href && item.href.startsWith("#")) {
                         e.preventDefault();
                         handleScrollTo(item.href);
                       }
