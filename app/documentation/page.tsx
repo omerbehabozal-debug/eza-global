@@ -36,27 +36,27 @@ const documentationSections = [
 export default function DocumentationPage() {
   return (
     <>
-      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-20">
+      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-8 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-4">
-            <Icon name="BookOpen" size={16} />
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 bg-eza-blue/10 text-eza-blue text-xs sm:text-sm font-semibold rounded-full border border-eza-blue/20 mb-3 md:mb-4">
+            <Icon name="BookOpen" size={14} />
             Dokümantasyon
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-eza-dark mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-eza-dark mb-3 md:mb-6">
             EZA Dokümantasyonu
           </h1>
-          <p className="text-xl text-eza-text-secondary mb-4">
+          <p className="text-sm md:text-xl text-eza-text-secondary mb-3 md:mb-4">
             EZA-Core için teknik dokümantasyon. API referansları, entegrasyon kılavuzları ve geliştirici araçları.
           </p>
-          <p className="text-base text-eza-text-secondary/80">
+          <p className="text-xs md:text-base text-eza-text-secondary/80">
             Geliştiriciler için detaylı teknik rehberler ve referanslar.
           </p>
         </div>
       </div>
 
-      <Section className="bg-white">
+      <Section className="bg-white !pt-6 md:!pt-16 !pb-6 md:!pb-24 !min-h-0">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-3 md:gap-8">
             {documentationSections.map((section, sectionIndex) => {
               const LinkComponent = section.external ? "a" : Link;
               const linkProps = section.external
@@ -73,25 +73,25 @@ export default function DocumentationPage() {
                     {...linkProps}
                     className="block group"
                   >
-                    <div className="bg-white rounded-2xl border border-gray-200 p-8 hover:border-eza-blue/30 hover:shadow-xl transition-all duration-300 h-full">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="w-14 h-14 rounded-xl bg-eza-blue/10 flex items-center justify-center group-hover:bg-eza-blue/20 transition-colors flex-shrink-0">
-                          <Icon name={section.icon} className="text-eza-blue" size={24} />
+                    <div className="bg-white rounded-2xl border border-gray-200 p-4 md:p-8 hover:border-eza-blue/30 hover:shadow-xl transition-all duration-300 h-full">
+                      <div className="flex items-start gap-3 md:gap-4 mb-3 md:mb-4">
+                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-eza-blue/10 flex items-center justify-center group-hover:bg-eza-blue/20 transition-colors flex-shrink-0">
+                          <Icon name={section.icon} className="text-eza-blue" size={20} />
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center justify-between gap-2 mb-2">
-                            <h2 className="text-xl font-bold text-eza-text group-hover:text-eza-blue transition-colors">
+                            <h2 className="text-base md:text-xl font-bold text-eza-text group-hover:text-eza-blue transition-colors">
                               {section.title}
                             </h2>
                             {section.external && (
                               <Icon
                                 name="ExternalLink"
-                                size={18}
+                                size={16}
                                 className="text-eza-text-secondary group-hover:text-eza-blue transition-colors flex-shrink-0"
                               />
                             )}
                           </div>
-                          <p className="text-sm text-eza-text-secondary leading-relaxed">
+                          <p className="text-xs md:text-sm text-eza-text-secondary leading-relaxed">
                             {section.description}
                           </p>
                         </div>
