@@ -13,26 +13,26 @@ export const metadata = generatePageMetadata(
 export default function DeveloperPanelPage() {
   return (
     <>
-      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-12 md:py-20">
+      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-8 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-4">
-              <Icon name="Code" size={16} />
+            <div className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1 sm:py-1.5 bg-eza-blue/10 text-eza-blue text-xs sm:text-sm font-semibold rounded-full border border-eza-blue/20 mb-3 md:mb-4">
+              <Icon name="Code" size={14} />
               EZA Panels
             </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-eza-text mb-4 md:mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-eza-text mb-3 md:mb-6">
               Developer Console
             </h1>
-            <p className="text-base md:text-xl text-eza-text-secondary">
+            <p className="text-sm md:text-xl text-eza-text-secondary">
               Geliştiriciler için API yönetim konsolu. Entegrasyon ve test araçları.
             </p>
           </FadeIn>
         </div>
       </div>
 
-      <Section className="bg-white">
+      <Section className="bg-white !min-h-0">
         <FadeIn delay={100}>
-          <div className="max-w-4xl mx-auto space-y-6 text-lg text-eza-text-secondary leading-relaxed">
+          <div className="max-w-4xl mx-auto space-y-3 md:space-y-6 text-sm md:text-lg text-eza-text-secondary leading-relaxed">
           <p>
             EZA Developer Console, geliştiriciler için özel olarak tasarlanmış bir API yönetim 
             konsoludur. Entegrasyon, test ve izleme araçları sunar. Bu konsol, geliştiricilerin 
@@ -52,25 +52,25 @@ export default function DeveloperPanelPage() {
         </FadeIn>
       </Section>
 
-      <Section className="bg-eza-gray">
+      <Section className="bg-eza-gray !min-h-0">
         <FadeIn delay={200}>
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-eza-text mb-6">Faydalar</h2>
-            <ul className="space-y-4 text-lg text-eza-text-secondary">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-eza-text mb-4 md:mb-6">Faydalar</h2>
+            <ul className="space-y-2 md:space-y-4 text-sm md:text-lg text-eza-text-secondary">
             <li className="flex items-start">
-              <span className="text-eza-green text-2xl mr-3">✓</span>
+              <span className="text-eza-green text-xl md:text-2xl mr-2 md:mr-3">✓</span>
               <span>API yönetimi ve entegrasyon araçları</span>
             </li>
             <li className="flex items-start">
-              <span className="text-eza-green text-2xl mr-3">✓</span>
+              <span className="text-eza-green text-xl md:text-2xl mr-2 md:mr-3">✓</span>
               <span>Test ve geliştirme ortamları</span>
             </li>
             <li className="flex items-start">
-              <span className="text-eza-green text-2xl mr-3">✓</span>
+              <span className="text-eza-green text-xl md:text-2xl mr-2 md:mr-3">✓</span>
               <span>Kapsamlı dokümantasyon ve örnekler</span>
             </li>
             <li className="flex items-start">
-              <span className="text-eza-green text-2xl mr-3">✓</span>
+              <span className="text-eza-green text-xl md:text-2xl mr-2 md:mr-3">✓</span>
               <span>Performans izleme ve analiz</span>
             </li>
           </ul>
@@ -78,25 +78,25 @@ export default function DeveloperPanelPage() {
         </FadeIn>
       </Section>
 
-      <Section className="bg-white">
+      <Section className="bg-white !min-h-0">
         <FadeIn delay={300}>
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-eza-text mb-6">EZA Nasıl Yardımcı Olur?</h2>
-            <ul className="space-y-4 text-lg text-eza-text-secondary">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-eza-text mb-4 md:mb-6">EZA Nasıl Yardımcı Olur?</h2>
+            <ul className="space-y-2 md:space-y-4 text-sm md:text-lg text-eza-text-secondary">
             <li className="flex items-start">
-              <span className="text-eza-blue text-xl mr-3">•</span>
+              <span className="text-eza-blue text-lg md:text-xl mr-2 md:mr-3">•</span>
               <span>API anahtarlarını yönetir ve güvenliği sağlar</span>
             </li>
             <li className="flex items-start">
-              <span className="text-eza-blue text-xl mr-3">•</span>
+              <span className="text-eza-blue text-lg md:text-xl mr-2 md:mr-3">•</span>
               <span>Entegrasyonları test eder ve doğrular</span>
             </li>
             <li className="flex items-start">
-              <span className="text-eza-blue text-xl mr-3">•</span>
+              <span className="text-eza-blue text-lg md:text-xl mr-2 md:mr-3">•</span>
               <span>Kapsamlı dokümantasyon ve örnekler sunar</span>
             </li>
             <li className="flex items-start">
-              <span className="text-eza-blue text-xl mr-3">•</span>
+              <span className="text-eza-blue text-lg md:text-xl mr-2 md:mr-3">•</span>
               <span>Performans izleme ve analiz araçları sağlar</span>
             </li>
           </ul>
@@ -104,22 +104,22 @@ export default function DeveloperPanelPage() {
         </FadeIn>
       </Section>
 
-      <Section className="bg-eza-gray">
+      <Section className="bg-eza-gray !min-h-0">
         <FadeIn delay={400}>
           <div className="max-w-4xl mx-auto text-center">
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
             <a
               href="https://admin.ezacore.ai/admin"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-eza-blue text-white rounded-lg font-semibold hover:bg-[#0077ed] transition-all shadow-lg hover:shadow-xl"
+              className="inline-flex items-center gap-2 px-6 md:px-8 py-2.5 md:py-4 bg-eza-blue text-white rounded-lg text-sm md:text-base font-semibold hover:bg-[#0077ed] transition-all shadow-lg hover:shadow-xl"
             >
               Developer Console'a Git
-              <Icon name="ExternalLink" size={18} />
+              <Icon name="ExternalLink" size={16} />
             </a>
             <ScrollLink
               href="/#ecosystem"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-eza-blue border border-eza-blue rounded-lg font-semibold hover:bg-eza-blue/5 transition-all"
+              className="inline-flex items-center gap-2 px-6 md:px-8 py-2.5 md:py-4 bg-white text-eza-blue border border-eza-blue rounded-lg text-sm md:text-base font-semibold hover:bg-eza-blue/5 transition-all"
               section="ecosystem"
             >
               EZA Ekosistemine Dön
