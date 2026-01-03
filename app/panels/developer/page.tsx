@@ -1,6 +1,7 @@
 import { generatePageMetadata } from "@/lib/seo";
 import Section from "@/app/components/Section";
 import Link from "next/link";
+import ScrollLink from "@/app/components/ScrollLink";
 import Icon from "@/app/components/Icon";
 import FadeIn from "@/app/components/FadeIn";
 
@@ -116,17 +117,13 @@ export default function DeveloperPanelPage() {
               Developer Console'a Git
               <Icon name="ExternalLink" size={18} />
             </a>
-            <Link
+            <ScrollLink
               href="/#ecosystem"
               className="inline-flex items-center gap-2 px-8 py-4 bg-white text-eza-blue border border-eza-blue rounded-lg font-semibold hover:bg-eza-blue/5 transition-all"
-              onClick={() => {
-                if (typeof window !== 'undefined') {
-                  sessionStorage.setItem('homeScrollSection', 'ecosystem');
-                }
-              }}
+              section="ecosystem"
             >
               EZA Ekosistemine Dön
-            </Link>
+            </ScrollLink>
           </div>
           </div>
         </FadeIn>
