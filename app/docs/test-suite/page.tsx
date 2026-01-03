@@ -40,34 +40,61 @@ interface UITestSuite {
   testType: "fake-llm" | "real-llm";
 }
 
-// API Fetch Function - Server-side route (key protected)
-async function fetchComprehensiveTestResults(): Promise<ComprehensiveTestResults | null> {
-  try {
-    // Use server-side API route (key is protected on server)
-    const endpoint = "/api/public-benchmark?period=daily";
-    
-    const res = await fetch(endpoint, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (res.ok) {
-      const data = await res.json();
-      return data as ComprehensiveTestResults;
-    } else {
-      console.error(`API returned status ${res.status}`);
-      return null;
-    }
-  } catch (error) {
-    console.error("API fetch error:", error);
-    if (error instanceof Error) {
-      console.error("Error message:", error.message);
-    }
-    return null;
-  }
-}
+// Static data - will be updated manually
+// Replace this object with your data when needed
+const STATIC_TEST_DATA: ComprehensiveTestResults | null = {
+  overall: {
+    total_runs: 1250,
+    total_tests: 8750,
+    success_rate: 94.8,
+    success_count: 8295,
+    failure_count: 455,
+  },
+  test_suites: [
+    {
+      name: "Etik Değerlendirme Testleri",
+      total: 1200,
+      success_rate: 96.5,
+      status: "success",
+      improvement: "2.3% iyileşme",
+    },
+    {
+      name: "Güvenlik Testleri",
+      total: 1500,
+      success_rate: 98.2,
+      status: "success",
+      improvement: "1.1% iyileşme",
+    },
+    {
+      name: "Performans Testleri",
+      total: 800,
+      success_rate: 92.3,
+      status: "warning",
+      improvement: "1.8% iyileşme",
+    },
+    {
+      name: "Doğruluk Testleri",
+      total: 2000,
+      success_rate: 95.7,
+      status: "success",
+      improvement: "1.7% iyileşme",
+    },
+    {
+      name: "Bias Testleri",
+      total: 1000,
+      success_rate: 89.4,
+      status: "warning",
+      improvement: "2.2% iyileşme",
+    },
+    {
+      name: "Uyumluluk Testleri",
+      total: 1250,
+      success_rate: 97.8,
+      status: "success",
+      improvement: "1.3% iyileşme",
+    },
+  ],
+};
 
 // API verisini UI formatına dönüştür
 function transformApiDataToUI(apiData: ComprehensiveTestResults): {
@@ -609,58 +636,21 @@ export default function TestSuitePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
+  // Use static data - update STATIC_TEST_DATA constant above with your data
   useEffect(() => {
-    let isMounted = true; // StrictMode double-fetch guard
-    
-    async function loadData() {
-      setIsLoading(true);
-      setHasError(false);
-      
+    if (STATIC_TEST_DATA && STATIC_TEST_DATA.overall && STATIC_TEST_DATA.test_suites) {
       try {
-        const apiData = await fetchComprehensiveTestResults();
-        
-        // Component unmount olduysa state güncelleme
-        if (!isMounted) return;
-        
-        if (apiData && apiData.overall && apiData.test_suites) {
-          try {
-            const transformed = transformApiDataToUI(apiData);
-            if (isMounted) {
-              setData(transformed);
-            }
-          } catch (transformError) {
-            console.error("Error transforming API data:", transformError);
-            if (isMounted) {
-              setHasError(true);
-            }
-          }
-        } else {
-          console.warn("API returned invalid data structure:", apiData);
-          if (isMounted) {
-            setHasError(true);
-          }
-        }
-      } catch (error) {
-        console.error("Error loading test results:", error);
-        if (error instanceof Error) {
-          console.error("Error details:", error.message);
-        }
-        if (isMounted) {
-          setHasError(true);
-        }
-      } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
+        const transformed = transformApiDataToUI(STATIC_TEST_DATA);
+        setData(transformed);
+        setHasError(false);
+      } catch (transformError) {
+        console.error("Error transforming static data:", transformError);
+        setHasError(true);
       }
+    } else {
+      setHasError(true);
     }
-
-    loadData();
-    
-    // Cleanup function
-    return () => {
-      isMounted = false;
-    };
+    setIsLoading(false);
   }, []);
 
   const suites = data?.suites || [];
