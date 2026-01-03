@@ -7,21 +7,21 @@ import Icon from "./Icon";
 export default function EZACoreIntro() {
   return (
     <FadeIn>
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
-        <div className="bg-gradient-to-br from-eza-blue/5 via-white to-eza-blue/5 rounded-2xl p-8 md:p-12 border border-eza-blue/10 shadow-lg">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
+        <div className="bg-gradient-to-br from-eza-blue/5 via-white to-eza-blue/5 rounded-2xl p-6 md:p-8 lg:p-12 border border-eza-blue/10 shadow-lg">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-4">
-                <Icon name="Cpu" size={16} />
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 bg-eza-blue/10 text-eza-blue text-xs sm:text-sm font-semibold rounded-full border border-eza-blue/20 mb-3 md:mb-4">
+                <Icon name="Cpu" size={14} />
                 EZA-Core
               </div>
-              <h3 className="text-3xl md:text-4xl font-semibold text-eza-text mb-4">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-eza-text mb-3 md:mb-4">
                 EZA-Core: EZA'nın Teknolojik Motoru
               </h3>
-              <p className="text-lg text-eza-text-secondary leading-relaxed mb-4">
+              <p className="text-base md:text-lg text-eza-text-secondary leading-relaxed mb-3 md:mb-4">
                 EZA'nın etik felsefesi ve vizyonu, <strong className="text-eza-text">EZA-Core</strong> adlı teknolojik platform ile hayata geçer.
               </p>
-              <p className="text-base text-eza-text-secondary leading-relaxed mb-6">
+              <p className="text-sm md:text-base text-eza-text-secondary leading-relaxed mb-4 md:mb-6">
                 EZA-Core, Standalone, Proxy, Proxy-Lite ve tüm panelleri çalıştıran çekirdek sistemdir. 
                 Etik analiz, skorlama ve risk değerlendirme motorlarını içeren kapsamlı bir teknoloji platformu.
               </p>

@@ -16,9 +16,11 @@ export default function Section({
   const content = (
     <section
       id={id}
-      className={`py-12 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-12 ${className}`}
+      className={`min-h-screen md:min-h-0 py-8 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-12 flex flex-col ${className}`}
     >
-      {children}
+      <div className="flex-1 flex flex-col justify-center">
+        {children}
+      </div>
     </section>
   );
 
