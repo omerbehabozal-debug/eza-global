@@ -9,19 +9,18 @@ export default function Header() {
   const [panelsOpen, setPanelsOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const [perspectivesOpen, setPerspectivesOpen] = useState(false);
+  const [infoOpen, setInfoOpen] = useState(false);
 
   const navigation = [
-    { name: "Ekosistem", href: "/#ecosystem" },
-    { name: "Hakkımızda", href: "/about" },
-      {
-        name: "Ürünler",
-        href: "#",
-        children: [
-          { name: "Standalone", href: "/products/standalone" },
-          { name: "Proxy", href: "/products/proxy" },
-          { name: "Proxy-Lite", href: "/products/proxy-lite" },
-        ],
-      },
+    {
+      name: "Ürünler",
+      href: "#",
+      children: [
+        { name: "Standalone", href: "/products/standalone" },
+        { name: "Proxy", href: "/products/proxy" },
+        { name: "Proxy-Lite", href: "/products/proxy-lite" },
+      ],
+    },
     {
       name: "Paneller",
       children: [
@@ -38,8 +37,14 @@ export default function Header() {
         { name: "İnsansı Robotlar", href: "/perspectives/humanoid-robots" },
       ],
     },
-    { name: "Dokümantasyon", href: "/documentation" },
-    { name: "İletişim", href: "/contact" },
+    {
+      name: "Bilgi",
+      children: [
+        { name: "Hakkımızda", href: "/about" },
+        { name: "Dokümantasyon", href: "/documentation" },
+        { name: "İletişim", href: "/contact" },
+      ],
+    },
   ];
 
   const handleScrollTo = (href: string) => {
@@ -81,7 +86,8 @@ export default function Header() {
                 const isOpen = 
                   (item.name === "Ürünler" && productsOpen) ||
                   (item.name === "Paneller" && panelsOpen) ||
-                  (item.name === "Gelecek Perspektifleri" && perspectivesOpen);
+                  (item.name === "Gelecek Perspektifleri" && perspectivesOpen) ||
+                  (item.name === "Bilgi" && infoOpen);
 
                 return (
                   <div
@@ -91,11 +97,13 @@ export default function Header() {
                       if (item.name === "Ürünler") setProductsOpen(true);
                       if (item.name === "Paneller") setPanelsOpen(true);
                       if (item.name === "Gelecek Perspektifleri") setPerspectivesOpen(true);
+                      if (item.name === "Bilgi") setInfoOpen(true);
                     }}
                     onMouseLeave={() => {
                       if (item.name === "Ürünler") setProductsOpen(false);
                       if (item.name === "Paneller") setPanelsOpen(false);
                       if (item.name === "Gelecek Perspektifleri") setPerspectivesOpen(false);
+                      if (item.name === "Bilgi") setInfoOpen(false);
                     }}
                   >
                     <button className="px-4 py-2 text-eza-text-secondary hover:text-eza-text transition-colors text-sm font-medium relative flex items-center gap-1">
@@ -109,11 +117,13 @@ export default function Header() {
                           if (item.name === "Ürünler") setProductsOpen(true);
                           if (item.name === "Paneller") setPanelsOpen(true);
                           if (item.name === "Gelecek Perspektifleri") setPerspectivesOpen(true);
+                          if (item.name === "Bilgi") setInfoOpen(true);
                         }}
                         onMouseLeave={() => {
                           if (item.name === "Ürünler") setProductsOpen(false);
                           if (item.name === "Paneller") setPanelsOpen(false);
                           if (item.name === "Gelecek Perspektifleri") setPerspectivesOpen(false);
+                          if (item.name === "Bilgi") setInfoOpen(false);
                         }}
                       >
                         <div className="bg-white rounded-xl shadow-xl border border-gray-200/50 py-2 animate-in fade-in slide-in-from-top-2">
