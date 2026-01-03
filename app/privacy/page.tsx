@@ -13,10 +13,10 @@ export default function PrivacyPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn>
             <h1 className="text-4xl md:text-5xl font-bold text-eza-text mb-6">
-              Gizlilik Politikası
+              Gizlilik Politikaları
             </h1>
             <p className="text-xl text-eza-text-secondary">
-              EZA veri kullanımı ve gizlilik prensipleri
+              EZA Veri Kullanımı, Gizlilik ve Etik Prensipleri
             </p>
           </FadeIn>
         </div>
@@ -24,86 +24,242 @@ export default function PrivacyPage() {
 
       <Section className="bg-white">
         <FadeIn delay={100}>
-          <div className="max-w-4xl mx-auto space-y-6 text-lg text-eza-text-secondary leading-relaxed">
+          <div className="max-w-4xl mx-auto space-y-8 text-lg text-eza-text-secondary leading-relaxed">
+            {/* Giriş */}
             <div>
-              <h2 className="text-2xl font-semibold text-eza-text mb-4">
-                EZA'nın Temel Prensipleri
-              </h2>
               <p>
-                EZA, yapay zekâ çıktılarının etik etkilerini ölçen ve görünür kılan bir etik gözlem 
-                altyapısıdır. EZA'nın temel prensipleri şunlardır:
+                Bu metin, EZA platformu kapsamında işlenen verilerin hangi prensiplerle ele alındığını, nasıl korunduğunu ve hangi amaçlarla kullanıldığını açıklamak amacıyla hazırlanmıştır.
               </p>
             </div>
 
-            <div className="bg-eza-gray rounded-lg p-6 space-y-4">
-              <div>
-                <h3 className="text-xl font-semibold text-eza-text mb-2">
-                  EZA İçerik Üretmez
-                </h3>
-                <p>
-                  EZA, yapay zekâ sistemlerinin ürettiği çıktıları analiz eder. Kendi başına içerik 
-                  üretmez veya içeriği değiştirmez.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-eza-text mb-2">
-                  EZA İçeriğe Otomatik Müdahale Etmez
-                </h3>
-                <p>
-                  EZA, analiz ettiği içeriğe otomatik veya zorunlu müdahale etmez. İçeriği otomatik olarak 
-                  engellemez, sansürlemez veya değiştirmez. Sadece etik etkilerini ölçer ve görünür kılar. 
-                  Ancak kullanıcı açıkça talep ettiğinde, etik iyileştirme önerileri sunabilir.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-eza-text mb-2">
-                  Veriler Sadece Analiz Amaçlı Kullanılır
-                </h3>
-                <p>
-                  EZA tarafından analiz edilen veriler, sadece etik skorlama ve risk değerlendirme 
-                  amaçlı kullanılır. Veriler, analiz dışında başka bir amaç için kullanılmaz.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-eza-text mb-2">
-                  Model Eğitimi Yapılmaz
-                </h3>
-                <p>
-                  EZA, analiz ettiği verileri kullanarak model eğitimi yapmaz. Veriler, sadece 
-                  anlık analiz ve skorlama için kullanılır.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-eza-text mb-2">
-                  Regülatör Panellerinde Veriler Anonimleştirilir
-                </h3>
-                <p>
-                  Regülatör panellerinde görüntülenen veriler, anonimleştirilmiş formatta sunulur. 
-                  Kişisel veya kurumsal bilgiler, gizlilik prensipleri gereği korunur.
-                </p>
-              </div>
-            </div>
-
+            {/* 1. EZA'nın Rolü ve Konumlanması */}
             <div>
               <h2 className="text-2xl font-semibold text-eza-text mb-4">
-                Veri Güvenliği
+                1. EZA'nın Rolü ve Konumlanması
               </h2>
-              <p>
-                EZA, veri güvenliğine önem verir. Analiz edilen veriler, güvenli bir şekilde 
-                işlenir ve saklanır. Veri güvenliği, EZA'nın temel önceliklerinden biridir.
+              <p className="mb-4">
+                EZA, yapay zekâ sistemleri tarafından üretilen çıktıları analiz eden, bu çıktılar üzerinden etik etki, risk ve skorlamaları görünür kılan bağımsız bir governance katmanıdır.
+              </p>
+              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
+                <p className="font-semibold text-eza-text">EZA:</p>
+                <ul className="space-y-2 ml-6">
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Kendi başına içerik üretmez</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Mevcut içeriği değiştirmez</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Otomatik sansür veya engelleme uygulamaz</span>
+                  </li>
+                </ul>
+              </div>
+              <p className="mt-4">
+                EZA'nın rolü; müdahale eden bir sistem olmak değil, gözlemleyen ve ölçen bir etik referans noktası oluşturmaktır.
               </p>
             </div>
 
+            {/* 2. İçeriğe Müdahale Prensibi */}
             <div>
               <h2 className="text-2xl font-semibold text-eza-text mb-4">
-                İletişim
+                2. İçeriğe Müdahale Prensibi
+              </h2>
+              <p className="mb-4">
+                EZA, analiz ettiği içeriklere otomatik veya zorunlu müdahalede bulunmaz. İçerik engellenmez, sansürlenmez veya yeniden yazılmaz.
+              </p>
+              <p className="mb-4">
+                Ancak kullanıcı açıkça talep ettiğinde:
+              </p>
+              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
+                <ul className="space-y-2 ml-6">
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>İçeriğin bağlamı korunarak</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Zorlayıcı veya yönlendirici olmadan</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Etik iyileştirme önerileri sunulabilir</span>
+                  </li>
+                </ul>
+              </div>
+              <p className="mt-4">
+                Bu öneriler isteğe bağlıdır ve nihai karar her zaman kullanıcıya aittir.
+              </p>
+            </div>
+
+            {/* 3. Veri Kullanımı ve Amaç Sınırlaması */}
+            <div>
+              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+                3. Veri Kullanımı ve Amaç Sınırlaması
+              </h2>
+              <p className="mb-4">
+                EZA tarafından analiz edilen tüm veriler:
+              </p>
+              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
+                <ul className="space-y-2 ml-6">
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Yalnızca etik analiz, risk değerlendirmesi ve skorlama amacıyla kullanılır</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Analiz dışında farklı bir amaçla değerlendirilmez</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Reklam, profil çıkarımı veya üçüncü taraf ticari kullanım için işlenmez</span>
+                  </li>
+                </ul>
+              </div>
+              <p className="mt-4">
+                Veri işleme faaliyetleri, amaçla sınırlılık ve asgari veri kullanımı prensiplerine dayanır.
+              </p>
+            </div>
+
+            {/* 4. Model Kullanımı ve Üçüncü Taraf Altyapılar */}
+            <div>
+              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+                4. Model Kullanımı ve Üçüncü Taraf Altyapılar
+              </h2>
+              <p className="mb-4">
+                EZA, mevcut ürünlerinde OpenAI, Groq, Mistral gibi üçüncü taraf yapay zekâ modellerini kullanabilir. EZA, bu modellerle rekabet etmeyi hedeflemez ve model üretimi yapmaz.
+              </p>
+              <p className="mb-4">
+                EZA'nın odağı:
+              </p>
+              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
+                <ul className="space-y-2 ml-6">
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Yapay zekâ modellerinin çıktılarının etik etkilerini ölçmek</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Modeller arası karşılaştırılabilir ve denetlenebilir bir yapı oluşturmaktır</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* 5. Geleceğe Yönelik Mimari Esneklik */}
+            <div>
+              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+                5. Geleceğe Yönelik Mimari Esneklik
+              </h2>
+              <p className="mb-4">
+                EZA'nın mimarisi, farklı yapay zekâ model altyapılarını destekleyebilecek şekilde tasarlanmıştır.
+              </p>
+              <p className="mb-4">
+                Bu yaklaşım:
+              </p>
+              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
+                <ul className="space-y-2 ml-6">
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Belirli bir modele bağımlılığı önler</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Uzun vadede esnek, sürdürülebilir ve genişleyebilir bir yapı sağlar</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* 6. Regülatör Panelleri ve Anonimleştirme */}
+            <div>
+              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+                6. Regülatör Panelleri ve Anonimleştirme
+              </h2>
+              <p className="mb-4">
+                Regülatör panellerinde görüntülenen tüm veriler:
+              </p>
+              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
+                <ul className="space-y-2 ml-6">
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Anonimleştirilmiş formatta sunulur</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Kişisel veya kurumsal kimlik bilgileri içermez</span>
+                  </li>
+                </ul>
+              </div>
+              <p className="mt-4">
+                Bu veriler, yalnızca sistemsel etik görünürlük ve denetim amacıyla paylaşılır.
+              </p>
+            </div>
+
+            {/* 7. Veri Güvenliği ve Gizlilik */}
+            <div>
+              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+                7. Veri Güvenliği ve Gizlilik
+              </h2>
+              <p className="mb-4">
+                EZA:
+              </p>
+              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
+                <ul className="space-y-2 ml-6">
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Verilerin gizliliğini ve bütünlüğünü korumayı temel ilke olarak benimser</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Yetkisiz erişime karşı teknik ve organizasyonel önlemler uygular</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Verileri yalnızca yetkili kullanıcılar ve tanımlı roller kapsamında erişilebilir kılar</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* 8. Kullanıcı Hakları */}
+            <div>
+              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+                8. Kullanıcı Hakları
+              </h2>
+              <p className="mb-4">
+                Kullanıcılar, yürürlükteki mevzuat kapsamında:
+              </p>
+              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
+                <ul className="space-y-2 ml-6">
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Analiz edilen verilere ilişkin bilgi talep etme</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Silme veya anonimleştirme talebinde bulunma</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-eza-blue mr-3">•</span>
+                    <span>Veri kullanımına ilişkin itiraz hakkına sahiptir</span>
+                  </li>
+                </ul>
+              </div>
+              <p className="mt-4">
+                Bu talepler, ilgili mevzuat çerçevesinde değerlendirilir.
+              </p>
+            </div>
+
+            {/* 9. Güncellemeler */}
+            <div>
+              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+                9. Güncellemeler
               </h2>
               <p>
-                Gizlilik politikası hakkında sorularınız için lütfen bizimle iletişime geçin.
+                Bu Gizlilik Politikaları metni, EZA'nın teknik veya hukuki gereksinimleri doğrultusunda güncellenebilir. Güncel versiyon her zaman bu sayfa üzerinden yayımlanır.
               </p>
             </div>
           </div>
