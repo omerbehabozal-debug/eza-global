@@ -128,7 +128,7 @@ function getSuccessRateComment(successRate: number): string {
     return "Genel olarak güçlü, iyileştirme alanı sınırlı.";
   } else if (successRate >= 70) {
     return "Orta seviye; riskli senaryolarda geliştirme önerilir.";
-  } else {
+    } else {
     return "Düşük seviye; öncelikli iyileştirme gerekir.";
   }
 }
@@ -250,22 +250,22 @@ function TestSummaryCards({
 
   return (
     <>
-      <div className="grid md:grid-cols-3 gap-6 mb-6">
-        {cards.map((card, index) => (
-          <FadeIn key={card.label} delay={index * 100}>
-            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center gap-4 mb-4">
-                <div className={`w-14 h-14 rounded-xl ${card.bgColor} flex items-center justify-center`}>
-                  <Icon name={card.icon} className={card.textColor} size={24} />
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-eza-text-secondary mb-1">{card.label}</p>
-                  <p className="text-3xl font-bold text-eza-text">{card.value}</p>
-                </div>
+      <div className="grid md:grid-cols-3 gap-3 md:gap-6 mb-4 md:mb-6">
+      {cards.map((card, index) => (
+        <FadeIn key={card.label} delay={index * 100}>
+            <div className="bg-white rounded-2xl p-4 md:p-8 border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300">
+              <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
+                <div className={`w-10 h-10 md:w-14 md:h-14 rounded-xl ${card.bgColor} flex items-center justify-center flex-shrink-0`}>
+                  <Icon name={card.icon} className={card.textColor} size={20} />
+              </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs md:text-sm font-medium text-eza-text-secondary mb-1">{card.label}</p>
+                  <p className="text-xl md:text-3xl font-bold text-eza-text break-words">{card.value}</p>
               </div>
             </div>
-          </FadeIn>
-        ))}
+          </div>
+        </FadeIn>
+      ))}
       </div>
     </>
   );
@@ -287,10 +287,10 @@ function SnapshotInfo({
     : "Snapshot";
 
   return (
-    <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
-      <div className="flex items-center gap-2 text-sm text-blue-800">
-        <Icon name="Info" size={16} />
-        <span>
+    <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 md:p-4 mb-4 md:mb-6">
+      <div className="flex items-center gap-2 text-xs md:text-sm text-blue-800">
+        <Icon name="Info" size={14} className="flex-shrink-0" />
+        <span className="break-words">
           <strong>Yayın (snapshot) tarihi:</strong> {formatDate(lastUpdated)} • <strong>Yayın tipi:</strong> {periodLabel}
         </span>
       </div>
@@ -333,28 +333,28 @@ function TestSuiteCard({ suite, index }: { suite: UITestSuite; index: number }) 
 
   return (
     <FadeIn delay={index * 50}>
-      <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm hover:shadow-xl hover:border-eza-blue/30 transition-all duration-300 h-full flex flex-col">
+      <div className="bg-white rounded-2xl p-4 md:p-8 border border-gray-200 shadow-sm hover:shadow-xl hover:border-eza-blue/30 transition-all duration-300 h-full flex flex-col">
         {/* Header */}
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex-1">
-            <h3 className="text-2xl font-bold text-eza-text mb-2">{suite.name}</h3>
-            <div className={`inline-flex items-center gap-2 px-3 py-1 ${statusColor.bg} ${statusColor.text} text-xs font-semibold rounded-full border ${statusColor.border}`}>
-              <Icon name={statusColor.icon} size={14} />
+        <div className="flex items-start justify-between mb-3 md:mb-4">
+          <div className="flex-1 min-w-0">
+            <h3 className="text-lg md:text-2xl font-bold text-eza-text mb-2 break-words">{suite.name}</h3>
+            <div className={`inline-flex items-center gap-2 px-2 md:px-3 py-1 ${statusColor.bg} ${statusColor.text} text-xs font-semibold rounded-full border ${statusColor.border}`}>
+              <Icon name={statusColor.icon} size={12} />
               {statusColor.label}
             </div>
           </div>
         </div>
 
         {/* İstatistikler */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-2 gap-3 md:gap-4 mb-4 md:mb-6">
           <div>
             <p className="text-xs text-eza-text-secondary mb-1">Başarı Oranı</p>
-            <p className={`text-2xl font-bold ${statusColor.text}`}>%{suite.successRate.toFixed(1)}</p>
+            <p className={`text-xl md:text-2xl font-bold ${statusColor.text}`}>%{suite.successRate.toFixed(1)}</p>
           </div>
           {suite.testCount > 0 && (
             <div>
               <p className="text-xs text-eza-text-secondary mb-1">Kapsam</p>
-              <p className="text-2xl font-bold text-eza-text">{suite.testCount} test</p>
+              <p className="text-xl md:text-2xl font-bold text-eza-text break-words">{suite.testCount} test</p>
             </div>
           )}
         </div>
@@ -450,7 +450,7 @@ function TestSuiteGrid({ suites, isLoading, hasError }: { suites: UITestSuite[];
   }
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
       {suites.map((suite, index) => (
         <TestSuiteCard key={suite.id} suite={suite} index={index} />
       ))}
@@ -485,15 +485,15 @@ function HighlightAchievements() {
   ];
 
   return (
-    <div className="grid md:grid-cols-3 gap-6">
+    <div className="grid md:grid-cols-3 gap-3 md:gap-6">
       {achievements.map((achievement, index) => (
         <FadeIn key={achievement.title} delay={index * 100}>
-          <div className="bg-gradient-to-br from-white to-eza-gray/30 rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all">
-            <div className={`w-12 h-12 rounded-lg ${achievement.bgColor} flex items-center justify-center mb-4`}>
-              <Icon name={achievement.icon} className={achievement.textColor} size={24} />
+          <div className="bg-gradient-to-br from-white to-eza-gray/30 rounded-xl p-4 md:p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all">
+            <div className={`w-10 h-10 md:w-12 md:h-12 rounded-lg ${achievement.bgColor} flex items-center justify-center mb-3 md:mb-4`}>
+              <Icon name={achievement.icon} className={achievement.textColor} size={20} />
             </div>
-            <h3 className="text-lg font-bold text-eza-text mb-2">{achievement.title}</h3>
-            <p className="text-sm text-eza-text-secondary">{achievement.description}</p>
+            <h3 className="text-base md:text-lg font-bold text-eza-text mb-2">{achievement.title}</h3>
+            <p className="text-xs md:text-sm text-eza-text-secondary">{achievement.description}</p>
           </div>
         </FadeIn>
       ))}
@@ -512,22 +512,22 @@ function LifetimeSummary({
   hasError: boolean;
 }) {
   return (
-    <Section className="bg-eza-gray">
-      <div className="max-w-4xl mx-auto">
+    <Section className="bg-eza-gray !pt-6 md:!pt-16 !pb-6 md:!pb-24 !min-h-0 overflow-x-hidden">
+      <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8 w-full">
         <FadeIn>
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-eza-text mb-4 relative pb-4">
+          <div className="text-center mb-4 md:mb-8">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-eza-text mb-3 md:mb-4 relative pb-3 md:pb-4">
               6 Aylık Toplam Test Kapsamı
-              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-0.5 bg-gradient-to-r from-transparent via-eza-blue to-transparent"></span>
+              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 md:w-16 h-0.5 bg-gradient-to-r from-transparent via-eza-blue to-transparent"></span>
             </h2>
-            <p className="text-lg text-eza-text-secondary max-w-2xl mx-auto">
+            <p className="text-sm md:text-lg text-eza-text-secondary max-w-2xl mx-auto">
               Son 6 ayda çalıştırılan toplam test sayısı ve kapsamlı performans özeti
             </p>
           </div>
         </FadeIn>
 
         <FadeIn delay={100}>
-          <div className="bg-white rounded-2xl p-8 md:p-12 border border-gray-200 shadow-sm">
+          <div className="bg-white rounded-2xl p-4 md:p-8 lg:p-12 border border-gray-200 shadow-sm">
             {isLoading ? (
               <div className="text-center py-8">
                 <p className="text-eza-text-secondary">Veriler yükleniyor...</p>
@@ -538,14 +538,14 @@ function LifetimeSummary({
               </div>
             ) : lifetimeTotalTests !== null ? (
               <div className="text-center">
-                <div className="mb-6">
-                  <p className="text-sm font-medium text-eza-text-secondary mb-2">Toplam Test Kapsamı (6 Ay)</p>
-                  <p className="text-5xl font-bold text-eza-text mb-4">
+                <div className="mb-4 md:mb-6">
+                  <p className="text-xs md:text-sm font-medium text-eza-text-secondary mb-2">Toplam Test Kapsamı (6 Ay)</p>
+                  <p className="text-3xl md:text-5xl font-bold text-eza-text mb-3 md:mb-4 break-words">
                     {lifetimeTotalTests.toLocaleString()}
                   </p>
                 </div>
-                <div className="bg-eza-blue/5 rounded-lg p-4 border border-eza-blue/10">
-                  <p className="text-sm text-eza-text-secondary">
+                <div className="bg-eza-blue/5 rounded-lg p-3 md:p-4 border border-eza-blue/10">
+                  <p className="text-xs md:text-sm text-eza-text-secondary">
                     Bu sayı, son 6 ayda çalıştırılan tüm testlerin toplamını temsil eder.
                   </p>
                 </div>
@@ -576,52 +576,52 @@ function LifetimeSummary({
 // Metodoloji ve Şeffaflık Component
 function MethodologyTransparency() {
   return (
-    <Section className="bg-white">
-      <div className="max-w-4xl mx-auto">
+    <Section className="bg-white !pt-6 md:!pt-16 !pb-6 md:!pb-24 !min-h-0 overflow-x-hidden">
+      <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8 w-full">
         <FadeIn>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-eza-text mb-4 relative pb-4">
+          <div className="text-center mb-6 md:mb-12">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-eza-text mb-3 md:mb-4 relative pb-3 md:pb-4">
               Metodoloji ve Şeffaflık
-              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-0.5 bg-gradient-to-r from-transparent via-eza-blue to-transparent"></span>
+              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 md:w-16 h-0.5 bg-gradient-to-r from-transparent via-eza-blue to-transparent"></span>
             </h2>
           </div>
         </FadeIn>
 
         <FadeIn delay={100}>
-          <div className="bg-gradient-to-br from-eza-gray to-white rounded-2xl p-8 md:p-12 border border-gray-200 shadow-sm">
-            <div className="space-y-6 text-eza-text-secondary leading-relaxed">
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-lg bg-eza-blue/10 flex items-center justify-center flex-shrink-0 mt-1">
-                  <Icon name="CheckCircle" className="text-eza-blue" size={16} />
+          <div className="bg-gradient-to-br from-eza-gray to-white rounded-2xl p-4 md:p-8 lg:p-12 border border-gray-200 shadow-sm">
+            <div className="space-y-4 md:space-y-6 text-eza-text-secondary leading-relaxed">
+              <div className="flex items-start gap-3 md:gap-4">
+                <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-eza-blue/10 flex items-center justify-center flex-shrink-0 mt-1">
+                  <Icon name="CheckCircle" className="text-eza-blue" size={14} />
                 </div>
-                <p>
+                <p className="text-sm md:text-base">
                   <strong className="text-eza-text">Testler günlük/haftalık/aylık periyotlarda arka planda çalışır.</strong>
                 </p>
               </div>
               
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-lg bg-eza-blue/10 flex items-center justify-center flex-shrink-0 mt-1">
-                  <Icon name="CheckCircle" className="text-eza-blue" size={16} />
+              <div className="flex items-start gap-3 md:gap-4">
+                <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-eza-blue/10 flex items-center justify-center flex-shrink-0 mt-1">
+                  <Icon name="CheckCircle" className="text-eza-blue" size={14} />
                 </div>
-                <p>
+                <p className="text-sm md:text-base">
                   <strong className="text-eza-text">Sonuçlar snapshot olarak yayınlanır ve yayınlandıktan sonra değişmez.</strong>
                 </p>
               </div>
               
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-lg bg-eza-blue/10 flex items-center justify-center flex-shrink-0 mt-1">
-                  <Icon name="CheckCircle" className="text-eza-blue" size={16} />
+              <div className="flex items-start gap-3 md:gap-4">
+                <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-eza-blue/10 flex items-center justify-center flex-shrink-0 mt-1">
+                  <Icon name="CheckCircle" className="text-eza-blue" size={14} />
                 </div>
-                <p>
+                <p className="text-sm md:text-base">
                   <strong className="text-eza-text">Bu sayfa, anlık hesaplama tetiklemez; yayınlanmış snapshot verisini gösterir.</strong>
                 </p>
               </div>
               
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 rounded-lg bg-eza-blue/10 flex items-center justify-center flex-shrink-0 mt-1">
-                  <Icon name="CheckCircle" className="text-eza-blue" size={16} />
+              <div className="flex items-start gap-3 md:gap-4">
+                <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-eza-blue/10 flex items-center justify-center flex-shrink-0 mt-1">
+                  <Icon name="CheckCircle" className="text-eza-blue" size={14} />
                 </div>
-                <p>
+                <p className="text-sm md:text-base">
                   <strong className="text-eza-text">Amaç: güvenlik ve etik performansının izlenebilir ve denetlenebilir olması.</strong>
                 </p>
               </div>
@@ -636,14 +636,14 @@ function MethodologyTransparency() {
 // Güvenlik Notu Component
 function SecurityNote() {
   return (
-    <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 border border-amber-200 shadow-sm">
-      <div className="flex items-start gap-4">
-        <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0">
-          <Icon name="AlertTriangle" className="text-amber-600" size={20} />
+    <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-4 md:p-8 border border-amber-200 shadow-sm">
+      <div className="flex items-start gap-3 md:gap-4">
+        <div className="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0">
+          <Icon name="AlertTriangle" className="text-amber-600" size={18} />
         </div>
-        <div>
-          <h3 className="text-lg font-semibold text-amber-900 mb-2">Güvenlik Notu</h3>
-          <p className="text-sm text-amber-800 leading-relaxed">
+        <div className="min-w-0 flex-1">
+          <h3 className="text-base md:text-lg font-semibold text-amber-900 mb-2">Güvenlik Notu</h3>
+          <p className="text-xs md:text-sm text-amber-800 leading-relaxed break-words">
             Not: Güvenlik ve kötüye kullanım riskleri nedeniyle test senaryolarının tam içeriği kamuya açık değildir. 
             Regülasyon otoriteleri ve kurumsal denetimler için detaylı raporlar, denetimli ve kontrollü erişim modeliyle paylaşılabilir.
           </p>
@@ -656,16 +656,16 @@ function SecurityNote() {
 // Kurumsal Açıklama Component
 function WhyTestsMatter() {
   return (
-    <Section className="bg-white">
-      <div className="max-w-4xl mx-auto">
+    <Section className="bg-white !pt-6 md:!pt-16 !pb-6 md:!pb-24 !min-h-0 overflow-x-hidden">
+      <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8 w-full">
         <FadeIn>
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-eza-text mb-4 relative pb-4">
+          <div className="text-center mb-4 md:mb-8">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-eza-text mb-3 md:mb-4 relative pb-3 md:pb-4">
               Neden Bu Testler Önemli?
-              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-0.5 bg-gradient-to-r from-transparent via-eza-blue to-transparent"></span>
+              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 md:w-16 h-0.5 bg-gradient-to-r from-transparent via-eza-blue to-transparent"></span>
             </h2>
           </div>
-          <div className="space-y-4 text-eza-text-secondary leading-relaxed text-lg">
+          <div className="space-y-3 md:space-y-4 text-eza-text-secondary leading-relaxed text-sm md:text-lg">
             <p>
               Yapay zekâ sistemleri; metin üretimi, karar destek, medya analizi ve otonom süreçlerde kritik roller üstlenmektedir.
             </p>
@@ -718,29 +718,29 @@ function RegulationCompliance() {
   ];
 
   return (
-    <Section className="bg-eza-gray">
-      <div className="max-w-7xl mx-auto">
+    <Section className="bg-eza-gray !pt-6 md:!pt-16 !pb-6 md:!pb-24 !min-h-0 overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 w-full">
         <FadeIn>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-eza-text mb-4 relative pb-4">
+          <div className="text-center mb-6 md:mb-12">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-eza-text mb-3 md:mb-4 relative pb-3 md:pb-4">
               Regülasyon Uyumluluğu
-              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-0.5 bg-gradient-to-r from-transparent via-eza-blue to-transparent"></span>
+              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 md:w-16 h-0.5 bg-gradient-to-r from-transparent via-eza-blue to-transparent"></span>
             </h2>
-            <p className="text-lg text-eza-text-secondary max-w-2xl mx-auto">
+            <p className="text-sm md:text-lg text-eza-text-secondary max-w-2xl mx-auto">
               EZA, dünya çapında kabul görmüş yapay zekâ güvenlik standartlarıyla tam uyumludur.
             </p>
           </div>
         </FadeIn>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
           {regulations.map((regulation, index) => (
             <FadeIn key={regulation.name} delay={index * 100}>
-              <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-[0_4px_30px_rgba(0,0,0,0.04)] hover:shadow-lg hover:scale-105 transition-all duration-300">
-                <div className="w-12 h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center mb-4">
-                  <Icon name={regulation.icon} className="text-eza-blue" size={24} />
+              <div className="bg-white rounded-2xl p-4 md:p-6 border border-gray-200 shadow-[0_4px_30px_rgba(0,0,0,0.04)] hover:shadow-lg hover:scale-105 transition-all duration-300">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center mb-3 md:mb-4">
+                  <Icon name={regulation.icon} className="text-eza-blue" size={20} />
                 </div>
-                <h3 className="text-xl font-bold text-eza-text mb-2">{regulation.name}</h3>
-                <p className="text-sm text-eza-text-secondary">{regulation.description}</p>
+                <h3 className="text-base md:text-xl font-bold text-eza-text mb-2">{regulation.name}</h3>
+                <p className="text-xs md:text-sm text-eza-text-secondary">{regulation.description}</p>
               </div>
             </FadeIn>
           ))}
@@ -753,36 +753,36 @@ function RegulationCompliance() {
 // Test Ekosistemi Mimarisi Component
 function TestEcosystemArchitecture() {
   return (
-    <Section className="bg-white">
-      <div className="max-w-4xl mx-auto">
+    <Section className="bg-white !pt-6 md:!pt-16 !pb-6 md:!pb-24 !min-h-0 overflow-x-hidden">
+      <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8 w-full">
         <FadeIn>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-eza-text mb-4 relative pb-4">
+          <div className="text-center mb-6 md:mb-12">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-eza-text mb-3 md:mb-4 relative pb-3 md:pb-4">
               EZA Test Ekosistemi Mimarisi
-              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-0.5 bg-gradient-to-r from-transparent via-eza-blue to-transparent"></span>
+              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 md:w-16 h-0.5 bg-gradient-to-r from-transparent via-eza-blue to-transparent"></span>
             </h2>
-            <p className="text-lg text-eza-text-secondary max-w-2xl mx-auto">
+            <p className="text-sm md:text-lg text-eza-text-secondary max-w-2xl mx-auto">
               EZA'nın test altyapısının mimari akışı
             </p>
           </div>
         </FadeIn>
 
         <FadeIn delay={100}>
-          <div className="bg-[#f8f9fb] rounded-xl p-8 md:p-12 border border-gray-200 shadow-[0_4px_30px_rgba(0,0,0,0.04)] font-mono">
-            <div className="space-y-4 text-eza-text text-center">
-              <div className="text-lg font-semibold">User Input</div>
+          <div className="bg-[#f8f9fb] rounded-xl p-4 md:p-8 lg:p-12 border border-gray-200 shadow-[0_4px_30px_rgba(0,0,0,0.04)] font-mono overflow-x-auto">
+            <div className="space-y-3 md:space-y-4 text-eza-text text-center">
+              <div className="text-sm md:text-lg font-semibold break-words">User Input</div>
               <div className="text-eza-blue">↓</div>
-              <div className="text-lg font-semibold">Input Analyzer</div>
+              <div className="text-sm md:text-lg font-semibold break-words">Input Analyzer</div>
               <div className="text-eza-blue">↓</div>
-              <div className="text-lg font-semibold">Model Router → LLM1 / LLM2 / LLM3</div>
+              <div className="text-sm md:text-lg font-semibold break-words">Model Router → LLM1 / LLM2 / LLM3</div>
               <div className="text-eza-blue">↓</div>
-              <div className="text-lg font-semibold">Output Analyzer</div>
+              <div className="text-sm md:text-lg font-semibold break-words">Output Analyzer</div>
               <div className="text-eza-blue">↓</div>
-              <div className="text-lg font-semibold">Policy Engine (F1-F3, Z1-Z3)</div>
+              <div className="text-sm md:text-lg font-semibold break-words">Policy Engine (F1-F3, Z1-Z3)</div>
               <div className="text-eza-blue">↓</div>
-              <div className="text-lg font-semibold">Behavioral Engine</div>
+              <div className="text-sm md:text-lg font-semibold break-words">Behavioral Engine</div>
               <div className="text-eza-blue">↓</div>
-              <div className="text-lg font-semibold text-eza-green">Safe & Aligned Answer</div>
+              <div className="text-sm md:text-lg font-semibold text-eza-green break-words">Safe & Aligned Answer</div>
             </div>
           </div>
         </FadeIn>
@@ -822,35 +822,35 @@ function TestFrequencyCalendar() {
   ];
 
   return (
-    <Section className="bg-[#f5f9ff]">
-      <div className="max-w-7xl mx-auto">
+    <Section className="bg-[#f5f9ff] !pt-6 md:!pt-16 !pb-6 md:!pb-24 !min-h-0 overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 w-full">
         <FadeIn>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-eza-text mb-4 relative pb-4">
+          <div className="text-center mb-6 md:mb-12">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-eza-text mb-3 md:mb-4 relative pb-3 md:pb-4">
               Profesyonel Test Periyotları
-              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-0.5 bg-gradient-to-r from-transparent via-eza-blue to-transparent"></span>
+              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 md:w-16 h-0.5 bg-gradient-to-r from-transparent via-eza-blue to-transparent"></span>
             </h2>
-            <p className="text-lg text-eza-text-secondary max-w-2xl mx-auto">
+            <p className="text-sm md:text-lg text-eza-text-secondary max-w-2xl mx-auto">
               EZA test ekosistemi, farklı periyotlarda çalışan kapsamlı test süitlerinden oluşur.
             </p>
           </div>
         </FadeIn>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-8">
           {frequencies.map((frequency, index) => (
             <FadeIn key={frequency.period} delay={index * 100}>
-              <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-[0_4px_30px_rgba(0,0,0,0.04)]">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center">
-                    <Icon name={frequency.icon} className="text-eza-blue" size={24} />
+              <div className="bg-white rounded-2xl p-4 md:p-8 border border-gray-200 shadow-[0_4px_30px_rgba(0,0,0,0.04)]">
+                <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center flex-shrink-0">
+                    <Icon name={frequency.icon} className="text-eza-blue" size={20} />
                   </div>
-                  <h3 className="text-2xl font-bold text-eza-text">{frequency.period}</h3>
+                  <h3 className="text-lg md:text-2xl font-bold text-eza-text break-words">{frequency.period}</h3>
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-3 md:space-y-4">
                   {frequency.tests.map((test) => (
-                    <div key={test.name} className="pb-4 border-b border-gray-100 last:border-0">
-                      <h4 className="font-semibold text-eza-text mb-1">{test.name}</h4>
-                      <p className="text-sm text-eza-text-secondary">{test.description}</p>
+                    <div key={test.name} className="pb-3 md:pb-4 border-b border-gray-100 last:border-0">
+                      <h4 className="font-semibold text-eza-text mb-1 text-sm md:text-base">{test.name}</h4>
+                      <p className="text-xs md:text-sm text-eza-text-secondary">{test.description}</p>
                     </div>
                   ))}
                 </div>
@@ -882,19 +882,19 @@ export default function TestSuitePage() {
     if (STATIC_TEST_DATA && STATIC_TEST_DATA.overall && STATIC_TEST_DATA.test_suites) {
       try {
         const transformed = transformApiDataToUI(STATIC_TEST_DATA);
-        setData(transformed);
+              setData(transformed);
         setHasError(false);
-      } catch (transformError) {
+          } catch (transformError) {
         // Controlled error logging - no console.error for invalid data structure
         if (transformError instanceof Error && !transformError.message.includes("invalid data structure")) {
           console.error("Error transforming static data:", transformError);
         }
-        setHasError(true);
-      }
-    } else {
-      setHasError(true);
-    }
-    setIsLoading(false);
+              setHasError(true);
+          }
+        } else {
+            setHasError(true);
+          }
+          setIsLoading(false);
   }, []);
 
   const suites = data?.suites || [];
@@ -909,21 +909,21 @@ export default function TestSuitePage() {
     <>
       {/* Premium Hero Section */}
       <div 
-        className="py-12 md:py-20 lg:py-24"
+        className="py-8 md:py-20 lg:py-24 overflow-x-hidden"
         style={{
           background: "linear-gradient(135deg, #f7faff 0%, #eef4ff 100%)",
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 w-full">
           <FadeIn>
-            <div className="text-center mb-12">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-eza-text mb-6 leading-tight">
+            <div className="text-center mb-6 md:mb-12">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-eza-text mb-3 md:mb-6 leading-tight">
                 Test ve Güvenlik Karşılaştırmaları
               </h1>
-              <p className="text-xl md:text-2xl text-eza-text-secondary max-w-4xl mx-auto leading-relaxed mb-4">
+              <p className="text-sm md:text-xl lg:text-2xl text-eza-text-secondary max-w-4xl mx-auto leading-relaxed mb-3 md:mb-4">
                 EZA'nın etik zekası periyodik olarak test edilir, ölçülür ve doğrulanır.
               </p>
-              <p className="text-base text-eza-text-secondary/80 max-w-3xl mx-auto italic">
+              <p className="text-xs md:text-base text-eza-text-secondary/80 max-w-3xl mx-auto italic">
                 Bu sayfadaki veriler anlık değildir; periyodik olarak yayınlanan snapshot sonuçlarıdır.
               </p>
             </div>
@@ -931,13 +931,13 @@ export default function TestSuitePage() {
 
           {/* Hata Banner */}
           {!isLoading && hasError && (
-            <div className="mb-6">
-              <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 max-w-2xl mx-auto">
-                <div className="flex items-center gap-3">
-                  <Icon name="Info" className="text-blue-600" size={24} />
+            <div className="mb-4 md:mb-6">
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 md:p-6 max-w-2xl mx-auto">
+                <div className="flex items-center gap-2 md:gap-3">
+                  <Icon name="Info" className="text-blue-600 flex-shrink-0" size={20} />
                   <div>
-                    <p className="text-blue-800 font-semibold mb-1">Veriler şu anda güncelleniyor</p>
-                    <p className="text-sm text-blue-700">Lütfen daha sonra tekrar deneyin.</p>
+                    <p className="text-xs md:text-sm text-blue-800 font-semibold mb-1">Veriler şu anda güncelleniyor</p>
+                    <p className="text-xs text-blue-700">Lütfen daha sonra tekrar deneyin.</p>
                   </div>
                 </div>
               </div>
@@ -962,11 +962,11 @@ export default function TestSuitePage() {
       <WhyTestsMatter />
 
       {/* Test Suite Özeti */}
-      <Section className="bg-eza-gray">
-        <div className="max-w-7xl mx-auto">
+      <Section className="bg-eza-gray !pt-6 md:!pt-16 !pb-6 md:!pb-24 !min-h-0 overflow-x-hidden">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 w-full">
           <FadeIn>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-eza-text mb-4 relative pb-4">
+            <div className="text-center mb-6 md:mb-12">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-eza-text mb-3 md:mb-4 relative pb-3 md:pb-4">
                 Test Suite Özeti
                 <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-0.5 bg-gradient-to-r from-transparent via-eza-blue to-transparent"></span>
               </h2>
@@ -993,11 +993,11 @@ export default function TestSuitePage() {
       <TestFrequencyCalendar />
 
       {/* Önemli Başarılar */}
-      <Section className="bg-white">
-        <div className="max-w-7xl mx-auto">
+      <Section className="bg-white !pt-6 md:!pt-16 !pb-6 md:!pb-24 !min-h-0 overflow-x-hidden">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 w-full">
           <FadeIn>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-eza-text mb-4 relative pb-4">
+            <div className="text-center mb-6 md:mb-12">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-eza-text mb-3 md:mb-4 relative pb-3 md:pb-4">
                 Önemli Başarılar
                 <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-0.5 bg-gradient-to-r from-transparent via-eza-blue to-transparent"></span>
               </h2>
@@ -1012,20 +1012,20 @@ export default function TestSuitePage() {
       </Section>
 
       {/* Test Frekansı ve Regülasyon */}
-      <Section className="bg-eza-gray">
-        <div className="max-w-4xl mx-auto">
+      <Section className="bg-eza-gray !pt-6 md:!pt-16 !pb-6 md:!pb-24 !min-h-0 overflow-x-hidden">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8 w-full">
           <FadeIn>
-            <div className="bg-gradient-to-br from-eza-blue/5 via-white to-eza-blue/5 rounded-2xl p-8 md:p-12 border border-eza-blue/10 shadow-[0_4px_30px_rgba(0,0,0,0.04)]">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center">
-                  <Icon name="Clock" className="text-eza-blue" size={24} />
+            <div className="bg-gradient-to-br from-eza-blue/5 via-white to-eza-blue/5 rounded-2xl p-4 md:p-8 lg:p-12 border border-eza-blue/10 shadow-[0_4px_30px_rgba(0,0,0,0.04)]">
+              <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center flex-shrink-0">
+                  <Icon name="Clock" className="text-eza-blue" size={20} />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-eza-text">
+                <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-eza-text break-words">
                   Test Frekansı ve Regülasyon
                 </h2>
               </div>
               
-              <div className="space-y-4 text-eza-text-secondary leading-relaxed">
+              <div className="space-y-3 md:space-y-4 text-eza-text-secondary leading-relaxed text-sm md:text-base">
                 <p>
                   Testler belirli aralıklarla (örneğin haftalık) ve kritik güncellemelerde otomatik olarak çalıştırılır. 
                   Test sonuçları, regülasyon kurumları ve kurumsal müşteriler için şeffaflık ve güven sağlamayı amaçlar.
@@ -1052,8 +1052,8 @@ export default function TestSuitePage() {
       <MethodologyTransparency />
 
       {/* Güvenlik Notu */}
-      <Section className="bg-eza-gray">
-        <div className="max-w-4xl mx-auto">
+      <Section className="bg-eza-gray !pt-6 md:!pt-16 !pb-6 md:!pb-24 !min-h-0 overflow-x-hidden">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8 w-full">
           <FadeIn>
             <SecurityNote />
           </FadeIn>
