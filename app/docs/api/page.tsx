@@ -49,22 +49,22 @@ const errorCodes = [
 export default function APIDocumentationPage() {
   return (
     <>
-      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-4">
+      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-8 md:py-20 overflow-x-hidden">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8 text-center w-full">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-3 md:mb-4">
             <Icon name="Code" size={16} />
             API Dokümantasyonu
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-eza-dark mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-eza-dark mb-3 md:mb-6">
             EZA-Core API Referansı
           </h1>
-          <p className="text-xl text-eza-text-secondary mb-4">
+          <p className="text-sm md:text-xl text-eza-text-secondary mb-3 md:mb-4">
             EZA-Core API, organizasyon bazlı etik analiz entegrasyonları için tasarlanmıştır. Tüm API erişimleri, EZA Platform üzerinden oluşturulan organizasyonlar ve Proxy katmanı üzerinden gerçekleştirilir.
           </p>
-          <p className="text-base text-eza-text-secondary/80 mb-2">
+          <p className="text-xs md:text-base text-eza-text-secondary/80 mb-2">
             EZA-Core API, v5 mimarisi üzerine inşa edilmiştir. Tüm güncel entegrasyonlar /api/v5 namespace'i üzerinden gerçekleştirilir.
           </p>
-          <p className="text-base text-eza-text-secondary/80">
+          <p className="text-xs md:text-base text-eza-text-secondary/80">
             Bu dokümantasyon, kurumsal entegrasyonlar için geçerli olan API yüzeyini kapsar.
           </p>
         </div>
@@ -75,7 +75,7 @@ export default function APIDocumentationPage() {
           {/* API Overview */}
           <FadeIn>
             <div className="mb-16">
-              <h2 className="text-3xl font-bold text-eza-text mb-6 flex items-center gap-3">
+              <h2 className="text-3xl font-bold text-eza-text mb-3 md:mb-6 flex items-center gap-3">
                 <div className="h-1 w-12 bg-gradient-to-r from-eza-blue to-blue-400 rounded-full"></div>
                 API Genel Bakış
               </h2>
@@ -118,7 +118,7 @@ export default function APIDocumentationPage() {
           {/* Authentication */}
           <FadeIn delay={100}>
             <div className="mb-16">
-              <h2 className="text-3xl font-bold text-eza-text mb-6 flex items-center gap-3">
+              <h2 className="text-3xl font-bold text-eza-text mb-3 md:mb-6 flex items-center gap-3">
                 <div className="h-1 w-12 bg-gradient-to-r from-eza-blue to-blue-400 rounded-full"></div>
                 Authentication
               </h2>
@@ -128,8 +128,8 @@ export default function APIDocumentationPage() {
                     key={index}
                     className="bg-white rounded-xl border border-gray-200 p-6 hover:border-eza-blue/30 hover:shadow-lg transition-all"
                   >
-                    <h3 className="text-xl font-semibold text-eza-text mb-3">{method.title}</h3>
-                    <p className="text-eza-text-secondary mb-4">{method.description}</p>
+                    <h3 className="text-sm md:text-xl font-semibold text-eza-text mb-3">{method.title}</h3>
+                    <p className="text-eza-text-secondary mb-3 md:mb-4">{method.description}</p>
                     {method.example && (
                       <code className="block bg-eza-gray/50 rounded-lg p-3 text-xs font-mono text-eza-text break-all">
                         {method.example}
@@ -144,7 +144,7 @@ export default function APIDocumentationPage() {
           {/* API Endpoints */}
           <FadeIn delay={200}>
             <div className="mb-16">
-              <h2 className="text-3xl font-bold text-eza-text mb-6 flex items-center gap-3">
+              <h2 className="text-3xl font-bold text-eza-text mb-3 md:mb-6 flex items-center gap-3">
                 <div className="h-1 w-12 bg-gradient-to-r from-eza-blue to-blue-400 rounded-full"></div>
                 Proxy API
               </h2>
@@ -153,7 +153,7 @@ export default function APIDocumentationPage() {
                   <div key={category.category} className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
                     <h3 className="text-2xl font-bold text-eza-text mb-3">{category.category}</h3>
                     {category.description && (
-                      <p className="text-eza-text-secondary mb-4">{category.description}</p>
+                      <p className="text-eza-text-secondary mb-3 md:mb-4">{category.description}</p>
                     )}
                     <div className="space-y-6">
                       {category.endpoints.map((endpoint, epIndex) => (
@@ -200,7 +200,7 @@ export default function APIDocumentationPage() {
           {/* Rate Limits */}
           <FadeIn delay={300}>
             <div className="mb-16">
-              <h2 className="text-3xl font-bold text-eza-text mb-6 flex items-center gap-3">
+              <h2 className="text-3xl font-bold text-eza-text mb-3 md:mb-6 flex items-center gap-3">
                 <div className="h-1 w-12 bg-gradient-to-r from-eza-blue to-blue-400 rounded-full"></div>
                 Rate Limits
               </h2>
@@ -231,7 +231,7 @@ export default function APIDocumentationPage() {
           {/* Error Handling */}
           <FadeIn delay={400}>
             <div className="mb-16">
-              <h2 className="text-3xl font-bold text-eza-text mb-6 flex items-center gap-3">
+              <h2 className="text-3xl font-bold text-eza-text mb-3 md:mb-6 flex items-center gap-3">
                 <div className="h-1 w-12 bg-gradient-to-r from-eza-blue to-blue-400 rounded-full"></div>
                 Hata Yönetimi
               </h2>
@@ -257,8 +257,8 @@ export default function APIDocumentationPage() {
           {/* CTA */}
           <FadeIn delay={500}>
             <div className="bg-gradient-to-r from-eza-blue to-blue-600 rounded-2xl p-12 text-center text-white">
-              <h2 className="text-3xl font-bold mb-4">Hazır mısınız?</h2>
-              <p className="text-xl mb-8 text-blue-100">
+              <h2 className="text-3xl font-bold mb-3 md:mb-4">Hazır mısınız?</h2>
+              <p className="text-sm md:text-xl mb-8 text-blue-100">
                 EZA'yı kurumsal kullanım için entegre etmek üzere organizasyonunuzu oluşturun ve Proxy entegrasyonunu başlatın.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
