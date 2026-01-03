@@ -73,6 +73,9 @@ export default function Header() {
               }}
             >
               <span className="text-xl font-semibold text-eza-text">EZA</span>
+              <span className="sm:hidden text-xs text-eza-text-secondary/70 font-normal">
+                etik zeka altyapısı
+              </span>
             </Link>
             <span className="hidden sm:inline-block px-2.5 py-0.5 bg-eza-blue/10 text-eza-blue text-xs font-medium rounded-full border border-eza-blue/20">
               Etik Zeka Altyapısı
