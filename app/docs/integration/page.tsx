@@ -163,12 +163,12 @@ export default function IntegrationGuidePage() {
                       <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-eza-blue/10 flex items-center justify-center flex-shrink-0">
                         <span className="text-lg md:text-xl font-bold text-eza-blue">{step.step}</span>
                       </div>
-                      <Icon name={step.icon} className="text-eza-blue" size={20} />
+                      <Icon name={step.icon} className="text-eza-blue flex-shrink-0" size={18} />
                     </div>
-                    <h3 className="text-base md:text-xl font-semibold text-eza-text mb-2">{step.title}</h3>
-                    <p className="text-xs md:text-sm text-eza-text-secondary mb-2">{step.description}</p>
+                    <h3 className="text-base md:text-xl font-semibold text-eza-text mb-2 break-words">{step.title}</h3>
+                    <p className="text-xs md:text-sm text-eza-text-secondary mb-2 break-words leading-relaxed">{step.description}</p>
                     {step.note && (
-                      <p className="text-xs text-eza-text-secondary/70 italic border-t border-gray-100 pt-2 mt-2">
+                      <p className="text-xs text-eza-text-secondary/70 italic border-t border-gray-100 pt-2 mt-2 break-words leading-relaxed">
                         {step.note}
                       </p>
                     )}
@@ -206,33 +206,33 @@ export default function IntegrationGuidePage() {
                     className="bg-white rounded-2xl border border-gray-200 p-4 md:p-8 shadow-sm hover:shadow-lg transition-all"
                   >
                     <div className="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
-                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-eza-blue/10 flex items-center justify-center flex-shrink-0">
-                        <Icon name={method.icon} className="text-eza-blue" size={24} />
+                      <div className="w-10 h-10 md:w-12 md:h-14 rounded-xl bg-eza-blue/10 flex items-center justify-center flex-shrink-0">
+                        <Icon name={method.icon} className="text-eza-blue" size={20} />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl md:text-2xl font-bold text-eza-text mb-2">{method.title}</h3>
-                        <p className="text-sm md:text-base text-eza-text-secondary mb-2">{method.description}</p>
-                        <p className="text-xs md:text-sm text-eza-text-secondary/80 italic">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-eza-text mb-2 break-words">{method.title}</h3>
+                        <p className="text-xs md:text-sm lg:text-base text-eza-text-secondary mb-2 break-words leading-relaxed">{method.description}</p>
+                        <p className="text-xs md:text-sm text-eza-text-secondary/80 italic break-words">
                           API kullanımı, organizasyon ve yetkilendirme kuralları çerçevesinde izlenir.
                         </p>
                       </div>
                     </div>
                     <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-                      <div>
+                      <div className="min-w-0">
                         <h4 className="font-semibold text-eza-text mb-2 md:mb-3 text-sm md:text-base">Özellikler</h4>
                         <ul className="space-y-2">
                           {method.features.map((feature, fIndex) => (
-                            <li key={fIndex} className="flex items-center gap-2 text-xs md:text-sm text-eza-text-secondary">
-                              <Icon name="Check" size={14} className="text-eza-blue flex-shrink-0" />
-                              {feature}
+                            <li key={fIndex} className="flex items-start gap-2 text-xs md:text-sm text-eza-text-secondary break-words">
+                              <Icon name="Check" size={14} className="text-eza-blue flex-shrink-0 mt-0.5" />
+                              <span>{feature}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <h4 className="font-semibold text-eza-text mb-2 md:mb-3 text-sm md:text-base">Örnek Kod</h4>
-                        <pre className="bg-eza-gray/50 rounded-lg p-3 md:p-4 text-xs font-mono text-eza-text overflow-x-auto">
-                          <code>{method.codeExample}</code>
+                        <pre className="bg-eza-gray/50 rounded-lg p-2 md:p-3 lg:p-4 text-xs font-mono text-eza-text overflow-x-auto w-full">
+                          <code className="break-all whitespace-pre-wrap">{method.codeExample}</code>
                         </pre>
                       </div>
                     </div>

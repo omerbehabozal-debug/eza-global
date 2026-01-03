@@ -57,13 +57,13 @@ function ComplianceRow({ item, index }: { item: ComplianceItem; index: number })
         animationFillMode: "forwards",
       }}
     >
-      <td className="px-6 py-5 text-sm font-semibold text-eza-text">
+      <td className="px-3 py-3 md:px-6 md:py-5 text-xs md:text-sm font-semibold text-eza-text whitespace-nowrap">
         {item.regulation}
       </td>
-      <td className="px-6 py-5 text-sm text-eza-text-secondary leading-relaxed">
+      <td className="px-3 py-3 md:px-6 md:py-5 text-xs md:text-sm text-eza-text-secondary leading-relaxed break-words min-w-[200px]">
         {item.requirement}
       </td>
-      <td className="px-6 py-5 text-sm text-eza-text-secondary leading-relaxed">
+      <td className="px-3 py-3 md:px-6 md:py-5 text-xs md:text-sm text-eza-text-secondary leading-relaxed break-words min-w-[200px]">
         {item.eza}
       </td>
     </tr>
@@ -72,48 +72,50 @@ function ComplianceRow({ item, index }: { item: ComplianceItem; index: number })
 
 export default function ComplianceMatrix() {
   return (
-    <Section className="bg-white">
-      <div className="max-w-6xl mx-auto">
+    <Section className="bg-white !pt-6 md:!pt-16 !pb-6 md:!pb-24 !min-h-0 overflow-x-hidden">
+      <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-8 w-full">
         <FadeIn>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-eza-text mb-4 relative pb-4">
+          <div className="text-center mb-6 md:mb-12">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-eza-text mb-3 md:mb-4 relative pb-3 md:pb-4">
               Regülasyon Uyum Matrisi
               <span 
                 className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5"
                 style={{
-                  width: "80px",
+                  width: "60px",
                   background: "linear-gradient(90deg, #5b8bff, #8fc5ff)",
                 }}
               ></span>
             </h2>
-            <p className="text-lg text-eza-text-secondary max-w-3xl mx-auto leading-relaxed">
+            <p className="text-sm md:text-lg text-eza-text-secondary max-w-3xl mx-auto leading-relaxed">
               EZA'nın çekirdek güvenlik mimarisi, uluslararası yapay zekâ standartları ve yerel regülasyonların gerektirdiği güvenlik, yönetişim ve risk yönetimi süreçleriyle doğrudan eşleşecek şekilde tasarlanmıştır.
             </p>
           </div>
         </FadeIn>
 
         <FadeIn delay={100}>
-          <div className="overflow-x-auto rounded-2xl shadow-xl border border-gray-200/70 bg-white">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-gradient-to-r from-eza-blue/5 to-eza-blue/10 border-b border-gray-200">
-                  <th className="px-6 py-4 text-left text-sm font-bold text-eza-text uppercase tracking-wider">
-                    Regülasyon / Standart
-                  </th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-eza-text uppercase tracking-wider">
-                    Gereksinim
-                  </th>
-                  <th className="px-6 py-4 text-left text-sm font-bold text-eza-text uppercase tracking-wider">
-                    EZA Modülü / Motor
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {complianceData.map((item, index) => (
-                  <ComplianceRow key={item.regulation} item={item} index={index} />
-                ))}
-              </tbody>
-            </table>
+          <div className="overflow-x-auto rounded-2xl shadow-xl border border-gray-200/70 bg-white -mx-3 sm:-mx-4 lg:mx-0">
+            <div className="min-w-[600px]">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gradient-to-r from-eza-blue/5 to-eza-blue/10 border-b border-gray-200">
+                    <th className="px-3 py-3 md:px-6 md:py-4 text-left text-xs md:text-sm font-bold text-eza-text uppercase tracking-wider whitespace-nowrap">
+                      Regülasyon / Standart
+                    </th>
+                    <th className="px-3 py-3 md:px-6 md:py-4 text-left text-xs md:text-sm font-bold text-eza-text uppercase tracking-wider">
+                      Gereksinim
+                    </th>
+                    <th className="px-3 py-3 md:px-6 md:py-4 text-left text-xs md:text-sm font-bold text-eza-text uppercase tracking-wider">
+                      EZA Modülü / Motor
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {complianceData.map((item, index) => (
+                    <ComplianceRow key={item.regulation} item={item} index={index} />
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </FadeIn>
       </div>
