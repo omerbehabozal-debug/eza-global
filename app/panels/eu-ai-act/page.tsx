@@ -32,10 +32,10 @@ export default function EUAIActPanelPage() {
               <Icon name="Scale" size={16} />
               EZA Panels
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-eza-text mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-eza-text mb-4 md:mb-6">
               EU AI Act Compliance Panel
             </h1>
-            <p className="text-xl text-eza-text-secondary">
+            <p className="text-base md:text-xl text-eza-text-secondary">
               Avrupa Birliği Yapay Zekâ Yasasına uyum sağlamak isteyen şirketler için özel panel.
             </p>
           </FadeIn>

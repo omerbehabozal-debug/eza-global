@@ -52,10 +52,10 @@ export default function RegulatorPanelPage() {
               <Icon name="Building2" size={16} />
               EZA Panels
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-eza-text mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-eza-text mb-4 md:mb-6">
               Regulator Oversight Panel
             </h1>
-            <p className="text-xl text-eza-text-secondary mb-4">
+            <p className="text-base md:text-xl text-eza-text-secondary mb-3 md:mb-4">
               Küresel ölçekte yapay zekâ sistemleri için içeriksiz, müdahalesiz ve denetlenebilir etik gözetim arayüzü.
             </p>
             <p className="text-lg text-eza-text-secondary/80 max-w-2xl mx-auto">

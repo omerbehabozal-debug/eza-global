@@ -169,18 +169,18 @@ export default function TestSafetyBenchmarksPage() {
     <>
       {/* Hero Section */}
       <div 
-        className="py-24 md:py-32"
+        className="py-12 md:py-20 lg:py-24"
         style={{
           background: "linear-gradient(135deg, #f7faff 0%, #eef4ff 100%)",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="text-center mb-12">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-eza-text mb-6 leading-tight">
+            <div className="text-center mb-8 md:mb-12">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-eza-text mb-4 md:mb-6 leading-tight">
                 Test ve Güvenlik Karşılaştırmaları
               </h1>
-              <p className="text-xl md:text-2xl text-eza-text-secondary max-w-4xl mx-auto leading-relaxed mb-4">
+              <p className="text-base md:text-xl lg:text-2xl text-eza-text-secondary max-w-4xl mx-auto leading-relaxed mb-3 md:mb-4">
                 EZA'nın etik zekası sürekli olarak test edilir, ölçülür ve doğrulanır.
               </p>
               <p className="text-base text-eza-text-secondary/80 max-w-3xl mx-auto italic">

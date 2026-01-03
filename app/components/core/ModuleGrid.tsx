@@ -40,11 +40,11 @@ export default function ModuleGrid() {
   return (
     <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12" id="modules">
       <FadeIn>
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-semibold text-eza-text mb-4">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-eza-text mb-3 md:mb-4">
             Modüller EZA-Core Üzerinde Çalışır
           </h2>
-          <p className="text-xl text-eza-text-secondary max-w-2xl mx-auto">
+          <p className="text-base md:text-xl text-eza-text-secondary max-w-2xl mx-auto">
             Tüm EZA modülleri ve panelleri, EZA-Core platformunun gücünü kullanır.
           </p>
         </div>

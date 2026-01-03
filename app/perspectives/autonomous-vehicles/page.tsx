@@ -40,13 +40,13 @@ export default function AutonomousVehiclesPage() {
 
   return (
     <>
-      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-20">
+      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-12 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn>
-            <h1 className="text-4xl md:text-5xl font-bold text-eza-text mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-eza-text mb-4 md:mb-6">
               Otonom Araçlar — Etik Gözlem Perspektifi
             </h1>
-            <p className="text-xl text-eza-text-secondary">
+            <p className="text-base md:text-xl text-eza-text-secondary">
               Otonom araç sistemlerinin karar süreçleri, güvenlik öncelikleri ve bağlam üzerinden etik etkiler üretebilir. Bu sayfa, bu etkilerin nasıl değerlendirilebileceğine dair bir etik gözlem perspektifi sunar.
             </p>
           </FadeIn>

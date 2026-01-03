@@ -9,13 +9,13 @@ export const metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-20">
+      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-12 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn>
-            <h1 className="text-4xl md:text-5xl font-bold text-eza-text mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-eza-text mb-4 md:mb-6">
               Gizlilik Politikaları
             </h1>
-            <p className="text-xl text-eza-text-secondary">
+            <p className="text-base md:text-xl text-eza-text-secondary">
               EZA Veri Kullanımı, Gizlilik ve Etik Prensipleri
             </p>
           </FadeIn>
@@ -24,7 +24,7 @@ export default function PrivacyPage() {
 
       <Section className="bg-white">
         <FadeIn delay={100}>
-          <div className="max-w-4xl mx-auto space-y-8 text-lg text-eza-text-secondary leading-relaxed">
+          <div className="max-w-4xl mx-auto space-y-6 md:space-y-8 text-base md:text-lg text-eza-text-secondary leading-relaxed px-4 sm:px-6">
             {/* Giriş */}
             <div>
               <p>
@@ -34,114 +34,114 @@ export default function PrivacyPage() {
 
             {/* 1. EZA'nın Rolü ve Konumlanması */}
             <div>
-              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+              <h2 className="text-xl md:text-2xl font-semibold text-eza-text mb-3 md:mb-4">
                 1. EZA'nın Rolü ve Konumlanması
               </h2>
-              <p className="mb-4">
+              <p className="mb-3 md:mb-4">
                 EZA, yapay zekâ sistemleri tarafından üretilen çıktıları analiz eden, bu çıktılar üzerinden etik etki, risk ve skorlamaları görünür kılan bağımsız bir governance katmanıdır.
               </p>
-              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
+              <div className="bg-eza-gray rounded-lg p-4 md:p-6 space-y-2 md:space-y-3">
                 <p className="font-semibold text-eza-text">EZA:</p>
-                <ul className="space-y-2 ml-6">
+                <ul className="space-y-2 md:space-y-2 ml-4 md:ml-6">
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Kendi başına içerik üretmez</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Mevcut içeriği değiştirmez</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Otomatik sansür veya engelleme uygulamaz</span>
                   </li>
                 </ul>
               </div>
-              <p className="mt-4">
+              <p className="mt-3 md:mt-4">
                 EZA'nın rolü; müdahale eden bir sistem olmak değil, gözlemleyen ve ölçen bir etik referans noktası oluşturmaktır.
               </p>
             </div>
 
             {/* 2. İçeriğe Müdahale Prensibi */}
             <div>
-              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+              <h2 className="text-xl md:text-2xl font-semibold text-eza-text mb-3 md:mb-4">
                 2. İçeriğe Müdahale Prensibi
               </h2>
-              <p className="mb-4">
+              <p className="mb-3 md:mb-4">
                 EZA, analiz ettiği içeriklere otomatik veya zorunlu müdahalede bulunmaz. İçerik engellenmez, sansürlenmez veya yeniden yazılmaz.
               </p>
-              <p className="mb-4">
+              <p className="mb-3 md:mb-4">
                 Ancak kullanıcı açıkça talep ettiğinde:
               </p>
-              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
-                <ul className="space-y-2 ml-6">
+              <div className="bg-eza-gray rounded-lg p-4 md:p-6 space-y-2 md:space-y-3">
+                <ul className="space-y-2 md:space-y-2 ml-4 md:ml-6">
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>İçeriğin bağlamı korunarak</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Zorlayıcı veya yönlendirici olmadan</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Etik iyileştirme önerileri sunulabilir</span>
                   </li>
                 </ul>
               </div>
-              <p className="mt-4">
+              <p className="mt-3 md:mt-4">
                 Bu öneriler isteğe bağlıdır ve nihai karar her zaman kullanıcıya aittir.
               </p>
             </div>
 
             {/* 3. Veri Kullanımı ve Amaç Sınırlaması */}
             <div>
-              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+              <h2 className="text-xl md:text-2xl font-semibold text-eza-text mb-3 md:mb-4">
                 3. Veri Kullanımı ve Amaç Sınırlaması
               </h2>
-              <p className="mb-4">
+              <p className="mb-3 md:mb-4">
                 EZA tarafından analiz edilen tüm veriler:
               </p>
-              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
-                <ul className="space-y-2 ml-6">
+              <div className="bg-eza-gray rounded-lg p-4 md:p-6 space-y-2 md:space-y-3">
+                <ul className="space-y-2 md:space-y-2 ml-4 md:ml-6">
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Yalnızca etik analiz, risk değerlendirmesi ve skorlama amacıyla kullanılır</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Analiz dışında farklı bir amaçla değerlendirilmez</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Reklam, profil çıkarımı veya üçüncü taraf ticari kullanım için işlenmez</span>
                   </li>
                 </ul>
               </div>
-              <p className="mt-4">
+              <p className="mt-3 md:mt-4">
                 Veri işleme faaliyetleri, amaçla sınırlılık ve asgari veri kullanımı prensiplerine dayanır.
               </p>
             </div>
 
             {/* 4. Model Kullanımı ve Üçüncü Taraf Altyapılar */}
             <div>
-              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+              <h2 className="text-xl md:text-2xl font-semibold text-eza-text mb-3 md:mb-4">
                 4. Model Kullanımı ve Üçüncü Taraf Altyapılar
               </h2>
-              <p className="mb-4">
+              <p className="mb-3 md:mb-4">
                 EZA, mevcut ürünlerinde OpenAI, Groq, Mistral gibi üçüncü taraf yapay zekâ modellerini kullanabilir. EZA, bu modellerle rekabet etmeyi hedeflemez ve model üretimi yapmaz.
               </p>
-              <p className="mb-4">
+              <p className="mb-3 md:mb-4">
                 EZA'nın odağı:
               </p>
-              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
-                <ul className="space-y-2 ml-6">
+              <div className="bg-eza-gray rounded-lg p-4 md:p-6 space-y-2 md:space-y-3">
+                <ul className="space-y-2 md:space-y-2 ml-4 md:ml-6">
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Yapay zekâ modellerinin çıktılarının etik etkilerini ölçmek</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Modeller arası karşılaştırılabilir ve denetlenebilir bir yapı oluşturmaktır</span>
                   </li>
                 </ul>
@@ -150,23 +150,23 @@ export default function PrivacyPage() {
 
             {/* 5. Geleceğe Yönelik Mimari Esneklik */}
             <div>
-              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+              <h2 className="text-xl md:text-2xl font-semibold text-eza-text mb-3 md:mb-4">
                 5. Geleceğe Yönelik Mimari Esneklik
               </h2>
-              <p className="mb-4">
+              <p className="mb-3 md:mb-4">
                 EZA'nın mimarisi, farklı yapay zekâ model altyapılarını destekleyebilecek şekilde tasarlanmıştır.
               </p>
-              <p className="mb-4">
+              <p className="mb-3 md:mb-4">
                 Bu yaklaşım:
               </p>
-              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
-                <ul className="space-y-2 ml-6">
+              <div className="bg-eza-gray rounded-lg p-4 md:p-6 space-y-2 md:space-y-3">
+                <ul className="space-y-2 md:space-y-2 ml-4 md:ml-6">
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Belirli bir modele bağımlılığı önler</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Uzun vadede esnek, sürdürülebilir ve genişleyebilir bir yapı sağlar</span>
                   </li>
                 </ul>
@@ -175,49 +175,49 @@ export default function PrivacyPage() {
 
             {/* 6. Regülatör Panelleri ve Anonimleştirme */}
             <div>
-              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+              <h2 className="text-xl md:text-2xl font-semibold text-eza-text mb-3 md:mb-4">
                 6. Regülatör Panelleri ve Anonimleştirme
               </h2>
-              <p className="mb-4">
+              <p className="mb-3 md:mb-4">
                 Regülatör panellerinde görüntülenen tüm veriler:
               </p>
-              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
-                <ul className="space-y-2 ml-6">
+              <div className="bg-eza-gray rounded-lg p-4 md:p-6 space-y-2 md:space-y-3">
+                <ul className="space-y-2 md:space-y-2 ml-4 md:ml-6">
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Anonimleştirilmiş formatta sunulur</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Kişisel veya kurumsal kimlik bilgileri içermez</span>
                   </li>
                 </ul>
               </div>
-              <p className="mt-4">
+              <p className="mt-3 md:mt-4">
                 Bu veriler, yalnızca sistemsel etik görünürlük ve denetim amacıyla paylaşılır.
               </p>
             </div>
 
             {/* 7. Veri Güvenliği ve Gizlilik */}
             <div>
-              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+              <h2 className="text-xl md:text-2xl font-semibold text-eza-text mb-3 md:mb-4">
                 7. Veri Güvenliği ve Gizlilik
               </h2>
-              <p className="mb-4">
+              <p className="mb-3 md:mb-4">
                 EZA:
               </p>
-              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
-                <ul className="space-y-2 ml-6">
+              <div className="bg-eza-gray rounded-lg p-4 md:p-6 space-y-2 md:space-y-3">
+                <ul className="space-y-2 md:space-y-2 ml-4 md:ml-6">
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Verilerin gizliliğini ve bütünlüğünü korumayı temel ilke olarak benimser</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Yetkisiz erişime karşı teknik ve organizasyonel önlemler uygular</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Verileri yalnızca yetkili kullanıcılar ve tanımlı roller kapsamında erişilebilir kılar</span>
                   </li>
                 </ul>
@@ -226,36 +226,36 @@ export default function PrivacyPage() {
 
             {/* 8. Kullanıcı Hakları */}
             <div>
-              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+              <h2 className="text-xl md:text-2xl font-semibold text-eza-text mb-3 md:mb-4">
                 8. Kullanıcı Hakları
               </h2>
-              <p className="mb-4">
+              <p className="mb-3 md:mb-4">
                 Kullanıcılar, yürürlükteki mevzuat kapsamında:
               </p>
-              <div className="bg-eza-gray rounded-lg p-6 space-y-3">
-                <ul className="space-y-2 ml-6">
+              <div className="bg-eza-gray rounded-lg p-4 md:p-6 space-y-2 md:space-y-3">
+                <ul className="space-y-2 md:space-y-2 ml-4 md:ml-6">
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Analiz edilen verilere ilişkin bilgi talep etme</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Silme veya anonimleştirme talebinde bulunma</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-eza-blue mr-3">•</span>
+                    <span className="text-eza-blue mr-2 md:mr-3 flex-shrink-0">•</span>
                     <span>Veri kullanımına ilişkin itiraz hakkına sahiptir</span>
                   </li>
                 </ul>
               </div>
-              <p className="mt-4">
+              <p className="mt-3 md:mt-4">
                 Bu talepler, ilgili mevzuat çerçevesinde değerlendirilir.
               </p>
             </div>
 
             {/* 9. Güncellemeler */}
             <div>
-              <h2 className="text-2xl font-semibold text-eza-text mb-4">
+              <h2 className="text-xl md:text-2xl font-semibold text-eza-text mb-3 md:mb-4">
                 9. Güncellemeler
               </h2>
               <p>

@@ -13,17 +13,17 @@ export const metadata = generatePageMetadata(
 export default function DeveloperPanelPage() {
   return (
     <>
-      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-20">
+      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-12 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-4">
               <Icon name="Code" size={16} />
               EZA Panels
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-eza-text mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-eza-text mb-4 md:mb-6">
               Developer Console
             </h1>
-            <p className="text-xl text-eza-text-secondary">
+            <p className="text-base md:text-xl text-eza-text-secondary">
               Geliştiriciler için API yönetim konsolu. Entegrasyon ve test araçları.
             </p>
           </FadeIn>

@@ -43,13 +43,13 @@ export default function PerspectivesPage() {
 
   return (
     <>
-      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-20">
+      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-12 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn>
-            <h1 className="text-4xl md:text-5xl font-bold text-eza-text mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-eza-text mb-4 md:mb-6">
               Gelecek Perspektifleri
             </h1>
-            <p className="text-xl text-eza-text-secondary mb-4">
+            <p className="text-base md:text-xl text-eza-text-secondary mb-3 md:mb-4">
               Henüz regüle edilmemiş, ancak etik etkileri yüksek alanlara dair EZA'nın değerlendirme ve gözlem perspektifleri.
             </p>
             <p className="text-lg text-eza-text-secondary max-w-3xl mx-auto">

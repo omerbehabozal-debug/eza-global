@@ -62,10 +62,10 @@ export default function GlobalOversightPage() {
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-4">
               EZA Paneller
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-eza-text mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-eza-text mb-4 md:mb-6">
               Global Ölçekli Paneller
             </h1>
-            <p className="text-xl text-eza-text-secondary">
+            <p className="text-base md:text-xl text-eza-text-secondary">
               Küresel yapay zekâ regülasyonları ve etik çerçevelerle uyumlu merkezi gözlem panelleri.
             </p>
           </FadeIn>

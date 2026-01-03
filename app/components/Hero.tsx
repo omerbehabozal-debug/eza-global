@@ -20,15 +20,15 @@ export default function Hero({
       <HeroVisual videoSrc={videoSrc} videoType={videoType} showVideo={showVideo} />
       
       {/* Content layer */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-24 w-full">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 py-12 md:py-20 lg:py-24 w-full">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="hero-title text-5xl md:text-6xl lg:text-7xl font-semibold text-eza-text mb-6 leading-tight">
+          <h1 className="hero-title text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-eza-text mb-4 md:mb-6 leading-tight">
             Yapay zekâ çıktıları için
             <br />
             etik gözlem katmanı
           </h1>
           
-          <p className="hero-description text-xl md:text-2xl text-eza-text-secondary mb-12 leading-relaxed max-w-2xl mx-auto">
+          <p className="hero-description text-base md:text-xl lg:text-2xl text-eza-text-secondary mb-8 md:mb-12 leading-relaxed max-w-2xl mx-auto">
             EZA, yapay zekâ çıktılarının
             <br />
             etik, toplumsal ve regülasyonel etkilerini

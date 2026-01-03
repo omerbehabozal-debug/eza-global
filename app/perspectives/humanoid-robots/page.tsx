@@ -40,13 +40,13 @@ export default function HumanoidRobotsPage() {
 
   return (
     <>
-      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-20">
+      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-12 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn>
-            <h1 className="text-4xl md:text-5xl font-bold text-eza-text mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-eza-text mb-4 md:mb-6">
               İnsansı Robotlar — Etik Gözlem Perspektifi
             </h1>
-            <p className="text-xl text-eza-text-secondary">
+            <p className="text-base md:text-xl text-eza-text-secondary">
               İnsansı robotlar, fiziksel varlıkları ve iletişim biçimleri üzerinden güçlü algısal ve yönlendirici etkiler oluşturabilir. Bu sayfa, bu etkileşimlerin etik etkilerinin nasıl değerlendirilebileceğine dair bir perspektif sunar.
             </p>
           </FadeIn>
