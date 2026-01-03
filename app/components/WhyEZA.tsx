@@ -101,34 +101,34 @@ export default function WhyEZA() {
     <div className="max-w-7xl mx-auto w-full">
       {/* Slogan */}
       <FadeIn>
-        <div className="text-center mb-8 md:mb-20">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-eza-text mb-4 md:mb-6">
+        <div className="text-center mb-4 md:mb-20">
+          <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-semibold text-eza-text mb-2 md:mb-6">
             Bugün asıl sorun ne?
           </h2>
-          <div className="inline-block px-4 sm:px-8 py-2 sm:py-3 bg-eza-blue/10 border border-eza-blue/20 rounded-lg mb-4 md:mb-6">
-            <span className="text-eza-blue font-semibold text-base sm:text-lg md:text-xl">"Ölçülmeyen şey, yönetilemez."</span>
+          <div className="inline-block px-3 sm:px-8 py-1.5 sm:py-3 bg-eza-blue/10 border border-eza-blue/20 rounded-lg mb-2 md:mb-6">
+            <span className="text-eza-blue font-semibold text-sm sm:text-lg md:text-xl">"Ölçülmeyen şey, yönetilemez."</span>
           </div>
-          <p className="text-base md:text-xl text-eza-text-secondary max-w-2xl mx-auto mb-3 md:mb-4">
+          <p className="text-sm md:text-xl text-eza-text-secondary max-w-2xl mx-auto mb-2 md:mb-4">
             Yapay zekâ sistemleri güvenlikten geçiyor, performansla ölçülüyor.
           </p>
-          <p className="text-base md:text-xl text-eza-text-secondary max-w-2xl mx-auto mb-3 md:mb-4">
+          <p className="text-sm md:text-xl text-eza-text-secondary max-w-2xl mx-auto mb-2 md:mb-4">
             Ancak ürettikleri çıktılar çoğu zaman etik etkileri açısından ölçülmüyor.
           </p>
-          <p className="text-base md:text-xl text-eza-text font-semibold max-w-2xl mx-auto mb-6 md:mb-12">
+          <p className="text-sm md:text-xl text-eza-text font-semibold max-w-2xl mx-auto mb-4 md:mb-12">
             Görünmeyen riskler, en büyük risklerdir.
           </p>
           
           {/* Premium Image */}
           <FadeIn delay={200}>
             <div className="max-w-4xl mx-auto">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200/50">
+              <div className="relative rounded-xl md:rounded-2xl overflow-hidden shadow-xl md:shadow-2xl border border-gray-200/50">
                 <div className="absolute inset-0 bg-gradient-to-br from-eza-blue/5 via-transparent to-purple-500/5 pointer-events-none" />
                 <img 
                   src="/videos/anasayfa resmi.png" 
                   alt="EZA - Etik Zeka Altyapısı"
                   className="w-full h-auto object-cover"
                   style={{
-                    maxHeight: '600px',
+                    maxHeight: '300px',
                     objectFit: 'cover'
                   }}
                 />
@@ -139,25 +139,25 @@ export default function WhyEZA() {
       </FadeIn>
 
       {/* Neden Gereklidir? */}
-      <div className="mb-8 md:mb-20">
+      <div className="mb-4 md:mb-20">
         <FadeIn>
-          <h3 className="text-2xl md:text-3xl font-semibold text-eza-text mb-4 md:mb-8 text-center">
+          <h3 className="text-xl md:text-3xl font-semibold text-eza-text mb-3 md:mb-8 text-center">
             Neden Gereklidir?
           </h3>
         </FadeIn>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6">
           {whyNeeded.map((item, index) => (
             <FadeIn key={index} delay={index * 50}>
-              <div className="bg-white rounded-lg p-6 border border-gray-200 h-full">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center">
-                    <Icon name={item.icon} className="text-eza-blue" size={24} />
+              <div className="bg-white rounded-lg p-3 md:p-6 border border-gray-200 h-full">
+                <div className="flex items-start gap-2 md:gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center">
+                    <Icon name={item.icon} className="text-eza-blue" size={18} />
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-semibold text-eza-text mb-2 text-base">
+                    <h4 className="font-semibold text-eza-text mb-1 md:mb-2 text-xs md:text-base">
                       {item.title}
                     </h4>
-                    <p className="text-sm text-eza-text-secondary leading-relaxed">
+                    <p className="text-xs md:text-sm text-eza-text-secondary leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -169,27 +169,27 @@ export default function WhyEZA() {
       </div>
 
       {/* EZA Nasıl Çalışır? */}
-      <div className="mb-8 md:mb-20">
+      <div className="mb-4 md:mb-20">
         <FadeIn>
-          <h3 className="text-2xl md:text-3xl font-semibold text-eza-text mb-3 md:mb-4 text-center">
+          <h3 className="text-xl md:text-3xl font-semibold text-eza-text mb-2 md:mb-4 text-center">
             EZA Nasıl Çalışır?
           </h3>
-          <p className="text-center text-sm md:text-base text-eza-text-secondary mb-6 md:mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-xs md:text-base text-eza-text-secondary mb-3 md:mb-12 max-w-2xl mx-auto">
             EZA önce anlamaya çalışır, sonra değerlendirir ve gerekirse daha iyi bir yol önerir.
             Bu süreç "engelleme" değil, daha iyiye yönlendirme sürecidir.
           </p>
         </FadeIn>
-        <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid md:grid-cols-3 gap-2 md:gap-6">
           {howItWorks.map((item, index) => (
             <FadeIn key={index} delay={index * 50}>
-              <div className="bg-white rounded-lg p-6 border border-gray-200 text-center relative">
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-eza-blue text-white font-bold text-sm">
+              <div className="bg-white rounded-lg p-3 md:p-6 border border-gray-200 text-center relative">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <div className="inline-flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-eza-blue text-white font-bold text-xs md:text-sm">
                     {item.step}
                   </div>
                 </div>
-                <h4 className="font-semibold text-eza-text mb-3 mt-2">{item.title}</h4>
-                <p className="text-sm text-eza-text-secondary leading-relaxed">
+                <h4 className="font-semibold text-eza-text mb-1 md:mb-3 mt-1 md:mt-2 text-sm md:text-base">{item.title}</h4>
+                <p className="text-xs md:text-sm text-eza-text-secondary leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -197,32 +197,32 @@ export default function WhyEZA() {
           ))}
         </div>
         <FadeIn delay={200}>
-          <p className="text-center text-sm text-eza-text-secondary/70 mt-6 max-w-2xl mx-auto">
+          <p className="text-center text-xs md:text-sm text-eza-text-secondary/70 mt-3 md:mt-6 max-w-2xl mx-auto">
             İyileştirme önerileri isteğe bağlıdır.
           </p>
         </FadeIn>
       </div>
 
       {/* EZA İnsanlığa Nasıl Katkı Sağlar? */}
-      <div className="mb-8 md:mb-20">
+      <div className="mb-4 md:mb-20">
         <FadeIn>
-          <h3 className="text-2xl md:text-3xl font-semibold text-eza-text mb-4 md:mb-8 text-center">
+          <h3 className="text-xl md:text-3xl font-semibold text-eza-text mb-3 md:mb-8 text-center">
             EZA İnsanlığa Nasıl Katkı Sağlar?
           </h3>
         </FadeIn>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6">
           {contributions.map((item, index) => (
             <FadeIn key={index} delay={index * 50}>
-              <div className="bg-white rounded-lg p-6 border border-gray-200 h-full">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center">
-                    <Icon name={item.icon} className="text-eza-blue" size={24} />
+              <div className="bg-white rounded-lg p-3 md:p-6 border border-gray-200 h-full">
+                <div className="flex items-start gap-2 md:gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center">
+                    <Icon name={item.icon} className="text-eza-blue" size={18} />
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-semibold text-eza-text mb-2 text-base">
+                    <h4 className="font-semibold text-eza-text mb-1 md:mb-2 text-xs md:text-base">
                       {item.title}
                     </h4>
-                    <p className="text-sm text-eza-text-secondary leading-relaxed">
+                    <p className="text-xs md:text-sm text-eza-text-secondary leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -236,18 +236,18 @@ export default function WhyEZA() {
       {/* Kimler İçin? */}
       <div>
         <FadeIn>
-          <h3 className="text-2xl md:text-3xl font-semibold text-eza-text mb-4 md:mb-8 text-center">
+          <h3 className="text-xl md:text-3xl font-semibold text-eza-text mb-3 md:mb-8 text-center">
             Kimler İçin?
           </h3>
         </FadeIn>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
           {targetAudience.map((audience, index) => (
             <FadeIn key={index} delay={index * 30}>
-              <div className="bg-white rounded-lg p-4 border border-gray-200 text-center">
-                <div className="flex items-center justify-center mb-2">
-                  <Icon name="CheckCircle" className="text-eza-blue" size={20} />
+              <div className="bg-white rounded-lg p-2 md:p-4 border border-gray-200 text-center">
+                <div className="flex items-center justify-center mb-1 md:mb-2">
+                  <Icon name="CheckCircle" className="text-eza-blue" size={16} />
                 </div>
-                <p className="text-sm font-medium text-eza-text">{audience}</p>
+                <p className="text-xs md:text-sm font-medium text-eza-text">{audience}</p>
               </div>
             </FadeIn>
           ))}

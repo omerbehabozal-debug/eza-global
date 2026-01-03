@@ -37,23 +37,23 @@ export default function DemoShowcase() {
   return (
     <FadeIn>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
-        <div className="text-center mb-8 md:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 bg-eza-blue/10 text-eza-blue text-xs sm:text-sm font-semibold rounded-full border border-eza-blue/20 mb-3 md:mb-4">
-            <Icon name="Play" size={12} />
+        <div className="text-center mb-4 md:mb-16">
+          <div className="inline-flex items-center gap-1.5 px-2 sm:px-3 py-0.5 sm:py-1 bg-eza-blue/10 text-eza-blue text-xs font-semibold rounded-full border border-eza-blue/20 mb-2 md:mb-4">
+            <Icon name="Play" size={10} />
             Premium Demos
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-eza-text mb-3 md:mb-4">
+          <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-semibold text-eza-text mb-2 md:mb-4">
             EZA-Core Nasıl Çalışır?
           </h2>
-          <p className="text-base md:text-xl text-eza-text-secondary max-w-2xl mx-auto mb-2">
+          <p className="text-sm md:text-xl text-eza-text-secondary max-w-2xl mx-auto mb-1 md:mb-2">
             EZA-Core'un gücünü 8-12 saniyede görün
           </p>
-          <p className="text-sm text-eza-text-secondary/70 max-w-xl mx-auto">
+          <p className="text-xs md:text-sm text-eza-text-secondary/70 max-w-xl mx-auto">
             Powered by EZA-Core
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-3 md:gap-8">
           {demos.map((demo, index) => (
             <FadeIn key={demo.id} delay={index * 100}>
               <div

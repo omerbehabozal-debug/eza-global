@@ -35,13 +35,13 @@ export default function EZAPosition() {
           }} />
           
           <div className="relative z-10">
-            <div className="text-center mb-6 md:mb-10">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-eza-text mb-3 md:mb-4 tracking-tight">
+            <div className="text-center mb-4 md:mb-10">
+              <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-semibold text-eza-text mb-2 md:mb-4 tracking-tight">
                 EZA'nın Duruşu
               </h2>
             </div>
             
-            <div className="space-y-3 md:space-y-4 text-base md:text-lg text-eza-text-secondary leading-relaxed max-w-3xl mx-auto">
+            <div className="space-y-2 md:space-y-4 text-sm md:text-lg text-eza-text-secondary leading-relaxed max-w-3xl mx-auto">
               <div className="bg-white/80 backdrop-blur-sm rounded-xl p-5 border border-gray-200/50 shadow-sm hover:shadow-md hover:border-eza-blue/20 transition-all duration-300">
                 <p className="text-eza-text text-center">
                   EZA, yapay zekâ sistemlerine otomatik veya zorunlu müdahale etmez.

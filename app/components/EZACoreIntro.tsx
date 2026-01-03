@@ -8,50 +8,50 @@ export default function EZACoreIntro() {
   return (
     <FadeIn>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
-        <div className="bg-gradient-to-br from-eza-blue/5 via-white to-eza-blue/5 rounded-2xl p-6 md:p-8 lg:p-12 border border-eza-blue/10 shadow-lg">
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
+        <div className="bg-gradient-to-br from-eza-blue/5 via-white to-eza-blue/5 rounded-2xl p-4 md:p-8 lg:p-12 border border-eza-blue/10 shadow-lg">
+          <div className="grid md:grid-cols-2 gap-4 md:gap-8 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 bg-eza-blue/10 text-eza-blue text-xs sm:text-sm font-semibold rounded-full border border-eza-blue/20 mb-3 md:mb-4">
-                <Icon name="Cpu" size={14} />
+              <div className="inline-flex items-center gap-1.5 px-2 sm:px-3 py-0.5 sm:py-1 bg-eza-blue/10 text-eza-blue text-xs font-semibold rounded-full border border-eza-blue/20 mb-2 md:mb-4">
+                <Icon name="Cpu" size={12} />
                 EZA-Core
               </div>
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-eza-text mb-3 md:mb-4">
+              <h3 className="text-xl sm:text-2xl md:text-4xl font-semibold text-eza-text mb-2 md:mb-4">
                 EZA-Core: EZA'nın Teknolojik Motoru
               </h3>
-              <p className="text-base md:text-lg text-eza-text-secondary leading-relaxed mb-3 md:mb-4">
+              <p className="text-sm md:text-lg text-eza-text-secondary leading-relaxed mb-2 md:mb-4">
                 EZA'nın etik felsefesi ve vizyonu, <strong className="text-eza-text">EZA-Core</strong> adlı teknolojik platform ile hayata geçer.
               </p>
-              <p className="text-sm md:text-base text-eza-text-secondary leading-relaxed mb-4 md:mb-6">
+              <p className="text-xs md:text-base text-eza-text-secondary leading-relaxed mb-3 md:mb-6">
                 EZA-Core, Standalone, Proxy, Proxy-Lite ve tüm panelleri çalıştıran çekirdek sistemdir. 
                 Etik analiz, skorlama ve risk değerlendirme motorlarını içeren kapsamlı bir teknoloji platformu.
               </p>
               <Link
                 href="/platform/eza-core"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-eza-blue text-white rounded-lg font-semibold hover:bg-[#0077ed] transition-all shadow-lg hover:shadow-xl"
+                className="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-eza-blue text-white rounded-lg text-sm md:text-base font-semibold hover:bg-[#0077ed] transition-all shadow-lg hover:shadow-xl"
               >
                 EZA-Core Platform
-                <Icon name="ArrowRight" size={18} />
+                <Icon name="ArrowRight" size={16} />
               </Link>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-gray-200">
-                <Icon name="Cpu" className="text-eza-blue mb-2" size={24} />
-                <p className="text-sm font-semibold text-eza-text mb-1">Çekirdek Motor</p>
+            <div className="grid grid-cols-2 gap-2 md:gap-4">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 border border-gray-200">
+                <Icon name="Cpu" className="text-eza-blue mb-1 md:mb-2" size={18} />
+                <p className="text-xs md:text-sm font-semibold text-eza-text mb-0.5 md:mb-1">Çekirdek Motor</p>
                 <p className="text-xs text-eza-text-secondary">Etik analiz pipeline</p>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-gray-200">
-                <Icon name="BarChart3" className="text-eza-blue mb-2" size={24} />
-                <p className="text-sm font-semibold text-eza-text mb-1">EZA Score</p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 border border-gray-200">
+                <Icon name="BarChart3" className="text-eza-blue mb-1 md:mb-2" size={18} />
+                <p className="text-xs md:text-sm font-semibold text-eza-text mb-0.5 md:mb-1">EZA Score</p>
                 <p className="text-xs text-eza-text-secondary">Skorlama sistemi</p>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-gray-200">
-                <Icon name="Shield" className="text-eza-blue mb-2" size={24} />
-                <p className="text-sm font-semibold text-eza-text mb-1">Risk Analizi</p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 border border-gray-200">
+                <Icon name="Shield" className="text-eza-blue mb-1 md:mb-2" size={18} />
+                <p className="text-xs md:text-sm font-semibold text-eza-text mb-0.5 md:mb-1">Risk Analizi</p>
                 <p className="text-xs text-eza-text-secondary">Değerlendirme motoru</p>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-gray-200">
-                <Icon name="Code" className="text-eza-blue mb-2" size={24} />
-                <p className="text-sm font-semibold text-eza-text mb-1">API Altyapısı</p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-4 border border-gray-200">
+                <Icon name="Code" className="text-eza-blue mb-1 md:mb-2" size={18} />
+                <p className="text-xs md:text-sm font-semibold text-eza-text mb-0.5 md:mb-1">API Altyapısı</p>
                 <p className="text-xs text-eza-text-secondary">Geliştirici araçları</p>
               </div>
             </div>

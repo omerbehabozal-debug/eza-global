@@ -33,13 +33,13 @@ export default function VisionSection({
 }: VisionSectionProps = {}) {
   const defaultDescription = (
     <>
-      <p className="text-base md:text-xl text-eza-text-secondary max-w-2xl mx-auto leading-relaxed">
+      <p className="text-sm md:text-xl text-eza-text-secondary max-w-2xl mx-auto leading-relaxed">
         EZA, üretilen içeriklerin ve karar süreçlerinin<br />
         etik, toplumsal ve regülasyonel etkilerini<br />
         sansürlemeden analiz eden<br />
         bir etik gözlem sistemidir.
       </p>
-      <p className="text-base md:text-xl text-eza-text-secondary max-w-2xl mx-auto leading-relaxed">
+      <p className="text-sm md:text-xl text-eza-text-secondary max-w-2xl mx-auto leading-relaxed">
         Otomatik veya zorunlu müdahalede bulunmaz.
         <br />
         Ölçer, skorlar, açıklar ve görünür kılar.
@@ -52,21 +52,21 @@ export default function VisionSection({
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
       <FadeIn>
-        <div className="text-center mb-8 md:mb-16">
-          <div className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 bg-eza-blue/10 text-eza-blue text-xs sm:text-sm font-medium rounded-full border border-eza-blue/20 mb-3 md:mb-4">
+        <div className="text-center mb-4 md:mb-16">
+          <div className="inline-block px-2 sm:px-3 py-0.5 sm:py-1 bg-eza-blue/10 text-eza-blue text-xs font-medium rounded-full border border-eza-blue/20 mb-2 md:mb-4">
             Etik Zeka Altyapısı
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-eza-text mb-3 md:mb-4">
+          <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-semibold text-eza-text mb-2 md:mb-4">
             {title}
           </h2>
           {description ? (
             description
           ) : title === "EZA Vizyonu" ? (
-            <p className="text-base md:text-xl text-eza-text-secondary max-w-2xl mx-auto">
+            <p className="text-sm md:text-xl text-eza-text-secondary max-w-2xl mx-auto">
               {subtitle}
             </p>
           ) : (
-            <div className="text-base md:text-xl text-eza-text-secondary max-w-2xl mx-auto leading-relaxed space-y-3 md:space-y-4">
+            <div className="text-sm md:text-xl text-eza-text-secondary max-w-2xl mx-auto leading-relaxed space-y-2 md:space-y-4">
               {defaultDescription}
             </div>
           )}
@@ -117,19 +117,19 @@ export default function VisionSection({
         </FadeIn>
       </div>
       ) : (
-      <div className="flex justify-center mb-8 md:mb-16">
+      <div className="flex justify-center mb-4 md:mb-16">
         <FadeIn delay={200}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 max-w-4xl w-full">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 max-w-4xl w-full">
             {features.map((feature) => (
               <div
                 key={feature.title}
-                className="bg-white rounded-lg p-4 md:p-6 border border-gray-200"
+                className="bg-white rounded-lg p-3 md:p-6 border border-gray-200"
               >
                 <div className="flex flex-col items-center text-center">
-                  <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center mb-2 md:mb-3">
-                    <Icon name={feature.icon} className="text-eza-blue" size={20} />
+                  <div className="flex-shrink-0 w-8 h-8 md:w-12 md:h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center mb-1.5 md:mb-3">
+                    <Icon name={feature.icon} className="text-eza-blue" size={16} />
                   </div>
-                  <h3 className="font-semibold text-eza-text text-base md:text-lg mb-1">{feature.title}</h3>
+                  <h3 className="font-semibold text-eza-text text-sm md:text-lg mb-0.5 md:mb-1">{feature.title}</h3>
                   <p className="text-eza-text-secondary text-xs md:text-sm leading-relaxed">{feature.description}</p>
                 </div>
               </div>
