@@ -40,24 +40,24 @@ export default function HumanoidRobotsPage() {
 
   return (
     <>
-      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-12 md:py-20">
+      <div className="bg-gradient-to-br from-slate-200 via-blue-100/80 to-slate-100 py-8 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-eza-text mb-4 md:mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-eza-text mb-3 md:mb-6">
               İnsansı Robotlar — Etik Gözlem Perspektifi
             </h1>
-            <p className="text-base md:text-xl text-eza-text-secondary">
+            <p className="text-sm md:text-xl text-eza-text-secondary">
               İnsansı robotlar, fiziksel varlıkları ve iletişim biçimleri üzerinden güçlü algısal ve yönlendirici etkiler oluşturabilir. Bu sayfa, bu etkileşimlerin etik etkilerinin nasıl değerlendirilebileceğine dair bir perspektif sunar.
             </p>
           </FadeIn>
         </div>
       </div>
 
-      <Section className="bg-white !pt-12 md:!pt-16 lg:!pt-20 !pb-24 md:!pb-32 lg:!pb-40">
+      <Section className="bg-white !min-h-0 !pt-6 md:!pt-16 lg:!pt-20 !pb-6 md:!pb-24 lg:!pb-40">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-center">
             <FadeIn>
-              <div className="space-y-6 text-lg text-eza-text-secondary leading-relaxed">
+              <div className="space-y-3 md:space-y-6 text-sm md:text-lg text-eza-text-secondary leading-relaxed">
                 <p>
                   İnsansı robotlar, fiziksel varlıkları ve insan benzeri davranış biçimleri üzerinden 
                   kullanıcılar üzerinde güçlü algısal ve yönlendirici etkiler oluşturabilir. Bu etkileşimler, 
@@ -77,12 +77,16 @@ export default function HumanoidRobotsPage() {
             
             {/* Premium Image */}
             <FadeIn delay={200}>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200/50">
+              <div className="relative rounded-xl md:rounded-2xl overflow-hidden shadow-xl md:shadow-2xl border border-gray-200/50">
                 <div className="absolute inset-0 bg-gradient-to-br from-eza-blue/5 via-transparent to-purple-500/5 pointer-events-none z-10" />
                 <img 
                   src="/videos/İnsansı Robotlar.png" 
                   alt="İnsansı Robotlar - Etik Gözlem Perspektifi"
                   className="w-full h-auto object-cover relative z-0"
+                  style={{
+                    maxHeight: '300px',
+                    objectFit: 'cover'
+                  }}
                 />
               </div>
             </FadeIn>
@@ -90,27 +94,27 @@ export default function HumanoidRobotsPage() {
         </div>
       </Section>
 
-      <Section className="bg-eza-gray">
+      <Section className="bg-eza-gray !min-h-0">
         <div className="max-w-6xl mx-auto">
           <FadeIn delay={300}>
-            <h2 className="text-3xl md:text-4xl font-bold text-eza-text text-center mb-12">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-eza-text text-center mb-6 md:mb-12">
               Ne Gözlemlenebilir?
             </h2>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 lg:gap-8">
             {observations.map((item, index) => (
               <FadeIn key={index} delay={400 + index * 100}>
-                <div className="bg-white rounded-xl p-6 border border-gray-200/50">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center">
-                      <Icon name={item.icon} className="text-eza-blue" size={24} />
+                <div className="bg-white rounded-xl p-4 md:p-6 border border-gray-200/50">
+                  <div className="flex items-start gap-2 md:gap-4">
+                    <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center">
+                      <Icon name={item.icon} className="text-eza-blue" size={20} />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-lg font-bold text-eza-text mb-2">
+                      <h3 className="text-base md:text-lg font-bold text-eza-text mb-1 md:mb-2">
                         {item.title}
                       </h3>
-                      <p className="text-sm text-eza-text-secondary leading-relaxed">
+                      <p className="text-xs md:text-sm text-eza-text-secondary leading-relaxed">
                         {item.description}
                       </p>
                     </div>
@@ -122,13 +126,13 @@ export default function HumanoidRobotsPage() {
         </div>
       </Section>
 
-      <Section className="bg-white">
+      <Section className="bg-white !min-h-0">
         <div className="max-w-4xl mx-auto">
           <FadeIn delay={600}>
-            <h2 className="text-2xl font-semibold text-eza-text mb-6">
+            <h2 className="text-xl md:text-2xl font-semibold text-eza-text mb-4 md:mb-6">
               EZA'nın Konumu
             </h2>
-            <div className="space-y-4 text-lg text-eza-text-secondary leading-relaxed">
+            <div className="space-y-2 md:space-y-4 text-sm md:text-lg text-eza-text-secondary leading-relaxed">
               <p>
                 EZA, insansı robotların davranışlarını veya etkileşimlerini değiştirmez.
               </p>
@@ -141,13 +145,13 @@ export default function HumanoidRobotsPage() {
         </div>
       </Section>
 
-      <Section className="bg-eza-gray">
+      <Section className="bg-eza-gray !min-h-0">
         <div className="max-w-4xl mx-auto">
           <FadeIn delay={700}>
-            <h2 className="text-2xl font-semibold text-eza-text mb-6">
+            <h2 className="text-xl md:text-2xl font-semibold text-eza-text mb-4 md:mb-6">
               Örnek Değerlendirme Yaklaşımı
             </h2>
-            <div className="space-y-4 text-lg text-eza-text-secondary leading-relaxed">
+            <div className="space-y-2 md:space-y-4 text-sm md:text-lg text-eza-text-secondary leading-relaxed">
               <p>
                 Bir insansı robot etkileşimi senaryosunda, robotun fiziksel yakınlığı, sosyal tepkisi ve 
                 insan benzeri davranışlarının kullanıcı üzerindeki algısal etkisi, otorite ve rol sınırları 
@@ -162,13 +166,13 @@ export default function HumanoidRobotsPage() {
         </div>
       </Section>
 
-      <Section className="bg-white">
+      <Section className="bg-white !min-h-0">
         <div className="max-w-4xl mx-auto">
           <FadeIn delay={800}>
-            <h2 className="text-2xl font-semibold text-eza-text mb-6">
+            <h2 className="text-xl md:text-2xl font-semibold text-eza-text mb-4 md:mb-6">
               Neden Önemlidir?
             </h2>
-            <div className="space-y-4 text-lg text-eza-text-secondary leading-relaxed">
+            <div className="space-y-2 md:space-y-4 text-sm md:text-lg text-eza-text-secondary leading-relaxed">
               <p>
                 İnsansı robotlar, insan–makine sınırlarının bulanıklaşmasına yol açabilir ve kurumsal 
                 sorumluluk sınırlarının netleştirilmesi ihtiyacını gündeme getirebilir. Bu durum, 
@@ -185,14 +189,14 @@ export default function HumanoidRobotsPage() {
         </div>
       </Section>
 
-      <Section className="bg-eza-gray">
+      <Section className="bg-eza-gray !min-h-0">
         <div className="max-w-4xl mx-auto">
           <FadeIn delay={900}>
-            <div className="bg-white rounded-xl p-6 border border-gray-200/50">
-              <h3 className="text-lg font-semibold text-eza-text mb-4">
+            <div className="bg-white rounded-xl p-4 md:p-6 border border-gray-200/50">
+              <h3 className="text-base md:text-lg font-semibold text-eza-text mb-3 md:mb-4">
                 Bilgilendirme Notu
               </h3>
-              <p className="text-sm text-eza-text-secondary leading-relaxed">
+              <p className="text-xs md:text-sm text-eza-text-secondary leading-relaxed">
                 Bu sayfa, EZA'nın geleceğe yönelik etik değerlendirme perspektifini yansıtır. 
                 Burada yer alan içerikler, bir ürün, hizmet veya aktif çözüm sunma ya da taahhüt etme amacı taşımaz.
               </p>
@@ -201,12 +205,12 @@ export default function HumanoidRobotsPage() {
         </div>
       </Section>
 
-      <Section className="bg-white">
+      <Section className="bg-white !min-h-0">
         <FadeIn delay={1000}>
           <div className="max-w-4xl mx-auto text-center">
             <Link
               href="/#ecosystem"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-eza-blue border border-eza-blue rounded-lg font-semibold hover:bg-eza-blue/5 transition-all"
+              className="inline-flex items-center gap-2 px-6 md:px-8 py-2.5 md:py-4 bg-white text-eza-blue border border-eza-blue rounded-lg text-sm md:text-base font-semibold hover:bg-eza-blue/5 transition-all"
               onClick={() => {
                 if (typeof window !== 'undefined') {
                   sessionStorage.setItem('homeScrollSection', 'ecosystem');
