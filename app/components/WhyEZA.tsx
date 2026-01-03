@@ -101,7 +101,7 @@ export default function WhyEZA() {
     <div className="max-w-7xl mx-auto w-full">
       {/* Slogan */}
       <FadeIn>
-        <div className="text-center mb-8 md:mb-20">
+        <div className="text-center mb-16 md:mb-20">
           <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-semibold text-eza-text mb-2 md:mb-6">
             Bugün asıl sorun ne?
           </h2>
@@ -139,7 +139,7 @@ export default function WhyEZA() {
       </FadeIn>
 
       {/* Neden Gereklidir? */}
-      <div className="mb-8 md:mb-20">
+      <div className="mb-16 md:mb-20">
         <FadeIn>
           <h3 className="text-xl md:text-3xl font-semibold text-eza-text mb-3 md:mb-8 text-center">
             Neden Gereklidir?
@@ -169,7 +169,7 @@ export default function WhyEZA() {
       </div>
 
       {/* EZA Nasıl Çalışır? */}
-      <div className="mb-8 md:mb-20">
+      <div className="mb-16 md:mb-20">
         <FadeIn>
           <h3 className="text-xl md:text-3xl font-semibold text-eza-text mb-2 md:mb-4 text-center">
             EZA Nasıl Çalışır?
@@ -204,7 +204,7 @@ export default function WhyEZA() {
       </div>
 
       {/* EZA İnsanlığa Nasıl Katkı Sağlar? */}
-      <div className="mb-8 md:mb-20">
+      <div className="mb-16 md:mb-20">
         <FadeIn>
           <h3 className="text-xl md:text-3xl font-semibold text-eza-text mb-3 md:mb-8 text-center">
             EZA İnsanlığa Nasıl Katkı Sağlar?
