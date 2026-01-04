@@ -1,13 +1,23 @@
 import { Metadata } from "next";
 
 export const defaultMetadata: Metadata = {
-  title: "EZA.global - Teknolojinin İnsanlığa Karşı Etik Davranmasını Sağlayan Rehber",
-  description: "EZA, insan ve teknoloji arasında etik bir köprü kurar. Yasaklamaz, ceza vermez; sadece daha iyi bir davranış önerir.",
+  title: "EZA.global — Ethical AI Oversight",
+  description: "Yapay zekâ çıktılarının etik risklerini ölçen ve görünür kılan bağımsız denetim altyapısı.",
   keywords: ["etik AI", "teknoloji etiği", "AI güvenliği", "etik yönlendirme", "EZA"],
   openGraph: {
-    title: "EZA.global - Etik Teknoloji Rehberi",
-    description: "Teknolojinin insanlığa karşı etik davranmasını sağlayan rehber.",
+    title: "EZA.global — Ethical AI Oversight",
+    description: "Yapay zekâ çıktılarının etik risklerini ölçen ve görünür kılan bağımsız denetim altyapısı.",
     type: "website",
+    url: "https://www.eza.global/",
+    siteName: "EZA.global",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "EZA.global — Ethical AI Oversight",
+    description: "Yapay zekâ çıktılarının etik risklerini ölçen ve görünür kılan bağımsız denetim altyapısı.",
+  },
+  alternates: {
+    canonical: "https://www.eza.global/",
   },
 };
 
