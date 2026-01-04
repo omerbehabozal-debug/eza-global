@@ -38,31 +38,31 @@ const modules = [
 
 export default function ModuleGrid() {
   return (
-    <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12" id="modules">
+    <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 w-full" id="modules">
       <FadeIn>
-        <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-eza-text mb-3 md:mb-4">
+        <div className="text-center mb-6 md:mb-12">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-eza-text mb-3 md:mb-4">
             Modüller EZA-Core Üzerinde Çalışır
           </h2>
-          <p className="text-base md:text-xl text-eza-text-secondary max-w-2xl mx-auto">
+          <p className="text-sm md:text-xl text-eza-text-secondary max-w-2xl mx-auto break-words">
             Tüm EZA modülleri ve panelleri, EZA-Core platformunun gücünü kullanır.
           </p>
         </div>
       </FadeIn>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
         {modules.map((module, index) => (
           <FadeIn key={module.title} delay={index * 50}>
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-gray-200/50 h-full">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center">
-                  <Icon name={module.icon} className="text-eza-blue" size={24} />
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-gray-200/50 h-full">
+              <div className="flex items-start gap-3 md:gap-4">
+                <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-lg bg-eza-blue/10 flex items-center justify-center">
+                  <Icon name={module.icon} className="text-eza-blue" size={20} />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-eza-text mb-2">
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-base md:text-lg lg:text-xl font-semibold text-eza-text mb-2 break-words">
                     {module.title}
                   </h3>
-                  <p className="text-sm text-eza-text-secondary leading-relaxed">
+                  <p className="text-xs md:text-sm text-eza-text-secondary leading-relaxed break-words">
                     {module.description}
                   </p>
                 </div>

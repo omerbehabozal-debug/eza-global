@@ -5,7 +5,7 @@ import Icon from "../Icon";
 export default function CoreHero() {
 
   return (
-    <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+    <div className="relative min-h-[60vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden">
       {/* Premium animated background */}
       <div className="absolute inset-0">
         {/* Gradient mesh */}
@@ -53,20 +53,21 @@ export default function CoreHero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-24 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-eza-blue/10 text-eza-blue text-sm font-semibold rounded-full border border-eza-blue/20 mb-6">
-          <Icon name="Cpu" size={16} />
+      <div className="relative z-10 max-w-6xl mx-auto px-3 sm:px-4 lg:px-8 py-8 md:py-20 lg:py-24 text-center w-full">
+        <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 bg-eza-blue/10 text-eza-blue text-xs sm:text-sm font-semibold rounded-full border border-eza-blue/20 mb-3 md:mb-6">
+          <Icon name="Cpu" size={14} />
           Etik Zeka Motoru
         </div>
         
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-eza-text mb-6 leading-tight">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-eza-text mb-3 md:mb-6 leading-tight break-words">
           EZA-Core —{" "}
           <span className="text-eza-blue">Etik Zeka Motoru</span>
         </h1>
 
-        <p className="text-xl md:text-2xl text-eza-text-secondary leading-relaxed max-w-3xl mx-auto">
+        <p className="text-sm md:text-xl lg:text-2xl text-eza-text-secondary leading-relaxed max-w-3xl mx-auto break-words">
           Tüm Standalone, Proxy ve kurumsal panelleri çalıştıran merkezi etik zekâ platformu.
-          <br />
+          <br className="hidden md:block" />
+          <span className="md:hidden"> </span>
           EZA'nın etik değerlendirme, risk analizi ve yönlendirme süreçlerinin çekirdeğidir.
         </p>
       </div>

@@ -33,36 +33,36 @@ const layers = [
 
 export default function Architecture() {
   return (
-    <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+    <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-8 w-full">
       <FadeIn>
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-semibold text-eza-text mb-4">
+        <div className="text-center mb-6 md:mb-12">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-eza-text mb-3 md:mb-4">
             Yüksek Seviye Mimarisi
           </h2>
-          <p className="text-xl text-eza-text-secondary max-w-2xl mx-auto">
+          <p className="text-sm md:text-xl text-eza-text-secondary max-w-2xl mx-auto break-words">
             EZA-Core, beş temel katmandan oluşan kapsamlı bir etik zekâ platformudur.
           </p>
         </div>
       </FadeIn>
 
-      <div className="space-y-6">
+      <div className="space-y-3 md:space-y-6">
         {layers.map((layer, index) => (
           <FadeIn key={layer.title} delay={index * 100}>
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-gray-200/50 hover:border-eza-blue/30 hover:shadow-lg transition-all duration-300">
-              <div className="flex items-start gap-6">
-                <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-gradient-to-br from-eza-blue/10 to-eza-blue/5 flex items-center justify-center border border-eza-blue/20">
-                  <Icon name={layer.icon} className="text-eza-blue" size={28} />
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 md:p-6 lg:p-8 border border-gray-200/50 hover:border-eza-blue/30 hover:shadow-lg transition-all duration-300">
+              <div className="flex items-start gap-3 md:gap-6">
+                <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-eza-blue/10 to-eza-blue/5 flex items-center justify-center border border-eza-blue/20">
+                  <Icon name={layer.icon} className="text-eza-blue" size={20} />
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-sm font-semibold text-eza-blue bg-eza-blue/10 px-2.5 py-1 rounded-full">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 md:gap-3 mb-2 flex-wrap">
+                    <span className="text-xs md:text-sm font-semibold text-eza-blue bg-eza-blue/10 px-2 md:px-2.5 py-0.5 md:py-1 rounded-full">
                       {index + 1}
                     </span>
-                    <h3 className="text-2xl font-semibold text-eza-text">
+                    <h3 className="text-base md:text-xl lg:text-2xl font-semibold text-eza-text break-words">
                       {layer.title}
                     </h3>
                   </div>
-                  <p className="text-lg text-eza-text-secondary leading-relaxed">
+                  <p className="text-xs md:text-base lg:text-lg text-eza-text-secondary leading-relaxed break-words">
                     {layer.description}
                   </p>
                 </div>
